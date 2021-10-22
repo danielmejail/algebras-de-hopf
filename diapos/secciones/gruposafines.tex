@@ -1,0 +1,203 @@
+\theoremstyle{plain}
+\newtheorem{coroGrupoDeMorfismos}{Corolario}
+
+%-------------
+
+\subsection{Repaso}
+
+\begin{frame}{El grupo $\Homalg\big(H,-\big)$}
+	El producto, la unidad y el inverso en $\Homalg\big(H,A\big)$ est\'{a}n
+	dados por
+	\begin{align*}
+		\pull{\Delta_H} & \,:\,\Homalg\big(H\tensor H,A\big)
+			\,\rightarrow\,\Homalg\big(H,A\big) \text{ ,} \\
+		\pull{\varepsilon_H} & \,:\,\Homalg\big(k,A\big)
+			\,\rightarrow\,\Homalg\big(H,A\big) \quad\text{y} \\
+		\pull{S_H} & \,:\,\Homalg\big(H,A\big) \,\rightarrow\,
+			\Homalg\big(H,A\big)
+		\text{ ,}
+	\end{align*}
+	%
+	si identificamos
+	\begin{align*}
+		\Homalg\big(H\tensor H,A\big) & \,\simeq\,
+			\Homalg\big(H,A\big)\times\Homalg\big(H,A\big) \\
+		\Homalg\big(k,A\big) & \,=\,\{\eta_A\}\simeq\{1\}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,-\big)$ (cont.)}
+	$G_A=\Homalg\big(H,A\big)$,
+	\begin{math}
+		G_A^{\otimes i}=\Homalg\big(H^{\otimes i},A\big) % \simeq
+			% G_A\times\,\cdots\,\times G_A
+	\end{math}.
+	\begin{center}
+		\begin{tikzcd}[ampersand replacement=\&]
+			H\tensor H\tensor H \&
+				H\tensor H
+					\arrow[l,"\id\tensor\Delta"'] \\
+			H\tensor H \arrow[u,"\Delta\tensor\id"] \&
+				H \arrow[u,"\Delta"']
+					\arrow[l,"\Delta"]
+		\end{tikzcd}
+		$\rightsquigarrow$
+		\begin{tikzcd}[ampersand replacement=\&]
+			G_A^{\otimes 3} \arrow[r,"\pull{(\id\tensor\Delta)}"]
+				\arrow[d,"\pull{(\Delta\tensor\id)}"'] \&
+				G_A^{\otimes 2} \arrow[d,"\pull\Delta"] \\
+			G_A^{\otimes 2} \arrow[r,"\pull\Delta"'] \&
+				G_A
+		\end{tikzcd}
+	\end{center}
+	Expl\'{\i}citamente, $f\convol (g\convol h)=(f\convol g)\convol h$.
+\end{frame}
+
+\begin{frame}{El funtor $\Homalg\big(H,-\big)$}
+	Si $\varphi:\,A\rightarrow B$ es morfismo de \'{a}lgebras, se obtiene
+	una funci\'{o}n $\push\varphi:\,G_A\,\rightarrow\,G_B$ que es,
+	adem\'{a}s, morfismo de grupos:
+	\begin{center}
+		\begin{tikzcd}[column sep=small,ampersand replacement=\&]
+			G_A^{\otimes 2} \arrow[r,"\pull\Delta_A"]
+				\arrow[d,"\push\varphi"'] \&
+				G_A \arrow[d,"\push\varphi"] \\
+			G_B^{\otimes 2} \arrow[r,"\pull\Delta_B"'] \&
+				G_B
+		\end{tikzcd}
+	\end{center}
+	\begin{coroGrupoDeMorfismos}\label{coro:grupodemorfismos}
+		Existe $G:\,\CommAlg[k]\rightarrow\Grp$ tal que
+		\begin{align*}
+			U\circ G & \,=\,\Homalg\big(H,-\big)
+		\end{align*}
+		%
+	\end{coroGrupoDeMorfismos}
+\end{frame}
+
+\begin{frame}{Grupos en $\CommAlg[k]\rightarrow\Set$}
+	En las categor\'{\i}as $\CommAlg[k]\rightarrow\Set$ y
+	$\CommAlg[k]\rightarrow\Grp$ hay productos y objetos terminales:
+	\begin{align*}
+		(G\times G')(\varphi) & \,=\,
+			G(\varphi)\times G'(\varphi)\,:\, \\
+			& \qquad
+			G(A)\times G'(A)\,\rightarrow\,G(B)\times G'(B) \\
+		t \,:\, G(A) & \,\xrightarrow{\cdot}\,\mathbf{1}(A)
+	\end{align*}
+	%
+	Podemos definir grupos.
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,-\big)$ (cont.)}
+	Existen transformaciones naturales
+	\begin{align*}
+		\pull\Delta:\,UG\times UG\xrightarrow{\cdot} UG
+			&\quad\text{,}\quad
+		\pull\varepsilon:\,U\mathbf{1}\xrightarrow{\cdot}UG
+			\quad\text{y}\quad
+		\pull S:\,UG\xrightarrow{\cdot} UG
+	\end{align*}
+	%
+	tales que
+	\begin{align*}
+		\pull\Delta\circ(\id\times\pull\Delta) & \,=\,
+			\pull\Delta\circ(\pull\Delta\times\id) \\
+		\pull\Delta\circ((\pull\varepsilon\circ t)\times\id)\circ\diag
+			& \,=\,\id\,=\,
+			\pull\Delta\circ(\id\times (\pull\varepsilon\circ t))
+				\circ\diag \\
+		\pull\Delta\circ(\id\times\pull S)\circ\diag & \,=\,
+			\pull\varepsilon\circ t \,=\,
+			\pull\Delta\circ(\pull S\times\id)\circ\diag
+	\end{align*}
+	%
+\end{frame}
+
+\subsection{Equivalencia}
+
+\begin{frame}{Representabilidad}
+	Sean $G,G':\,\CommAlg[k]\rightarrow\Grp$, $U:\,\Grp\rightarrow\Set$,
+	$\push U:\,\Grp^{\CommAlg[k]}\rightarrow\Set^{\CommAlg[k]}$.
+	\begin{itemize}
+		\item Dada $\tilde\tau:\,UG\xrightarrow\cdot UG'$,
+			?`existe $\tau:\,G\xrightarrow\cdot G'$ tal que
+			$\push U\tau=\tilde\tau$?
+		\item Dadas $\tau_1,\tau_2:\,G\xrightarrow\cdot G'$ tales que
+			$\push U\tau_1=\push U\tau_2$, ?`$\tau_1=\tau_2$?
+	\end{itemize}
+	Porque $U$ es fiel, $\push U\tau_1=\push U\tau_2$ implica
+	$\tau_1=\tau_2$.
+\end{frame}
+
+\begin{frame}{Representabilidad (cont.)}
+	$\tilde\tau:\,UG\xrightarrow\cdot UG'$ induce
+	\begin{center}
+		\begin{tikzcd}[column sep=small,ampersand replacement=\&]
+			U(G(A)) \arrow[r,"\tilde\tau_A"]
+				\arrow[d,"U(G\varphi)"'] \&
+				U(G'(A)) \arrow[d,"U(G'\varphi)"] \\
+			U(G(B)) \arrow[r,"\tilde\tau_B"'] \& U(G'(B))
+		\end{tikzcd}
+	\end{center}
+	Que $\tilde\tau_A$ sea morfismo de grupos significa que existe
+	\begin{center}
+		\begin{tikzcd}[column sep=small,ampersand replacement=\&]
+			UG(A)\times UG(A) \arrow[r,"m^{G}_A"]
+				\arrow[d,"\tilde\tau_A\times\tilde\tau_A"'] \&
+				UG(A) \arrow[d,"\tilde\tau_A"] \\
+			UG'(A)\times UG'(A) \arrow[r,"m^{G'}_A"'] \& UG'(A)
+		\end{tikzcd}
+	\end{center}
+	La multiplicaci\'{o}n deber\'{\i}a ser natural en $G$, tambi\'{e}n.
+\end{frame}
+
+\begin{frame}{Representabilidad (cont.)}
+	$U\circ G=\Homalg\big(H,-\big)$ y $U\circ G'=\Homalg\big(H',-\big)$,
+	por el lema de Yoneda,
+	\begin{align*}
+		\Nat(U\circ G,U\circ G') & \,\simeq\,U\circ G'(H) \,=\,
+			\Homalg\big(H',H\big)
+	\end{align*}
+	%
+	(morfismos de \emph{\'{a}lgebras}) v\'{\i}a $\phi\mapsto\pull\phi$
+	\begin{itemize}
+		\item Dada $\phi$, ?`existe $\tau:\,G\xrightarrow\cdot G'$ tal
+			que $\push U\tau =\pull\phi$?
+	\end{itemize}
+	%
+\end{frame}
+
+\begin{frame}{Representabilidad (cont.)}
+	El diagrama
+	\begin{center}
+		\begin{tikzcd}[ampersand replacement=\&]
+			UG(A)\times UG(A) \arrow[r,"\pull\phi\times\pull\phi"]
+				\arrow[d,"\pull\Delta_H"'] \&
+			UG'(A)\times UG'(A)\arrow[d,"\pull\Delta_{H'}"'] \\
+			UG(A)\arrow[r,"\pull\phi"'] \& UG'(A)
+		\end{tikzcd}
+	\end{center}
+	conmuta si y s\'{o}lo si $\phi:\,H'\rightarrow H$ es morfismo de
+	\'{a}lgebras de Hopf.
+\end{frame}
+
+\begin{frame}{Relaci\'{o}n con grupos afines}
+	La aplicaci\'{o}n
+	\begin{align*}
+		H\,\mapsto\,\Homalg\big(H,-\big) &\quad\text{,}\quad
+			\phi\,\mapsto\,\pull\phi
+	\end{align*}
+	%
+	define un funtor contravariante fiel y pleno de la categor\'{\i}a de
+	\'{a}lgebras de Hopf en la categor\'{\i}a de grupos afines,
+	$(G,m,u,\sigma)$ donde
+	\begin{itemize}
+		\item $G:\,\CommAlg[k]\rightarrow\Grp$ es funtor,
+		\item $UG$ es representable: existe $H$ tal que
+			$UG\simeq\Homalg\big(H,-\big)$,
+		\item $m,u,\sigma$ son transformaciones naturales que hacen de
+			$UG$ un grupo en $\Set^{\CommAlg[k]}$.
+	\end{itemize}
+\end{frame}

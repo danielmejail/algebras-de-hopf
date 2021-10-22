@@ -1,0 +1,1538 @@
+\theoremstyle{plain}
+\newtheorem{defAlgebra}{Definici\'{o}n}[section]
+\newtheorem{propoLibre}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{propoRectaAfin}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{coroRectaAfin}[defAlgebra]{Corolario}
+\newtheorem{propoMultiplicativo}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{coroMultiplicativo}[defAlgebra]{Corolario}
+\newtheorem{propoProductoDeMatrices}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{propoLinealGeneral}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{propoProductoTensorialDeModulos}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{propoProductoTensorialDeAlgebras}[defAlgebra]{Proposici\'{o}n}
+\newtheorem{propoProductoDeCociente}[defAlgebra]{Proposici\'{o}n}
+
+\theoremstyle{definition}
+\newtheorem{ejemploLibre}[defAlgebra]{Ejemplo}
+\newtheorem{obsRectaAfin}[defAlgebra]{Observaci\'{o}n}
+\newtheorem{obsProductoDeMatrices}[defAlgebra]{Observaci\'{o}n}
+\newtheorem{ejemploProductoTensorialDeModulos}[defAlgebra]{Ejemplo}
+\newtheorem{obsProductoTensorialDeModulos}[defAlgebra]{Observaci\'{o}n}
+\newtheorem{obsAlgebra}[defAlgebra]{Observaci\'{o}n}
+\newtheorem{obsProductoTensorialDeAlgebras}[defAlgebra]{Observaci\'{o}n}
+\newtheorem{obsAlgebraEjemplos}[defAlgebra]{Observaci\'{o}n}
+
+%------------
+
+$k$ denota un anillo conmutatico (con unidad).
+
+\subsection{Definiciones}\label{subsec:kalgebras:definiciones}
+
+\begin{defAlgebra}\label{def:algebra}
+	Una $k$-\'{a}lgebra es un anillo $A$, junto con un morfismo de anillos
+	\begin{align*}
+		\eta_A & \,:\,k\,\rightarrow\,A
+	\end{align*}
+	%
+	cuya imagen est\'{a} contenida en el centro
+	$\centre(A)$ de $A$.
+\end{defAlgebra}
+
+Si $A$ es una $k$-\'{a}lgebra, la aplicaci\'{o}n
+$(\lambda,a)\mapsto\eta_A(\lambda)\,a$ define una estructura de $k$-m\'{o}dulo
+en $A$. Con respecto a esta estructura, la multiplicaci\'{o}n
+$\mu_A:\,A\times A\rightarrow A$ es una transformaci\'{o}n $k$-bilineal.
+
+\begin{defAlgebra}\label{def:morfismodealgebras}
+	Un morfismo de $k$-\'{a}lgebras es un morfismo de anillos
+	$f:\,A\rightarrow B$ que es morfismo de $k$-m\'{o}dulos, es decir,
+	\begin{equation}
+		\label{eq:morfismodealgebras}
+		f\circ\eta_A \,=\,\eta_B
+	\end{equation}
+	%
+	Denotamos el conjunto de morfismos de $k$-\'{a}lgebras $A\rightarrow B$
+	por $\Homalg\big(A,B\big)$.
+\end{defAlgebra}
+
+\subsubsection{El \'{a}lgebra libre}
+
+Dado un conjunto $X$, llamamos \emph{palabra en $X$} a las sucesiones finitas
+de elementos de $X$, $x_{i_1}\,\cdots\,x_{i_n}$ ($n\geq 1$), o bien a la
+\emph{palabra vac\'{\i}a}, $\varnothing$. Denotamos por $k\{X\}$
+($k\{\lista{x}{n}\}$, si $X=\{\lista{x}{n}\}$) el $k$-m\'{o}dulo libre con base
+las palabras en $X$. La concatenaci\'{o}n de palabras,
+\begin{align*}
+	(x_{i_1}\,\cdots\,x_{i_n})\,(x_{i_{n+1}}\,\cdots\,x_{i_m}) & \,=\,
+		(x_{i_1}\,\cdots\,x_{i_n}\,x_{i_{n+1}}\,\cdots\,x_{i_m})
+	\text{ ,}
+\end{align*}
+%
+define, extendiendo $k$-bilinealmente, un producto en $k\{X\}$ que lo convierte
+en $k$-\'{a}lgebra. Llamamos a este \'{a}legbra, el \emph{\'{a}lgebra libre %
+en $X$}.
+
+\begin{ejemploLibre}\label{ejemplo:libre}
+	Si $X=\{x\}$, $k\{x\}=k[x]$, el \'{a}lgebra de polinomios en una
+	variable. Si $X=\{x,y\}$, entonces $k\{x,y\}\not=k[x,y]$, pues
+	$xy\not=yx$.
+\end{ejemploLibre}
+
+El \'{a}lgebra libre est\'{a} caracterizada por la siguiente propiedad
+universal:
+
+\begin{propoLibre}\label{propo:libre}
+	Dados un conjunto $X$, una $k$-\'{a}lgebra $A$ y una funci\'{o}n
+	$f:\,X\rightarrow A$, existe un \'{u}nico morfismo de $k$-\'{a}lgebras
+	$\tilde f:\,k\{X\}\rightarrow A$ tal que $\tilde f(x)=f(x)$ para todo
+	$x\in X$.
+\end{propoLibre}
+
+Dicho de otra manera, existe una biyecci\'{o}n natural
+\begin{equation}
+	\label{eq:propo:libre}
+	\Homalg\big(k\{X\},A\big) \,\simeq\,\Hom[\Set]\big(X,\olvido A\big)
+	\text{ ,}
+\end{equation}
+%
+donde $\olvido A$ denota el conjunto subyacente al \'{a}lgebra $A$. Por
+ejemplo, como conjuntos,
+\begin{align*}
+	\Homalg\big(k\{x,y\},A\big) \,=\,A^2
+	\text{ ,}
+\end{align*}
+%
+v\'{\i}a $f\mapsto (f(x),f(y))$.
+
+Toda $k$-\'{a}lgebra es cociente de un \'{a}lgebra libre. En general,
+\begin{equation}
+\label{eq:libre:cociente}
+	\Homalg\big(k\{X\}/I,A\big) \,\simeq\,
+		\Big\{f\in\Hom[\Set]\big(X,\olvido A\big)\,:\,
+			\tilde f(I)=0\Big\}
+	\text{ .}
+\end{equation}
+%
+
+\begin{ejemploLibre}\label{ejemplo:libre:cociente}
+	En $k\{x,y\}$ podemos considerar el ideal bil\'{a}tero generado por
+	$xy-yx$. En este caso, se obtiene el \'{a}lgebra de polinomios,
+	$k[x,y]\simeq k\{x,y\}/\generado{xy-yx}$ y vale que
+	\begin{align*}
+		\Homalg\big(k[x,y],A\big) & \,\simeq\,
+			\big\{(a,b)\in A^2\,:\,ab=ba\big\}
+		\text{ .}
+	\end{align*}
+	%
+\end{ejemploLibre}
+
+\subsection{Ejemplos}\label{subsec:kalgebras:ejemplos}
+
+\subsubsection{La recta y el plano afines}
+
+De ahora en adelante, asumiremos que $A$ es un \'{a}lgebra conmutativa. La
+correspondencia \eqref{eq:libre:cociente} implica, entonces, que existe una
+biyecci\'{o}n natural
+\begin{equation}
+	\label{eq:morfismosdesdepolinomios}
+	\Homalg\big(k[\lista{x}{n}],A\big) \,\simeq\, A^n
+		\qquad f\mapsto\big(f(x_1),\,\dots,\,f(x_n)\big)
+	\text{ ,}
+\end{equation}
+%
+es decir, todo morfismo de \'{a}lgebras $f:\,k[\lista{x}{n}]\rightarrow A$, en
+un \'{a}lgebra conmutativa, est\'{a} determinado por los valores que toma en
+los generadores $\lista{x}{n}$.
+
+El grupo abeliano $(A,+)$ de un \'{a}lgebra est\'{a} determinado por tres
+funciones: la suma, el neutro y el inverso,
+\begin{align*}
+	+\,:\,A\times A\,\rightarrow\,A & \quad\text{,}\quad
+		0\,:\,\{0\}\,\rightarrow\,A \quad\text{y}\quad
+		-\,:\,A\,\rightarrow\,A
+	\text{ ,}
+\end{align*}
+%
+que obedecen ciertas reglas ($+$ es asociativa, $0$ es un neutro para $+$ y
+$-a$ es el inverso de $a$ con respecto a $+$). Queremos expresar las leyes de
+grupo de manera, en alg\'{u}n sentido, universal; buscamos un objeto algebraico
+independiente de toda $k$-\'{a}lgebra conmutativa $A$ que describa estas
+reglas. Con este objetivo, vamos a darle una estructura de grupo (abeliano) al
+conjunto $\Homalg\big(k[x],A\big)$ que sea compatible con
+\eqref{eq:morfismosdesdepolinomios}.
+
+Vamos a definir tres morfismos $\Delta:\,k[x]\rightarrow k[x',x'']$,
+$\varepsilon:\,k[x]\rightarrow k$ y $S:\,k[x]\rightarrow k[x]$. \'{E}stos son
+los morfismos \emph{de \'{a}lgebras} determinados por
+\begin{equation}
+	\label{eq:rectafin}
+	\Delta(x)\,=\,x'+x'' \quad\text{,}\quad \varepsilon(x)\,=\,0
+		\quad\text{y}\quad S(x)\,=\,-x
+	\text{ .}
+\end{equation}
+%
+Cada uno de ellos induce, por precomposici\'{o}n, una funci\'{o}n en morfismos:
+\begin{align*}
+	\pull\Delta & \,:\,\Homalg\big(k[x',x''],A\big)\,\rightarrow\,
+		\Homalg\big(k[x],A\big) \text{ ,} \\
+	\pull\varepsilon & \,:\,\Homalg\big(k,A\big)\,\rightarrow\,
+		\Homalg\big(k[x],A\big) \quad\text{y} \\
+	\pull S & \,:\,\Homalg\big(k[x],A\big)\,\rightarrow\,
+		\Homalg\big(k[x],A\big)
+\end{align*}
+%
+(la composici\'{o}n de morfismos de \'{a}lgebras es un morfismo de
+\'{a}lgebras).
+
+\begin{propoRectaAfin}\label{propo:rectaafin}
+	Los siguientes diagramas conmutan.
+	\begin{center}
+		\begin{tikzcd}
+			\Homalg\big(k[x,x],A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\Delta"'] &
+				A^2 \arrow[d,"+"] \\
+			\Homalg\big(k[x],A\big) \arrow[r,"\sim"] & A
+		\end{tikzcd}
+		\begin{tikzcd}
+			\Homalg\big(k,A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\varepsilon"'] &
+				\{0\} \arrow[d,"0"] \\
+			\Homalg\big(k[x],A\big) \arrow[r,"\sim"] & A
+		\end{tikzcd}
+		\begin{tikzcd}
+			\Homalg\big(k[x],A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull S"'] &
+				A \arrow[d,"-"] \\
+			\Homalg\big(k[x],A\big) \arrow[r,"\sim"] & A
+		\end{tikzcd}
+	\end{center}
+\end{propoRectaAfin}
+Las flechas horizontales est\'{a}n dadas por
+\eqref{eq:morfismosdesdepolinomios}. El conjunto $\Homalg\big(k,A\big)$ posee
+un \'{u}nico elemento, $\eta_A:\,k\rightarrow A$; en este caso, la funci\'{o}n
+$\Homalg\big(k,A\big)\rightarrow \{0\}$ es la identificaci\'{o}n
+$\eta_A\mapsto 0$.
+
+\begin{proof}
+	Por ejemplo, si $f:\,k[x',x'']\rightarrow A$, siguiendo las flechas
+	superior y derecha, obtenemos
+	\begin{align*}
+		f\,\mapsto\,\big(f(x'),f(x'')\big)\,\mapsto\,f(x')+f(x'')
+		\text{ .}
+	\end{align*}
+	%
+	Recorriendo el otro camino, llegamos a
+	\begin{align*}
+		f\,\mapsto\,\pull\Delta(f)=f\circ\Delta\,\mapsto\,
+			f\circ\Delta(x)=f(x'+x'')
+		\text{ .}
+	\end{align*}
+	%
+	Pero $f$ es morfismo de \'{a}lgebras, as\'{\i} que los dos resultados
+	coinciden.
+\end{proof}
+
+\begin{obsRectaAfin}\label{obs:rectaafin}
+	Existe una correspondencia entre morfismos $k[x',x'']\rightarrow A$ y
+	pares de morfismos $k[x]\rightarrow A$. Podemos describir esta
+	correspondencia de la siguiente manera: si $f:\,k[x',x'']\rightarrow A$
+	es el morfismo de \'{a}lgebras determinado por $f(x')=a'$ y
+	$f(x'')=a''$, el par correspondiente a $f$ es $(f',f'')$, donde
+	$f',f'':\,k[x]\rightarrow A$ son los morfismos de \'{a}lgebras
+	determinados por $f'(x)=a'$ y $f''(x)=a''$. Rec\'{\i}procamente, dados
+	$f',f'':\,k[x]\rightarrow A$, definimos $f:\,k[x',x'']\rightarrow A$
+	por $f(x')=f'(x)$ y $f(x'')=f''(x)$. Esta relaci\'{o}n es, simplemente,
+	\eqref{eq:morfismosdesdepolinomios} en los casos $n=1$ y $2$:
+	\begin{equation}
+		\label{eq:obs:rectaafin}
+		\begin{aligned}
+			\Homalg\big(k[x',x''],A\big) & \,\simeq\, A^2\,=\,
+				A\,\times\,A \\
+			& \,\simeq\,\Homalg\big(k[x],A\big)\,\times\,
+				\Homalg\big(k[x],A\big)
+			\text{ .}
+		\end{aligned}
+	\end{equation}
+	%
+\end{obsRectaAfin}
+
+Dados morfismos de \'{a}lgebras $f,g:\,k[x]\rightarrow A$, podemos definir la
+suma de $f$ con $g$, que denotamos $\pull\Delta(f,g)$, como el morfismo
+determinado por
+\begin{equation}
+	\label{eq:rectaafin:suma}
+	\pull\Delta(f,g)(x) \,=\,f(x)+g(x)
+	\text{ .}
+\end{equation}
+%
+Por \eqref{eq:obs:rectaafin}, este morfismo no es otro m\'{a}s que el que se
+obtiene aplicando $\pull\Delta$ al morfismo $k[x',x'']\rightarrow A$
+correspondiente al par $(f,g)$.
+
+\begin{propoRectaAfin}\label{propo:rectaafin:suma}
+	La suma \eqref{eq:rectaafin:suma} posee las siguientes propiedades:
+	\begin{itemize}
+		\item
+			\begin{math}
+				\pull\Delta(f,\pull\Delta(g,h))=
+					\pull\Delta(\pull\Delta(f,g),h)
+			\end{math};
+		\item
+			\begin{math}
+				\pull\Delta(f,\pull\varepsilon(\eta_A))=
+					\pull\Delta(\pull\varepsilon(\eta_A),f)
+					=f
+			\end{math};
+		\item
+			\begin{math}
+				\pull\Delta(f,\pull S(f))=
+					\pull\Delta(\pull S(f),f)=
+					\pull\varepsilon(\eta_A)
+			\end{math}; y
+		\item
+			\begin{math}
+				\pull\Delta(f,g)=\pull\Delta(g,f)
+			\end{math}.
+	\end{itemize}
+	%
+\end{propoRectaAfin}
+
+\begin{proof}
+	Las igualdades
+	\begin{align*}
+		\pull\Delta(f,\pull\Delta(g,h))(x) & \,=\,
+			f(x)+\pull\Delta(g,h)(x)\,=\,f(x)+(g(x)+h(x))
+			\quad\text{y} \\
+		\pull\Delta(\pull\Delta(f,g),h)(x) & \,=\,
+			\pull\Delta(f,g)(x)+h(x)\,=\,(f(x)+g(x))+h(x)
+	\end{align*}
+	%
+	demuestran, por ejemplo, que $\pull\Delta$ es asociativa. Haciendo uso
+	de
+	\begin{align*}
+		\pull S(f)(x) \,=\,f(-x)\,=\,-f(x)
+			& \quad\text{y}\quad
+			\pull\varepsilon(\eta_A)(x) \,=\,\eta_A(0)\,=\,0
+		\text{ ,}
+	\end{align*}
+	%
+	vemos que $\pull\varepsilon(\eta_A)$ es un neutro para esta suma y que
+	el morfismo $\pull S(f)$ es el inverso de $f$. Por \'{u}ltimo, de
+	$f(x)+g(x)=g(x)+f(x)$, deducimos que $\pull\Delta$ es abeliana.
+\end{proof}
+
+Las operaciones $\pull\Delta$, $\pull\varepsilon$ y $\pull S$ son esencialmente
+independientes del \'{a}lgebra $A$ en $\Homalg\big(k[x],A\big)$.
+
+\begin{propoRectaAfin}\label{propo:rectaafin:sumanatural}
+	Todo morfismo de $k$-\'{a}lgebras $\varphi:\,A\rightarrow B$ induce
+	diagramas conmutativos
+	\begin{center}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k[x',x''],A\big) \arrow[r,"\pull\Delta"]
+				\arrow[d,"\push\varphi"'] &
+				\Homalg\big(k[x],A\big)
+					\arrow[d,"\push\varphi"] \\
+			\Homalg\big(k[x',x''],B\big) \arrow[r,"\pull\Delta"] &
+				\Homalg\big(k[x],B\big)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k,A\big) \arrow[r,"\pull\varepsilon"]
+				\arrow[d,"\push\varphi"'] &
+				\Homalg\big(k[x],A\big)
+					\arrow[d,"\push\varphi"] \\
+			\Homalg\big(k,B\big) \arrow[r,"\pull\varepsilon"] &
+				\Homalg\big(k[x],B\big)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k[x],A\big) \arrow[r,"\pull S"]
+				\arrow[d,"\push\varphi"'] &
+				\Homalg\big(k[x],A\big)
+					\arrow[d,"\push\varphi"] \\
+			\Homalg\big(k[x],B\big) \arrow[r,"\pull S"] &
+				\Homalg\big(k[x],B\big)
+		\end{tikzcd}
+	\end{center}
+	con $\push\varphi(f)=\varphi\circ f$.
+\end{propoRectaAfin}
+
+\begin{proof}
+	\begin{math}
+		\push\varphi\circ\pull{\mathtt X}(f)=
+			\varphi\circ f\circ\mathtt X=
+			\pull{\mathtt X}\circ\push\varphi(f)
+	\end{math}.
+\end{proof}
+
+Podemos interpretar esto de dos maneras. Por un lado, la Proposici\'{o}n~%
+\ref{propo:rectaafin:sumanatural} quiere decir que
+\begin{equation}
+	\label{eq:rectaafin:sumanatural}
+	\begin{aligned}
+		\pull\Delta & \,:\,\Homalg\big(k[x',x''],-\big)
+			\,\xrightarrow\cdot\,
+			\Homalg\big(k[x],-\big) \text{ ,} \\
+		\pull\varepsilon & \,:\,\Homalg\big(k,-\big)
+			\,\xrightarrow\cdot\,
+			\Homalg\big(k[x],-\big) \quad\text{y} \\
+		\pull S & \,:\,\Homalg\big(k[x],-\big)\,\xrightarrow\cdot\,
+			\Homalg\big(k[x],-\big)
+	\end{aligned}
+\end{equation}
+%
+son transformaciones naturales. Por otro lado, v\'{\i}a la correspondencia
+\eqref{eq:obs:rectaafin}, el primero de los diagramas muestra que, para cada
+morfismo $\varphi:\,A\rightarrow B$, la funci\'{o}n inducida
+\begin{math}
+	\push\varphi:\,\Homalg\big(k[x],A\big)\rightarrow
+		\Homalg\big(k[x],B\big)
+\end{math}
+es un morfismo de grupos, si en cada conjunto $\Homalg\big(k[x],A\big)$
+la suma est\'{a} dada por $\pull\Delta$.
+
+\begin{coroRectaAfin}\label{coro:rectaafin}
+	Existe un funtor $G:\,\CommAlg[k]\rightarrow\Grp$ tal que
+	\begin{align*}
+		\olvido\circ G & \,=\,\Homalg\big(k[x],-\big)
+		\text{ ,}
+	\end{align*}
+	%
+	donde $\olvido:\,\Grp\rightarrow\Set$ es el funtor olvido. Este funtor
+	est\'{a} definido en objetos por $A\mapsto G(A)$, donde
+	$G(A)$ es el grupo cuyo conjunto subyacente es
+	$\Homalg\big(k[x],A\big)$ y cuya operaci\'{o}n binaria est\'{a} dada
+	por $\pull\Delta(A)=\pull\Delta$.
+
+	La \emph{funci\'{o}n} (biyectiva, por
+	\eqref{eq:morfismosdesdepolinomios})
+	\begin{align*}
+		\big(f\mapsto f(x)\big) & \,:\,\Homalg\big(k[x],A\big)
+			\,\rightarrow\,A
+	\end{align*}
+	%
+	determina un isomorfismo de grupos $\tau_A:\,G(A)\rightarrow (A,+)$. A
+	su vez, estos isomorfismos determinan un isomorfismo natural
+	$\tau:\,G\xrightarrow\cdot (-,+)$ de $G$ en el funtor
+	$A\mapsto (A,+)$.
+\end{coroRectaAfin}
+
+\begin{proof}
+	Que $\tau_A(f)=f(x)$ es morfismo de grupos, es consecuencia de la
+	conmutatividad del primer diagrama de la Proposici\'{o}n~%
+	\ref{propo:rectaafin}. Lo \'{u}nico que queda por verificar es la
+	naturalidad de $\tau$. Pero
+	\begin{align*}
+		\tau_B\circ\push\varphi(f) & \,=\,(\varphi\circ f)(x)\,=\,
+			\varphi(f(x))\,=\,\varphi\circ\tau_A(f)
+		\text{ ,}
+	\end{align*}
+	%
+	donde, en el \'{u}ltimo t\'{e}rmino, $\varphi$ denota el morfismo de
+	grupos $(A,+)\rightarrow(B,+)$.
+\end{proof}
+
+\subsubsection{El grupo multiplicativo}
+
+Dada una $k$-\'{a}legbra $A$, $A^\times$ denota el grupo multiplicativo
+compuesto por las unidades de $A$. Dado un morfismo de \'{a}lgebras
+$\varphi:\,A\rightarrow B$, se cumple que $\varphi(A^\times)\subset B^\times$ y
+que $\varphi$ define, por restricci\'{o}n, un morfismo de grupos
+$\varphi^\times:\,A^\times\rightarrow B^\times$. Nos referimos, con
+$(-,\times):\,\CommAlg[k]\rightarrow\Grp$, al funtor dado por
+$A\mapsto A^\times$ en objetos y por $\varphi\mapsto\varphi^\times$ en
+morfismos. Escribiremos $\varphi$ en lugar de $\varphi^\times$.
+
+Sea $I\triangleleft k[x,y]$ el ideal $I=\generado{xy-1}$. El cociente
+\begin{align*}
+	k[x,x^{-1}] & \,=\,k[x,y]/\generado{xy-1}
+\end{align*}
+%
+posee la siguiente propiedad: para toda $k$-\'{a}lgebra conmutativa $A$,
+la aplicaci\'{o}n $\tau_A:\,f\mapsto f(x)$ es una biyecci\'{o}n
+\begin{equation}
+	\label{eq:polinomiosdelaurent}
+	\Homalg\big(k[x,x^{-1}],A\big) \,\simeq\,A^\times
+	\text{ .}
+\end{equation}
+%
+Esta biyecci\'{o}n es natural en $A$. De manera similar, si definimos
+\begin{align*}
+	k[x',x'',{x'}^{-1},{x''}^{-1}] & \,=\,k[x',y',x'',y'']/
+		\generado{x'y'-1,x''y''-1}
+	\text{ ,}
+\end{align*}
+%
+obtenemos una biyecci\'{o}n natural
+\begin{equation}
+	\label{eq:polinomiosdelaurentproducto}
+	\Homalg\big(k[x',x'',{x'}^{-1},{x''}^{-1}],A\big) \,\simeq\,
+		A^\times\,\times\,A^\times
+	\text{ .}
+\end{equation}
+%
+
+El grupo multiplicativo de un \'{a}lgebra $A$ est\'{a} definido por tres
+funciones:
+\begin{align*}
+	\times\,:\,A^\times\,\times\,A^\times\,\rightarrow\,A^\times
+		& \quad\text{,}\quad
+	1\,:\,\{1\}\,\rightarrow\,A^\times
+		\quad\text{y}\quad
+	\null^{-1}\,:\,A^\times\,\rightarrow\,A^\times
+	\text{ .}
+\end{align*}
+%
+
+\begin{propoMultiplicativo}\label{propo:multiplicativo}
+	Sean $\Delta:\,k[x,x^{-1}]\rightarrow k[x',x'',{x'}^{-1},{x''}^{-1}]$,
+	$\varepsilon:\,k[x,x^{-1}]\rightarrow k$ y
+	$S:\,k[x,x^{-1}]\rightarrow k[x,x^{-1}]$ los morfismos de \'{a}lgebras
+	determinados por
+	\begin{equation}
+		\label{eq:multiplicativo}
+		\Delta(x)\,=\,x'\,x'' \quad\text{,}\quad
+		\varepsilon(x)\,=\,1 \quad\text{y}\quad
+		S(x)\,=\,x^{-1}
+		\text{ .}
+	\end{equation}
+	%
+	Entonces los siguientes diagramas conmutan.
+	\begin{center}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k[x',x'',{x'}^{-1},{x''}^{-1}],A\big)
+				\arrow[r,"\sim"]
+				\arrow[d,"\pull\Delta"'] &
+				A^\times\times A^\times \arrow[d,"\times"] \\
+			\Homalg\big(k[x,x^{-1}],A\big) \arrow[r,"\sim"] &
+				A^\times
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k,A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\varepsilon"'] &
+				\{1\} \arrow[d,"1"] \\
+			\Homalg\big(k[x,x^{-1}],A\big) \arrow[r,"\sim"] &
+				A^\times
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k[x,x^{-1}],A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull S"'] &
+				A^\times \arrow[d,"\null^{-1}"] \\
+			\Homalg\big(k[x,x^{-1}],A\big) \arrow[r,"\sim"] &
+				A^\times
+		\end{tikzcd}
+	\end{center}
+\end{propoMultiplicativo}
+Las funciones $\pull\Delta$, $\pull\varepsilon$ y $\pull S$ son los pullbacks
+de los morfismos correspondientes. Como en la Proposici\'{o}n~%
+\ref{propo:rectaafin}, las flechas horizontales est\'{a}n dadas por
+\eqref{eq:polinomiosdelaurent} y \eqref{eq:polinomiosdelaurentproducto}. En
+este caso, como estamos tratando el grupo multiplicativo, identificamos el
+\'{u}nico elemento del conjunto $\Homalg\big(k,A\big)=\{\eta_A\}$ con el
+\'{u}nico elemento de $\{1\}$.
+
+Se puede demostrar la existencia de una biyecci\'{o}n similar a la mencionada
+en la Observaci\'{o}n~\ref{obs:rectaafin}:
+\begin{equation}
+	\label{eq:obs:multiplicativo}
+	\Homalg\big(k[x',x'',{x'}^{-1},{x''}^{-1}],A\big) \,\simeq\,
+		\Homalg\big(k[x,x^{-1}],A\big)\,\times\,
+		\Homalg\big(k[x,x^{-1}],A\big)
+	\text{ .}
+\end{equation}
+%
+Esto nos permite darle una estructura de grupo al conjunto
+$\Homalg\big(k[x,x^{-1}],A\big)$ para un \'{a}lgebra fija $A$ y demostrar
+resultados an\'{a}logos a los demostrados en el caso del grupo aditivo. En
+particular, se deduce el siguiente corolario.
+
+\begin{coroMultiplicativo}\label{coro:multiplicativo}
+	Existe un funtor $G:\,\CommAlg[k]\rightarrow\Grp$ tal que
+	\begin{align*}
+		\olvido\circ G & \,=\,\Homalg\big(k[x,x^{-1}],-\big)
+		\text{ .}
+	\end{align*}
+	%
+	Si $A$ es una $k$-\'{a}lgebra conmutativa, $G(A)$ es el grupo
+	$\Homalg\big(k[x,x^{-1}],A\big)$ con el producto, el neutro y el
+	inverso dados por $\pull\Delta$, $\pull\varepsilon$ y $\pull S$.
+	Las biyecciones \eqref{eq:polinomiosdelaurent} son, con respecto a esta
+	estructura de grupo, isomorfismos de grupos e inducen un isomorfismo
+	natural $\tau:\,G\xrightarrow\cdot (-,\times)$.
+\end{coroMultiplicativo}
+
+\subsubsection{$\GL(2)$ y $\SL(2)$}
+
+Apliquemos las ideas anteriores para describir el producto de matrices. Vamos a
+escribir $\MM(2)$ para denotar el \'{a}lgebra de polinomios $k[a,b,c,d]$.
+Entonces la aplicaci\'{o}n
+\begin{equation}
+	\label{eq:morfismoenmatriz}
+	f\,\mapsto\,f\Big(
+		\begin{bmatrix} a & b \\ c & d \end{bmatrix}\Big)\,=\,
+		\begin{bmatrix}	f(a) & f(b) \\ f(c) & f(d) \end{bmatrix}
+\end{equation}
+%
+define una biyecci\'{o}n
+\begin{equation}
+	\label{eq:morfismosdesdematrices}
+	\Homalg\big(\MM(2),A\big) \,\simeq\,\MM[2\times 2](A)
+	\text{ ,}
+\end{equation}
+%
+identificando $A^4=\MM[2\times 2](A)$.
+
+Si queremos expresar el producto de matrices de manera universal, lo primero
+que haremos ser\'{a} duplicar las variables: definimos
+\begin{align*}
+	\MM(2)^{\otimes 2} & \,=\,k[a',b',c',d',a'',b'',c'',d'']
+\end{align*}
+%
+y buscaremos luego, un morfismo de \'{a}lgebras
+$\Delta:\,\MM(2)\rightarrow\MM(2)^{\otimes 2}$ que haga conmutar el diagrama
+\begin{center}
+	\begin{tikzcd}
+		\Homalg\big(\MM(2)^{\otimes 2},A\big) \arrow[r,"\sim"]
+			\arrow[d,"\pull\Delta"'] &
+			\MM[2\times 2](A)^2
+				\arrow[d,"\cdot"] \\
+		\Homalg\big(\MM(2),A\big) \arrow[r,"\sim"] & \MM[2\times 2](A)
+	\end{tikzcd}
+\end{center}
+donde $\cdot:\,\MM[2\times 2](A)^2\rightarrow\MM[2\times 2](A)$ es el producto
+de matrices con coeficientes en el \'{a}lgebra $A$. La flecha inferior est\'{a}
+dada por \eqref{eq:morfismosdesdematrices} y la flecha superior es la
+biyecci\'{o}n
+\begin{math}
+	\Homalg\big(\MM(2)^{\otimes 2},A\big)\simeq\MM[2\times 2](A)^2
+\end{math} dada por
+\begin{math}
+	f\mapsto\big(f\,
+		\left[\begin{smallmatrix}
+			a' & b' \\ c' & d'
+		\end{smallmatrix}\right],
+		f\,
+		\left[\begin{smallmatrix}
+			a'' & b'' \\ c'' & d''
+		\end{smallmatrix}\right]\big)
+\end{math}. Para que este diagrama conmute, lo que tiene que cumplirse es
+\begin{align*}
+	f\circ\Delta\Big(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\Big)
+		& \,=\,
+		f\Big(\begin{bmatrix} a' & b' \\ c' & d' \end{bmatrix}\Big)\,
+		f\Big(\begin{bmatrix} a'' & b'' \\ c'' & d'' \end{bmatrix}\Big)
+			\,=\,
+		f\Big(\begin{bmatrix} a' & b' \\ c' & d' \end{bmatrix}\,
+			\begin{bmatrix}
+				a'' & b'' \\ c'' & d''
+			\end{bmatrix}\Big)
+\end{align*}
+%
+para todo morfismo de \'{a}lgebras $f:\,\MM(2)^{\otimes 2}\rightarrow A$.
+
+\begin{propoProductoDeMatrices}\label{propo:productodematrices}
+	Sea $\Delta:\,\MM(2)\rightarrow\MM(2)^{\otimes 2}$ el morfismo de
+	\'{a}lgebras determinado por
+	\begin{align*}
+		\Delta\Big(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\Big)
+			& \,=\,
+			\begin{bmatrix} a' & b' \\ c' & d' \end{bmatrix}\,
+			\begin{bmatrix} a'' & b'' \\ c'' & d'' \end{bmatrix}
+		\text{ ,}
+	\end{align*}
+	%
+	es decir,
+	\begin{equation}
+		\label{eq:productodematrices}
+		\begin{aligned}
+			\Delta(a) \,=\, a'a'' + b'c'' & \quad\text{,}\quad
+			\Delta(b) \,=\, a'b'' + b'd'' \text{ ,} \\
+			\Delta(c) \,=\, c'a'' + d'c'' & \quad\text{y}\quad
+			\Delta(d) \,=\, c'b'' + d'd''
+			\text{ .}
+		\end{aligned}
+	\end{equation}
+	%
+	Entonces el diagrama conmuta.
+\end{propoProductoDeMatrices}
+
+Vamos a usar este morfismo $\Delta$ para tratar los grupos $\GL[2](A)$ y
+$\SL[2](A)$, matrices invertibles y, respectivamente, matrices de determinante
+$1$ con coeficientes en $A$. Introducimos las \'{a}lgebras
+\begin{align*}
+	\GL(2) & \,=\,\MM(2)[t]/\generado{(ad-bc)\,t-1}\quad\text{y} \\
+	\SL(2) & \,=\,\GL(2)/\generado{t-1}\,=\,
+		\MM(2)/\generado{ad-bc-1}
+	\text{ .}
+\end{align*}
+%
+
+\begin{propoLinealGeneral}\label{propo:morfismosdesdelinealgeneral}
+	Para toda \'{a}lgebra conmutativa $A$, la expresi\'{o}n
+	\eqref{eq:morfismoenmatriz} determina biyecciones
+	\begin{equation}
+		\label{eq:morfismosdesdelinealgeneral}
+		\Homalg\big(\GL(2),A\big) \,\simeq\,\GL[2](A)
+			\quad\text{y}\quad
+		\Homalg\big(\SL(2),A\big) \,\simeq\,\SL[2](A)
+		\text{ .}
+	\end{equation}
+	%
+\end{propoLinealGeneral}
+
+\begin{proof}
+	Si
+	\begin{math}
+		\big[\begin{smallmatrix}
+			\alpha & \beta \\ \gamma & \delta
+		\end{smallmatrix}\big]\in\GL[2](A)
+	\end{math}, por \eqref{eq:morfismosdesdepolinomios}, existe un
+	\'{u}nico morfismo de \'{a}lgebras $f:\,\MM(2)[t]\rightarrow A$ tal que
+	\begin{align*}
+		f\Big(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\Big) \,=\,
+			\begin{bmatrix}
+				\alpha & \beta \\ \gamma & \delta
+			\end{bmatrix} & \quad\text{y}\quad
+		f(t)\,=\,(\alpha\delta-\beta\gamma)^{-1}
+		\text{ .}
+	\end{align*}
+	%
+	Como $f$ es morfismo de \'{a}lgebras, se verifica que
+	\begin{math}
+		f((ad-bc)\,t-1)=0
+	\end{math} y $f$ pasa al cociente $\GL(2)$. Si la matriz pertenece a
+	$\SL[2](A)$, entonces $f(t-1)=0$, tambi\'{e}n, y $f$ se factoriza por
+	$\SL(2)$.
+\end{proof}
+
+Sean, ahora,
+\begin{align*}
+	\GL(2)^{\otimes 2} & \,=\,\MM(2)^{\otimes 2}[t',t'']/
+		\generado{(a'd'-b'c')\,t'-1,(a''d''-b''c'')\,t''-1}
+		\quad\text{y} \\
+	\SL(2)^{\otimes 2} & \,=\,\GL(2)^{\otimes 2}/\generado{t'-1,t''-1}
+		\,=\,\MM(2)^{\otimes 2}/\generado{a'd'-b'c'-1,a''d''-b''c''-1}
+	\text{ .}
+\end{align*}
+%
+
+\begin{obsProductoDeMatrices}\label{obs:productodematrices}
+	El morfismo $\Delta:\,\MM(2)\rightarrow\MM(2)^{\otimes 2}$ verifica
+	\begin{align*}
+		\Delta(ad-bc) & \,=\,(a'd'-b'c')\,(a''d''-b''c'')
+		\text{ .}
+	\end{align*}
+	%
+	Extendemos $\Delta$ a un morfismo de \'{a}lgebras
+	$\Delta:\,\MM(2)[t]\rightarrow\MM(2)^{\otimes 2}[t',t'']$, definiendo
+	\begin{align*}
+		\Delta(t) & \,=\,t'\,t''
+		\text{ .}
+	\end{align*}
+	%
+	En particular,
+	\begin{math}
+		\Delta((ad-bc)\,t-1)=(a'd'-b'c')\,(a''d''-b''c'')\,t'\,t''-1
+	\end{math}. Componiendo con la proyecci\'{o}n de
+	$\MM(2)^{\otimes 2}[t',t'']$ en $\GL(2)^{\otimes 2}$, concluimos que
+	existe un \'{u}nico morfismo de \'{a}lgebras
+	$\Delta:\,\GL(2)\rightarrow\GL(2)^{\otimes 2}$ tal que
+	\begin{center}
+		\begin{tikzcd}
+			\MM(2)[t] \arrow[r,"\Delta"] \arrow[d] &
+				\MM(2)^{\otimes 2}[t',t''] \arrow[d] \\
+			\GL(2)\arrow[r,"\Delta"'] & \GL(2)^{\otimes 2}
+		\end{tikzcd}
+	\end{center}
+	conmuta. Componiendo con
+	$\GL(2)^{\otimes 2}\rightarrow\SL(2)^{\otimes 2}$, obtenemos
+	$\Delta:\,\SL(2)\rightarrow\SL(2)^{\otimes 2}$.
+\end{obsProductoDeMatrices}
+
+Las \'{a}lgebras $\GL(2)^{\otimes 2}$ y $\SL(2)^{\otimes 2}$ tienen la
+propiedad de que, para toda \'{a}lgebra conmutativa $A$, existen biyecciones
+\begin{equation}
+	\label{eq:morfismosdesdelinealgeneralproducto}
+	\Homalg\big(\GL(2)^{\otimes 2},A\big)\,\simeq\,
+		\GL[2](A)^2 \quad\text{y}\quad
+	\Homalg\big(\SL(2)^{\otimes 2},A\big)\,\simeq\,
+		\SL[2](A)^2
+\end{equation}
+%
+dadas por evaluar un morfismo en los generadores de las \'{a}lgebras.
+
+\begin{propoLinealGeneral}\label{propo:linealgeneralcoproducto}
+	Con $\Delta$ definido como en la Observaci\'{o}n~%
+	\ref{obs:productodematrices}, los diagramas siguientes conmutan.
+	\begin{center}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(\GL(2)^{\otimes 2},A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\Delta"'] &
+				\GL[2](A)^2 \arrow[d,"\cdot"] \\
+			\Homalg\big(\GL(2),A\big)\arrow[r,"\sim"] & \GL[2](A)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(\SL(2)^{\otimes 2},A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\Delta"'] &
+				\SL[2](A)^2 \arrow[d,"\cdot"] \\
+			\Homalg\big(\SL(2),A\big)\arrow[r,"\sim"] & \SL[2](A)
+		\end{tikzcd}
+	\end{center}
+\end{propoLinealGeneral}
+Las flechas horizontales est\'{a}n dadas por
+\eqref{eq:morfismosdesdelinealgeneral} y por
+\eqref{eq:morfismosdesdelinealgeneralproducto}. La flecha del lado derecho de
+cada uno de los cuadrados es el producto de matrices.
+
+\begin{propoLinealGeneral}\label{propo:linealgeneralcounidadyantipoda}
+	Si definimos morfismos de \'{a}lgebras
+	\begin{align*}
+		\varepsilon\,:\,\GL(2)\,\rightarrow\,k
+			& \quad\text{,}\quad
+		S\,:\,\GL(2)\,\rightarrow\,\GL(2) \text{ ,} \\
+		\varepsilon\,:\,\SL(2)\,\rightarrow\,k
+			& \quad\text{,}\quad
+		S\,:\,\SL(2)\,\rightarrow\,\SL(2)
+	\end{align*}
+	%
+	determinados por
+	\begin{equation}
+		\label{eq:linealgeneralcounidadyantipoda}
+		\begin{aligned}
+			\varepsilon\,
+				\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+					\,=\,
+				\begin{bmatrix} 1 & \\ & 1 \end{bmatrix}
+				& \quad\text{,}\quad
+					\varepsilon(t)\,=\,1 \text{ ,} \\
+			S\,\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+				\,=\,(ad-bc)^{-1}\,
+				\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+				& \quad\text{y}\quad
+					S(t) \,=\,t^{-1}
+		\end{aligned}
+		\text{ ,}
+	\end{equation}
+	%
+	entonces los siguientes diagramas conmutan.
+	\begin{center}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k,A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\varepsilon"'] &
+				\{1\} \arrow[d,"1"] \\
+			\Homalg\big(\GL(2),A\big) \arrow[r,"\sim"] & \GL[2](A)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(k,A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull\varepsilon"'] &
+				\{1\} \arrow[d,"1"] \\
+			\Homalg\big(\SL(2),A\big) \arrow[r,"\sim"] & \SL[2](A)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(\GL(2),A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull S"'] &
+				\GL[2](A) \arrow[d,"\null^{-1}"] \\
+			\Homalg\big(\GL(2),A\big) \arrow[r,"\sim"] & \GL[2](A)
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small]
+			\Homalg\big(\SL(2),A\big) \arrow[r,"\sim"]
+				\arrow[d,"\pull S"'] &
+				\SL[2](A) \arrow[d,"\null^{-1}"] \\
+			\Homalg\big(\SL(2),A\big) \arrow[r,"\sim"] & \SL[2](A)
+		\end{tikzcd}
+	\end{center}
+\end{propoLinealGeneral}
+
+Identificaciones an\'{a}logas a \eqref{eq:obs:rectaafin} y a
+\eqref{eq:obs:multiplicativo},
+\begin{align*}
+	\Homalg\big(\GL(2)^{\otimes 2},A\big) & \,\simeq\,
+		\Homalg\big(\GL(2),A\big)\,\times\,
+		\Homalg\big(\GL(2),A\big) \quad\text{y} \\
+	\Homalg\big(\SL(2)^{\otimes 2},A\big) & \,\simeq\,
+		\Homalg\big(\SL(2),A\big)\,\times\,
+		\Homalg\big(\SL(2),A\big)
+	\text{ ,}
+\end{align*}
+%
+permiten darle a los conjuntos $\Homalg\big(\GL(2),A\big)$ y
+$\Homalg\big(\SL(2),A\big)$ estructuras de grupo con el producto determinado
+por $\pull\Delta$. El elemento neutro con respecto a esta operaci\'{o}n
+es $\pull\varepsilon(\eta_A)=\eta_A\circ\varepsilon$, donde $\eta_A$ es el
+\'{u}nico morfismo en $\Homalg\big(k,A\big)$. El inverso de un morfismo $f$ es
+la composici\'{o}n $\pull S(f)=f\circ S$. Se puede verificar, adem\'{a}s, que,
+tanto para $\GL(2)$ como para $\SL(2)$, los pullbacks $\pull\Delta$,
+$\pull\varepsilon$ y $\pull S$ son naturales en $A$.
+%
+En particular, la naturalidad de $\pull\Delta$ implica que, dado un morfismo
+$\varphi:\,A\rightarrow B$, la funci\'{o}n
+$\push\varphi:\,\Homalg\big(\GL(2),A\big)\rightarrow\Homalg\big(\GL(2),B\big)$
+dada por $\push\varphi(f)=\varphi\circ f$, es, en realidad, un morfismo de
+grupos. En definitiva, podemos definir un funtor
+$G:\,\CommAlg[k]\rightarrow\Grp$ que en objetos est\'{a} dado por asociarle a
+una $k$-\'{a}lgebra conmutativa $A$ el grupo $\Homalg\big(\GL(2),A\big)$ con el
+producto dado por $\pull\Delta$ y que en morfismos est\'{a} dado por
+$\varphi\mapsto\push\varphi$. Lo que vale, adem\'{a}s, es que evaluar un
+morfismo $f:\,\GL(2)\rightarrow A$ en los generadores de $\GL(2)$ es un
+isomorfismo de grupos $\Homalg\big(\GL(2),A\big)\rightarrow\GL[2](A)$, natural
+en $A$ y, por lo tanto, determina un isomorfismo natural
+$G\xrightarrow\cdot\GL[2]$, donde $\GL[2]$ es el funtor que a un \'{a}lgebra
+conmutativa le asigna el grupo de matrices invertibles con coeficientes en el
+\'{a}lgebra $\GL[2](A)$. Afirmaciones an\'{a}logas son ciertas para $\SL(2)$.
+
+\subsection{Producto tensorial}\label{subsec:kalgebras:productotensorial}
+
+Cada vez que quisimos definir un morfismo correspondiente a la operaci\'{o}n
+binaria del grupo que est\'{a}bamos estudiando, necesitamos ``duplicar'' las
+variables, definir una nueva \'{a}lgebra y enunciar una propiedad universal
+para este \'{a}lgebra. A continuaci\'{o}n, formalizamos estas ideas.
+
+\subsubsection{Producto tensorial de m\'{o}dulos}
+
+Empecemos repasando la definici\'{o}n de producto tensorial de $k$-m\'{o}dulos.
+Recordemos que $k$ es un anillo conmutativo.
+
+Dados $k$-m\'{o}dulos $A$ y $B$, el \emph{producto tensorial} de $A$ con $B$ es
+un par compuesto por un $k$-m\'{o}dulo, denotado en general por
+$A\tensor[k]B$, y una tranformaci\'{o}n \emph{$k$-bilineal}
+\begin{align*}
+	\tensor & \,:\,A\,\times\,B\,\rightarrow\,A\tensor[k]B
+\end{align*}
+%
+que posee la siguiente propiedad universal: dada una transformaci\'{o}n
+$k$-bilineal $h:\,A\times B\rightarrow C$ en un $k$-m\'{o}dulo $C$, existe un
+\'{u}nico morfismo de $k$-m\'{o}dulos $t:\,A\tensor[k]B\rightarrow C$ tal que
+$t\circ\tensor=h$.
+\begin{center}
+	\begin{tikzcd}[row sep=large]
+		A\times B \arrow[r,"\tensor"] \arrow[dr,"h"'] &
+			A\tensor[k]B \arrow[d,dashed,"t"] \\ & C
+	\end{tikzcd}
+\end{center}
+El producto tensorial $A\tensor[k]B$ se puede realizar como cociente del
+$k$-m\'{o}dulo libre en el conjunto $A\times B$, o, lo que es lo mismo,
+$A\tensor[k]B$ est\'{a} generado, como $k$-m\'{o}dulo por los elementos de la
+forma $a\tensor b=\tensor(a,b)$, con $a\in A$ y $b\in B$.
+
+\begin{ejemploProductoTensorialDeModulos}%
+	\label{ejemplo:productotensorialdemodulos}
+	Dado un $k$-m\'{o}dulo $A$, la funci\'{o}n
+	$h_0:\,k\times A\rightarrow k$ dada por $h_0(\lambda,a)=\lambda\,a$ es
+	universal entre las funciones $k$-bilineales con dominio en
+	$k\times A$: si $h:\,k\times A\rightarrow C$ es bilineal y
+	$h=t\circ h_0$ para cierta $t:\,A\rightarrow C$, entonces
+	\begin{align*}
+		t(a) & \,=\,t(h_0(1,a)) \,=\,h(1,a)
+		\text{ ,}
+	\end{align*}
+	%
+	lo que muestra que, si $t$ existe, est\'{a} determinada por los valores
+	de $h$ en pares de la forma $(1,a)$. Si definimos $t:\,A\rightarrow C$
+	por $t(a)=h(1,a)$, como $h$ es bilineal, $t$ es morfismo de $k$-%
+	m\'{o}dulos y, m\'{a}s aun,
+	\begin{align*}
+		h(\lambda,a) & \,=\,\lambda\,h(1,a)\,=\,\lambda\,t(a)\,=\,
+			t(\lambda\,a)\,=\,t\circ h_0(\lambda,a)
+		\text{ .}
+	\end{align*}
+	%
+	Concluimos, as\'{\i}, que $A$ tiene la propiedad universal del producto
+	tensorial $k\tensor[k]A$ y podemos identificar can\'{o}nicamente
+	\begin{align*}
+		A & \,\simeq\,k\tensor[k]A
+		\text{ .}
+	\end{align*}
+	%
+	Esta identificaci\'{o}n est\'{a} dada, expl\'{\i}citamente, por
+	$a\mapsto 1\tensor a$. Un poco m\'{a}s en general, la funci\'{o}n
+	$h_0:\,k^n\times A\rightarrow A^n$ dada por
+	$h_0((\lista{\lambda}{n}),a)=(\lambda_1\,a,\,\dots,\,\lambda_n\,a)$ es
+	universal entre las transformaciones $k$-bilineales con dominio en
+	$k^n\times A$, mostrando que $k^n\tensor[k]A$ se identifica
+	naturalmente con $A^n$.
+\end{ejemploProductoTensorialDeModulos}
+
+\begin{propoProductoTensorialDeModulos}\label{propo:productotensorialdemodulos}
+	El producto tensorial de $k$-m\'{o}dulos posee las siguientes
+	propiedades: dados $k$-m\'{o}dulos $A$, $B$ y $C$,
+	\begin{align*}
+		A\tensor[k]\big(B\,\oplus\,C\big) & \,\simeq\,
+			\big(A\tensor[k]B\big)\,\oplus\,
+			\big(A\tensor[k]C\big) \text{ ,} \\
+		A\tensor[k]\big(B\tensor[k] C\big) & \,\simeq\,
+			\big(A\tensor[k]B\big)\tensor[k]C \text{ ,} \\
+		A\tensor[k]B & \,\simeq\,B\tensor[k]A
+		\text{ .}
+	\end{align*}
+	%
+	Estos isomorfismos est\'{a}n determinados, respectivamente, por
+	\begin{align*}
+		a\tensor(b+c) & \,\mapsto\,(a\tensor b)+(a\tensor c)
+			\text{ ,} \\
+		a\tensor(b\tensor c) & \,\mapsto\,(a\tensor b)\tensor c
+			\quad\text{y} \\
+		a\tensor b & \,\mapsto\,b\tensor a
+		\text{ .}
+	\end{align*}
+	%
+\end{propoProductoTensorialDeModulos}
+
+\begin{obsProductoTensorialDeModulos}\label{obs:productotensorialdemodulos}
+	Usando el segundo isomorfismo, identificamos
+	\begin{align*}
+		A\tensor[k]B\tensor[k]C & \,=\,
+			A\tensor[k]\big(B\tensor[k] C\big) \,=\,
+			\big(A\tensor[k]B\big)\tensor[k]C
+		\text{ .}
+	\end{align*}
+	Escribimos $\swap$ o $\swap[{A\tensor[k]B}]$ para referirnos al tercer
+	isomorfismo. Es decir, dados $a\in A$ y $b\in B$,
+	\begin{align*}
+		\swap(a\tensor b) & \,=\,
+			\swap[{A\tensor[k]B}](a\tensor b) \,=\,	b\tensor a
+		\text{ .}
+	\end{align*}
+	%
+\end{obsProductoTensorialDeModulos}
+%
+% \begin{proof}
+	% En cuanto a la primera, la aplicaci\'{o}n
+	% \begin{align*}
+		% h(a,b+c) & \,=\,\inc[{A\tensor[k]B}](a\tensor b)\,+\,
+			% \inc[{A\tensor[k]C}](a\tensor c)
+		% \text{ ,}
+	% \end{align*}
+	% %
+	% donde $\inc[{A\tensor[k]B}]$ e $\inc[{A\tensor[k]C}]$ denotan las
+	% inclusiones en la suma directa, es lineal en $a\in A$ y lineal en el
+	% par $b\in B$, $c\in C$. Por propiedad universal del producto tensorial,
+	% existe un \'{u}nico morfismo de $k$-m\'{o}dulos
+	% \begin{math}
+		% f:\,A\tensor[k](B\oplus C)\rightarrow
+			% (A\tensor[k] B)\oplus (A\tensor[k] C)
+	% \end{math} tal que $f(a\tensor (b+c))=h(a,b+c)$. Es decir, obtenemos un
+	% diagrama conmutativo:
+	% \begin{center}
+		% \begin{tikzcd}[column sep=small,row sep=large]
+		% A\,\times\,\big(B\,\oplus\,C\big) \arrow[r,"\tensor"]
+			% \arrow[dr,"h"'] &
+			% A\tensor[k]\big(B\,\oplus\,C\big)
+				% \arrow[d,dashed,"f"'] \\
+		% & \big(A\tensor[k]B\big)\,\oplus\,\big(A\tensor[k]C\big)
+	% \end{tikzcd}
+	% \end{center}
+	% Por otro lado, las inclusiones
+	% \begin{math}
+		% B\hookrightarrow B\oplus C\hookleftarrow C
+	% \end{math} determinan inclusiones
+	% \begin{center}
+	% \begin{tikzcd}
+		% A\,\times\,B\arrow[r,hook,"{\inc[A\times B]}"] &
+		% A\times (B\oplus C) &
+		% A\,\times\,C\arrow[l,hook',"{\inc[A\times C]}"']
+	% \end{tikzcd}
+	% \end{center}
+	% dadas por $\inc[A\times B](a,b)=(a,\inc[B](b))$ e
+	% $\inc[A\times C](a,c)=(a,\inc[C](c))$. La composiciones
+	% $\tensor\circ\inc[A\times B]$ y $\tensor\circ\inc[A\times C]$ son
+	% bilineales y, por las propiedades universales de $A\tensor[k]B$ y
+	% $A\tensor[k]C$, existen morfismos
+	% \begin{center}
+	% \begin{tikzcd}
+		% A\tensor[k]B\arrow[r,"j_{A\tensor[k]B}"] &
+		% A\tensor[k]\big(B\,\oplus\,C\big) &
+		% A\tensor[k]C\arrow[l,"j_{A\tensor[k]C}"']
+	% \end{tikzcd}
+	% \end{center}
+	% \'{u}nicos de manera que
+	% $j_{A\tensor[k]B}(a\tensor b)=a\tensor\inc[B](b)$ y
+	% $j_{A\tensor[k]C}(a\tensor c)=a\tensor\inc[C](c)$. Por propiedad
+	% universal de la suma directa, existe un \'{u}nico mofismo $g$ que hace
+	% conmutar el diagrama siguiente:
+	% \begin{center}
+	% \begin{tikzcd}
+		% A\tensor[k]B \arrow[r,"{\inc[{A\tensor[k]B}]}"]
+			% \arrow[dr,"j_{A\tensor[k]B}"'] &
+		% \big(A\tensor[k]B\big)\,\oplus\,\big(A\tensor[k]C\big)
+			% \arrow[d,dashed,"g"] &
+		% A\tensor[k]C \arrow[l,"{\inc[{A\tensor[k]C}]}"']
+			% \arrow[dl,"j_{A\tensor[k]X}"] \\
+		% & A\tensor[k]\big(B\,\oplus\,C\big) &
+	% \end{tikzcd}
+	% \end{center}
+	% Ahora bien, los morfismos $f$ y $g$ cumplen que
+	% \begin{align*}
+		% g\circ h(a,b+c) & \,=\,a\tensor\inc[B](b)\,+\,
+			% a\tensor\inc[C](c) \,=\,a\tensor(b+c) \,=\,
+			% \tensor(a,(b+c)) \text{ ,} \\
+		% f\circ\ j_{A\tensor[k]B}\circ\tensor(a,b) & \,=\,
+			% f(a\tensor\inc[B](b))\,=\,h(a,\inc[B](b))\,=\,
+			% \inc[{A\tensor[k]B}](a\tensor b) \quad\text{y} \\
+		% f\circ\ j_{A\tensor[k]C}\circ\tensor(a,c) & \,=\,
+			% f(a\tensor\inc[C](c))\,=\,h(a,\inc[C](c))\,=\,
+			% \inc[{A\tensor[k]C}](a\tensor c)
+		% \text{ .}
+	% \end{align*}
+	% %
+	% Por la parte de unicidad de las propiedades universales,
+	% $f\circ g=\id$ y $g\circ f=\id$.
+% \end{proof}
+
+\begin{propoProductoTensorialDeModulos}%
+	\label{propo:productotensorialdemoduloslibres}
+	Dados conjuntos $X$ e $Y$, sean $k^X$, $k^Y$ y $k^{X\times Y}$ los
+	$k$-m\'{o}dulos libres en los conjuntos $X$, $Y$ y $X\times Y$.
+	Existe una \'{u}nica transformaci\'{o}n bilineal
+	$h_0:\,k^X\times k^Y\rightarrow k^{X\times Y}$ tal que
+	$h_0(x,y)=(x,y)$. Esta transformaci\'{o}n es universal entre todas
+	las transformaciones bilineales con dominio en $k^X\times k^Y$. En
+	consecuencia,
+	\begin{align*}
+		k^{X\times Y} & \,\simeq\, k^X\tensor[k]k^Y
+		\text{ .}
+	\end{align*}
+	%
+	El isomorfismo est\'{a} dado en la base por $(x,y)\mapsto x\tensor y$.
+\end{propoProductoTensorialDeModulos}
+
+\begin{obsProductoTensorialDeModulos}%
+	\label{obs:productotensorialdemodulosesfuntorial}
+	Dados morfismo de $k$-m\'{o}dulos $f:\,A\rightarrow A'$ y
+	$g:\,B\rightarrow B'$, la funci\'{o}n
+	$A\times B\rightarrow A'\tensor[k]B'$, definida por
+	$(a,b)\mapsto f(a)\tensor g(b)$ es $k$-bilineal. Por lo tanto, existe
+	un \'{u}nico morfismo de $k$-m\'{o}dulos
+	\begin{equation}
+		\label{eq:productotensorialdemorfismosdemodulos}
+		f\tensor g \,:\,A\tensor[k]B\,\rightarrow\,A'\tensor[k]B'
+	\end{equation}
+	%
+	que cumple $(f\tensor g)(a\tensor b)=f(a)\tensor g(b)$. Se verifica,
+	por unicidad, que
+	\begin{align*}
+		\id[A]\tensor\id[B] & \,=\,\id[{A\tensor[k]B}] \quad\text{y} \\
+		(f'\tensor g')\circ (f\tensor g) & \,=\,
+			(f'\circ f)\tensor (g'\circ g)
+		\text{ .}
+	\end{align*}
+	%
+	En particular, dado un $k$-m\'{o}dulo $C$, obtenemos un funtor
+	$-\tensor[k]C:\,\Mod[k]\rightarrow\Mod[k]$ dado por
+	\begin{align*}
+		(\varphi:\,A\rightarrow B) & \,\mapsto\,
+			\big(\varphi\tensor\id[C]:\,
+				A\tensor[k]C\rightarrow B\tensor[k]C\big)
+		\text{ .}
+	\end{align*}
+	%
+\end{obsProductoTensorialDeModulos}
+
+De ahora en adelante, escribiremos $A\tensor B$ en lugar de $A\tensor[k]B$.
+
+\begin{obsAlgebra}\label{obs:algebra}
+	En una $k$-\'{a}lgebra $A$, la multiplicaci\'{o}n es una operaci\'{o}n
+	$k$-bilineal $A\times A\rightarrow A$ y determina un\'{\i}vocamente un
+	morfismo $\mu_A:\,A\tensor A\rightarrow A$ y todo morfismo de este tipo
+	define, por composici\'{o}n con
+	$\tensor:\,A\times A\rightarrow A\tensor A$, una transformaci\'{o}n
+	$k$-bilineal. Usando esta correspondencia, podemos dar una
+	definici\'{o}n alternativa de $k$-\'{a}lgebras.
+\end{obsAlgebra}
+
+\begin{defAlgebra}\label{def:algebraalternativa}
+	Una $k$-\'{a}lgebra es un $k$-m\'{o}dulo $A$ junto con morfismos de
+	$k$-m\'{o}dulos $\unidad[A]:\,k\rightarrow A$ --la unidad de $A$-- y
+	$\producto[A]:\,A\tensor A\rightarrow A$ --el producto en $A$-- que
+	verifican que los siguientes diagramas conmutan.
+	\begin{center}
+		\begin{tikzcd}
+			A\tensor A\tensor A
+				\arrow[r,"{\producto[A]\tensor\id[A]}"]
+				\arrow[d,"{\id[A]\tensor\producto[A]}"'] &
+			A\tensor A \arrow[d,"{\producto[A]}"] \\
+			A\tensor A\arrow[r,"{\producto[A]}"'] & A
+		\end{tikzcd}
+		\begin{tikzcd}
+			k\tensor A\arrow[r,"{\unidad[A]\tensor\id[A]}"]
+				\arrow[dr,"\sim"'] &
+			A\tensor A \arrow[d,"{\producto[A]}"] &
+			A\tensor k\arrow[l,"{\id[A]\tensor\unidad[A]}"']
+				\arrow[dl,"\sim"] \\ & A &
+		\end{tikzcd}
+	\end{center}
+	Una $k$-\'{a}lgebra es conmutativa, si y s\'{o}lo si
+	\begin{align*}
+		\producto[A]\circ\swap & \,=\,\producto[A]
+		\text{ .}
+	\end{align*}
+	%
+	Un morfismo de $k$-\'{a}lgebras es un morfismo de $k$-m\'{o}dulos
+	$f:\,A\rightarrow B$ tal que
+	\begin{align*}
+		f\circ\producto[A] \,=\,\producto[B]\circ (f\tensor f)
+		% en particular, $f\circ\mu_A$ es el morfismo de \'{a}lgebras
+		% $A\tensor A\rightarrow B$ inducido por la propiedad de
+		% producto tensorial (si $B$ es conmutativa\dots)
+		%
+			& \quad\text{y}\quad
+		f\circ\unidad[A] \,=\,\unidad[B]
+		\text{ .}
+	\end{align*}
+	%
+\end{defAlgebra}
+
+\begin{obsAlgebra}\label{obs:algebraopuesta}
+	Si $(A,\producto[A],\unidad[A])$ es una $k$-\'{a}lgebra, su
+	\emph{\'{a}lgebra opuesta} es $(A,\producto[A]^\opp,\unidad[A])$, donde
+	\begin{align*}
+		\producto[A]^\opp & \,=\,\producto[A]\circ\swap
+		\text{ .}
+	\end{align*}
+	%
+	Denotamos este \'{a}lgebra por $A^\opp$. El \'{a}lgebra $A$ es
+	conmutativa, si $A^\opp=A$, es decir, si el morfismo de m\'{o}dulos
+	$\id[A]:\,A\rightarrow A^\opp$ es morfimo de \'{a}lgebras.
+\end{obsAlgebra}
+
+\subsubsection{Producto tensorial de \'{a}lgebras}
+
+Definimos el producto tensorial de \'{a}lgebras y enunciamos dos propiedades
+importantes.
+
+\begin{propoProductoTensorialDeAlgebras}%
+	\label{propo:productotensorialdealgebras}
+	Sean $A$ y $B$ dos $k$-\'{a}lgebras (no necesariamente conmutativas) y
+	sea $A\tensor B$ el producto tensorial como $k$-m\'{o}dulos. La
+	operaci\'{o}n $k$-bilineal definida por
+	\begin{align*}
+		(a\tensor b)\,(a_1\tensor b_1) & \,=\,(a\,a_1)\tensor (b\,b_1)
+	\end{align*}
+	%
+	(productos en $A$ y en $B$) determina una estructura de $k$-\'{a}lgebra
+	en $A\tensor B$. La unidad est\'{a} dada por $1\tensor 1$ y los
+	morfismos $j_A:\,A\rightarrow A\tensor B$ y
+	$j_B:\,B\leftarrow A\tensor B$, dados por $a\mapsto a\tensor 1$ y
+	$b\mapsto 1\tensor b$, son morfismos de \'{a}lgebras.
+\end{propoProductoTensorialDeAlgebras}
+
+Los morfismos $j_A$ y $j_B$ de la Proposici\'{o}n~%
+\ref{propo:productotensorialdealgebras} cumplen con que, para todo par $a\in A$
+y $b\in B$,
+\begin{align*}
+	j_A(a)\,j_B(b) & \,=\,(a\tensor 1)\,(1\tensor b)\,=\,(a\tensor b)\,=\,
+		(1\tensor b)\,(a\tensor 1)\,=\,j_B(b)\,j_A(a)
+	\text{ .}
+\end{align*}
+%
+% en $A\tensor B$, es decir,
+% \begin{align*}
+	% \mu_{A\tensor B}\circ (j_A\tensor j_B) & \,=\,
+		% \mu_{A\tensor B}\circ (j_B\tensor j_A)\circ\swap[A\tensor B]
+	% \text{ .}
+% \end{align*}
+% %
+El \'{a}lgebra $A\tensor B$ est\'{a} caracterizada por la siguiente propiedad
+universal.
+
+\begin{propoProductoTensorialDeAlgebras}%
+	\label{propo:productotensorialdealgebrasuniversal}
+	Dada un \'{a}lgebra $C$ y morfimsos $f:\,A\rightarrow C$ y
+	$g:\,B\rightarrow C$ que verifican $f(a)g(b)=g(b)f(a)$ en $C$ para todo
+	par $a\in A$ y $b\in B$, existe un \'{u}nico morfismo de \'{a}lgebras
+	$f\cdot g:\,A\tensor B\rightarrow C$ tal que
+	\begin{equation}
+		\label{eq:productotensorialdemorfismosdealgebras}
+		(f\cdot g)\circ j_A\,=\,f \quad\text{y}\quad
+			(f\cdot g)\circ j_B \,=\,g
+		\text{ .}
+	\end{equation}
+	%
+\end{propoProductoTensorialDeAlgebras}
+
+\begin{proof}
+	Si $\phi:\,A\tensor B\rightarrow C$ es un morfismo de \'{a}lgebras que
+	cumple con \eqref{eq:productotensorialdemorfismosdealgebras}, entonces
+	\begin{align*}
+		\phi (a\tensor b) & \,=\,
+			\phi\circ(\mu_{A\tensor B}(j_A(a)\tensor j_B(b))) \\
+		& \,=\,\mu_C\circ (\phi\tensor\phi)\circ
+				(j_A\tensor j_B)(a\tensor b) \\
+		& \,=\,\mu_C\circ (f\tensor g)(a\tensor b)
+		\text{ .}
+	\end{align*}
+	%
+	Rec\'{\i}procamente, si $\phi:\,A\tensor B\rightarrow C$ es el morfismo
+	de m\'{o}dulos $\phi=\mu_C\circ (f\tensor g)$, entonces como
+	$f$ y $g$ son morfismos de \'{a}lgebras, $f(1)=1=g(1)$ y $\phi$ cumple
+	\eqref{eq:productotensorialdemorfismosdealgebras}. Resta verificar que,
+	si $f$ y $g$ cumplen con las hip\'{o}tesis del enunciado, entonces
+	$f\cdot g:=\mu_C\circ (f\tensor g)$ es morfismo de \'{a}lgebras. Pero
+	\begin{align*}
+		(f\cdot g)(a\,a_1\tensor b\,b_1) & \,=\,f(a\,a_1)\,g(b\,b_1)
+			\,=\,f(a)\,f(a_1)\,g(b)\,g(b_1) \\
+		& \,=\, f(a)\,g(b)\,f(a_1)\,g(b_1) \\
+		& \,=\, (f\cdot g)(a\tensor b)\,(f\cdot g)(a_1\tensor b_1)
+		\text{ .}
+	\end{align*}
+	%
+	%
+	% La condici\'{o}n $f(a)g(b)=g(b)f(a)$ se puede reescribir de la
+	% siguiente manera:
+	% \begin{align*}
+		% \mu_C\circ(f\tensor g) & \,=\,
+			% \mu_C\circ(g\tensor f)\circ\swap[A\tensor B] \,=\,
+			% \mu_C\circ\swap[C\tensor C]\circ (f\tensor g)
+		% \text{ .}
+	% \end{align*}
+	% %
+	% Por otro lado, la asociatividad de $\mu_C$ implica
+	% \begin{align*}
+		% \mu_C \circ (\mu_C\tensor\mu_C) & \,=\,
+			% \mu_C\circ(\mu_C\tensor\id[C])\circ
+			% (\id[C]\tensor\mu_C\tensor\id[C])
+		% \text{ .}
+	% \end{align*}
+	% %
+	% Entonces
+	% \begin{align*}
+		% & \mu_C(\mu_C\,(f\tensor g)\tensor\mu_C\,(f\tensor g)) \,=\,
+			% \mu_C\,(\mu_C\,(f\tensor g)\tensor
+			% \mu_C\,(g\tensor f)\,\swap[A\tensor B]) \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(\mu_C\tensor\id[C])\,
+				% (\id[C]\tensor\mu_C\tensor\id[C])\,
+				% (f\tensor g\tensor g\tensor f)\,
+				% (\id[A\tensor B]\tensor\swap[A\tensor B]) \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(\mu_C\tensor\id[C])\,
+				% (f\tensor(g\,\mu_B)\tensor f)\,
+				% (\id[A\tensor B]\tensor\swap[A\tensor B]) \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(\mu_C\tensor\id[C])\,(f\tensor g\tensor f)\,
+				% (\id[A]\tensor\mu_B\tensor\id[A])\,
+				% (\id[A\tensor B]\tensor\swap[A\tensor B]) \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(\mu_C\tensor\id[C])\,(f\tensor f\tensor g)\,
+				% (\id[A]\tensor\swap[B\tensor A])\,
+				% (\id[A]\tensor\mu_B\tensor\id[A])\,
+				% (\id[A\tensor B]\tensor\swap[A\tensor B]) \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(f\tensor g)\,(\mu_A\tensor\id[B])\,
+				% (\id[A\tensor A]\tensor\mu_B)\,
+				% (\id[A]\tensor\swap[B\tensor A]\tensor\id[B])
+				% \\
+		% & \qquad\qquad\,=\,
+			% \mu_C\,(f\tensor g)\,(\mu_A\tensor\mu_B)\,
+				% (\id[A]\tensor\swap[B\tensor A]\tensor\id[B])
+	% \end{align*}
+	% %
+\end{proof}
+
+En particular, si $C$ es conmutativa, existe una biyecci\'{o}n natural
+\begin{equation}
+	\label{eq:morfismosdesdeelproductotensorialdealgebras}
+	\Homalg\big(A,C\big) \,\times\,\Homalg\big(B,C\big) \,\simeq\,
+		\Homalg\big(A\tensor B,C\big)
+\end{equation}
+%
+dado por $(f,g)\mapsto \mu_C\circ(f\tensor g)$. En otras palabras, el producto
+tensorial (junto con los morfismos de la Proposici\'{o}n~%
+\ref{propo:productotensorialdealgebras}) es el \emph{coproducto} en la
+categor\'{\i}a $\CommAlg[k]$.
+
+\begin{obsProductoTensorialDeAlgebras}%
+	\label{obs:productotensorialdealgebrasejemplomodulos}
+	En el Ejemplo~\ref{ejemplo:productotensorialdemodulos}, vimos que
+	$A\simeq k\tensor A$ como $k$-m\'{o}dulos, naturalmente, v\'{\i}a
+	$a\mapsto 1\tensor a$. Pero este morfismo coincide con el morfismo de
+	\'{a}lgebras $j_A:\,A\rightarrow k\tensor A$ de la definici\'{o}n de
+	producto tensorial de \'{a}lgebras (Proposici\'{o}n~%
+	\ref{propo:productotensorialdealgebras}). Teniendo esto en cuenta
+	idenitficamos naturalmente $k\tensor A\simeq A\simeq A\tensor k$ como
+	\'{a}lgebras.
+\end{obsProductoTensorialDeAlgebras}
+
+\begin{obsProductoTensorialDeAlgebras}%
+	\label{obs:productotensorialdealgebrasesfuntorial}
+	Sea $\varphi:\,A\rightarrow B$ morfismo de $k$-\'{a}lgebras y sea $C$
+	otra $k$-\'{a}lgebra. Por la Observaci\'{o}n~%
+	\ref{obs:productotensorialdemodulosesfuntorial}, existe un \'{u}nico
+	morfismo de m\'{o}dulos
+	$\varphi\tensor\id[C]:\,A\tensor C\rightarrow B\tensor C$ tal que
+	$\varphi\tensor\id[C](a\tensor c)=\varphi(a)\tensor c$. Ahora bien, por
+	la Proposici\'{o}n~\ref{propo:productotensorialdealgebrasuniversal},
+	existe un \'{u}nico morfismo de \'{a}lgebras
+	$\varphi\cdot\id[C]:\,A\tensor C\rightarrow B\tensor C$ tal que el
+	diagrama siguiente conmuta.
+	\begin{center}
+		\begin{tikzcd}
+			A \arrow[d,"\varphi"'] \arrow[r,"j_A"] &
+				A\tensor C
+				\arrow[d,dashed,"{\varphi\cdot\id[C]}"] &
+				C \arrow[l,"j_C"'] \arrow[d,equal] \\
+			B \arrow[r,"j_B"'] & B\tensor C &
+				C \arrow[l,"j_C"]
+		\end{tikzcd}
+	\end{center}
+	Pero la conmutatividad de este diagrama quiere decir que
+	\begin{align*}
+		\varphi\cdot\id[C](a\tensor c) & \,=\,
+			\varphi\cdot\id[C](j_A(a)\,j_C(c)) \,=\,
+			j_B(\varphi(a))\,j_C(\id[C](c)) \\
+		& \,=\, \varphi(a)\tensor c
+		\text{ .}
+	\end{align*}
+	%
+	Es decir, el morfismo de m\'{o}dulos $\varphi\tensor\id[C]$ es, en
+	realidad, morfismo de \'{a}lgebras. En particular, obtenemos un
+	funtor $-\tensor C:\,\Alg[k]\rightarrow\Alg[k]$ dado por
+	\begin{align*}
+		\big(\varphi:\,A\rightarrow B\big) & \,\mapsto\,
+			\big(\varphi\tensor\id[C]:\,
+				A\tensor C\rightarrow B\tensor C\big)
+		\text{ .}
+	\end{align*}
+	%
+\end{obsProductoTensorialDeAlgebras}
+
+\begin{obsProductoTensorialDeAlgebras}\label{obs:productotensorialdealgebras}
+	En t\'{e}rminos de los morfismos $\producto[A]$, $\producto[B]$ y
+	$\swap:\,A\tensor B\rightarrow B\tensor A$, el producto en $A\tensor B$
+	est\'{a} dado por
+	\begin{equation}
+		\label{eq:productotensorialdealgebras}
+		\producto[A\tensor B] \,=\,
+			(\producto[A]\tensor\producto[B])\circ
+			(\id[A]\tensor\swap\tensor\id[B])
+		\text{ .}
+	\end{equation}
+	%
+	En adelante, escribiremos simplemente $\producto[C]\circ (f\tensor g)$
+	en lugar de $f\cdot g$ para referirnos al morfismo de \'{a}lgebras
+	inducido en el producto tensorial.
+\end{obsProductoTensorialDeAlgebras}
+
+Sea $A$ una $k$-\'{a}lgebra. Dados $a,b\in A$, por
+\eqref{eq:productotensorialdealgebras}, sabemos que
+$(a\tensor 1)\,(1\tensor b)=(1\tensor b)\,(a\tensor 1)$ en $A\tensor A$. Si
+$A=k\{X\}/I$, el siguiente resultado muestra c\'{o}mo describir el producto
+$A\tensor A$ como cociente de un \'{a}lgebra libre, a partir de la
+presentaci\'{o}n de $A$.
+
+\begin{propoProductoTensorialDeAlgebras}%
+	\label{propo:productotensorialdealgebrascociente}
+	Sea $A=k\{X\}/I$ una $k$-\'{a}lgebra generada por el conjunto $X$.
+	Sean $X',X''$ dos \emph{copias} del conjunto $X$ y sean
+	$I'\triangleleft k\{X'\}$ e $I''\triangleleft k\{X''\}$ los ideales
+	bil\'{a}teros correspondientes a $I$ determinados por identificar
+	las copias. Entonces $A\tensor A$ es isomorfa como $k$-\'{a}lgebra a
+	\begin{align*}
+		A^{\otimes 2} & \,:=\,k\{X'\sqcup X''\}/
+			\generado{I',I'',X'X''-X''X'}
+		\text{ ,}
+	\end{align*}
+	%
+	donde $X'\sqcup X''$ denota la uni\'{o}n disjunta de las copias de $X$
+	y $\generado{I',I'',X'X''-X''X'}$ es el ideal bil\'{a}tero generado por
+	$I'$, $I''$ y los elementos de la forma $x'y''-y''x'$ con $x'\in X'$ e
+	$y''\in X''$ (no necesariamente correspondientes al mismo elemento de
+	$X$).
+\end{propoProductoTensorialDeAlgebras}
+
+\begin{proof}
+	Definimos morfismos $\varphi',\varphi'':\,A\rightarrow A^{\otimes 2}$
+	por $\varphi'(x)=x'$ y $\varphi''(x)=x''$, donde $x'\in X'$ y
+	$x''\in X''$ son las copias del elemento $x\in X$. Dado que
+	\begin{align*}
+		\varphi'(x)\,\varphi''(y) & \,=\,x'\,y''\,\,y''\,x'\,=\,
+			\varphi''(y)\,\varphi'(x)
+		\text{ ,}
+	\end{align*}
+	%
+	en $A^{\otimes 2}$, para todo par $x,y\in X$, por la Proposici\'{o}n~%
+	\ref{propo:productotensorialdealgebrasuniversal}, existe un \'{u}nico
+	morfismo $\varphi:\,A\tensor A\rightarrow A^{\otimes 2}$ tal que
+	\begin{align*}
+		\varphi(x\tensor y) & \,=\,\varphi'(x)\,\varphi''(y)\,=\,
+			x'\,y''
+	\end{align*}
+	%
+	para todo par $x,y\in X$. En la direcci\'{o}n opuesta, definimos
+	$\psi:\,k\{X'\sqcup X''\}\rightarrow A\tensor A$ por
+	\begin{align*}
+		\psi(x') \,=\,x\tensor 1 & \quad\text{y}\quad
+		\psi(y'') \,=\,1\tensor y
+		\text{ ,}
+	\end{align*}
+	%
+	si $x'$ es copia de $x$ e $y''$ es copia de $y$. Pero este morfismo de
+	\'{a}lgebras se anula en el ideal $\generado{I',I'',X'X''-X''X'}$. Por
+	lo tanto, determina un\'{\i}vocamente un morfismo
+	$\psi:\,A^{\otimes 2}\rightarrow A\tensor A$. Se puede ver que
+	$\varphi$ y $\psi$ son inversos uno de otro.
+\end{proof}
+
+Con este \'{u}ltimo resultado, podemos ver que el ``producto de matrices''
+$\Delta:\,\MM(2)\rightarrow\MM(2)\tensor\MM(2)$ est\'{a} dado por
+\begin{align*}
+	\Delta\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} & \,=\,
+		\begin{bmatrix} a & b \\ c & d \end{bmatrix}\tensor
+		\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+	\text{ ,}
+\end{align*}
+%
+es decir,
+\begin{align*}
+	\Delta(a) \,=\,a\tensor a + b\tensor c & \quad\text{,}\quad
+	\Delta(b) \,=\,a\tensor b + b\tensor d \\
+	\Delta(c) \,=\,c\tensor a + d\tensor c & \quad\text{y}\quad
+	\Delta(d) \,=\,c\tensor b + d\tensor d
+	\text{ .}
+\end{align*}
+%
+
+\begin{obsAlgebraEjemplos}\label{obs:algebraejemplos}
+	Sea $H=k[x]$, $k[x,x^{-1}]$, $\GL(2)$ o $\SL(2)$. En la secci\'{o}n
+	\ref{subsec:kalgebras:ejemplos}, vimos c\'{o}mo definir un morfismo de
+	\'{a}lgebras $\Delta:\,H\rightarrow H^{\otimes 2}$ en cada uno de estos
+	casos y afirmamos que el pullback
+	\begin{math}
+		\pull\Delta:\,\Homalg\big(H^{\otimes 2},A\big)\rightarrow
+			\Homalg\big(H,A\big)
+	\end{math} permite definir una estructura de grupo en el conjunto de
+	morfismos $H\rightarrow A$. La validez de esta afirmaci\'{o}n la
+	hab\'{\i}amos visto como consecuencia de ciertas identificaciones
+	particulares para cada caso: \eqref{eq:obs:rectaafin},
+	\eqref{eq:obs:multiplicativo}. Ahora podemos ver que el argumento es
+	v\'{a}lido en general. Supongamos dada un \'{a}lgebra $H$ y un morfismo
+	de \'{a}lgebras $\Delta:\,H\rightarrow H^{\otimes 2}$. Entonces, por
+	la Proposici\'{o}n~\ref{propo:productotensorialdealgebrascociente},
+	\begin{align*}
+		\Homalg\big(H^{\otimes 2},A\big) & \,\simeq\,
+			\Homalg\big(H\tensor H,A\big)
+	\end{align*}
+	%
+	y, por \eqref{eq:morfismosdesdeelproductotensorialdealgebras}, si $A$
+	es conmutativa,
+	\begin{align*}
+		\Homalg\big(H\tensor H,A\big) & \,\simeq\,
+			\Homalg\big(H,A\big)\,\times\,
+			\Homalg\big(H,A\big)
+		\text{ .}
+	\end{align*}
+	%
+	Por medio de estas biyecciones, obtenemos una funci\'{o}n
+	\begin{align*}
+		\pull\Delta & \,:\,\Homalg\big(H,A\big)\,\times\,
+			\Homalg\big(H,A\big)\,\rightarrow\,\Homalg\big(H,A\big)
+	\end{align*}
+	%
+	dada por
+	\begin{align*}
+		\pull\Delta(f,g) & \,=\,\mu_A\circ(f\tensor g)\circ\Delta
+		\text{ .}
+	\end{align*}
+	%
+	Ahora bien, que esta operaci\'{o}n binaria en el conjunto de morfismos
+	sea asociativa, admita un elemento neutro y sea tal que todo morfismo
+	posea un inverso con respecto a la misma, depender\'{a} de las
+	propiedades del morfismo $\Delta$.
+\end{obsAlgebraEjemplos}

@@ -1,0 +1,226 @@
+\theoremstyle{plain}
+\newtheorem{defAntipoda}{Definici\'{o}n}[section]
+\newtheorem{obsHopf}[defAntipoda]{Observaci\'{o}n}
+\newtheorem{teoGrupoDeMorfismos}[defAntipoda]{Teorema}
+
+%-------------
+
+\subsection{La ant\'{\i}poda}
+
+\begin{frame}{Convoluci\'{o}n y ant\'{\i}poda}
+	Sean $(A,\mu,\eta)$, $(C,\Delta,\varepsilon)$. La
+	\emph{convoluci\'{o}n} de $f,g\in\Hom[k](C,A)$, es
+	\begin{align*}
+		f \convol g & \,:=\,\mu\circ(f\tensor g)\circ\Delta
+			\,\in\,\Hom[k](C,A)
+		\text{ .}
+	\end{align*}
+	%
+	Si $\Delta(x)=\sum_i\,x_i'\tensor x_i''$,
+	$f \convol g(x) =\sum_i\,f(x_i')\,g(x_i'')$
+	\begin{defAntipoda}\label{def:antipoda}
+		Una \emph{ant\'{\i}poda} en $(H,\mu,\eta,\Delta,\varepsilon)$
+		es $S\in\Endo[k](H)$ tal que
+		\begin{align*}
+			S\convol\id[H] & \,=\,\id[H]\convol S \,=\,
+				\eta\circ\varepsilon
+			\text{ .}
+		\end{align*}
+		%
+		\begin{math}
+			\sum_i\,x_i'S(x_i'')=\varepsilon(x)\cdot 1=
+				\sum_i\,S(x_i')x_i''
+		\end{math}. Si existe, es \'{u}nica.
+	\end{defAntipoda}
+\end{frame}
+
+\begin{frame}{Definici\'{o}n}
+	Un \emph{\'{a}lgebra de Hopf} es una bi\'{a}lgebra $H$ con
+	ant\'{\i}poda. Un morfismo de \'{a}lgebras de Hopf es un morfismo de
+	bi\'{a}lgebras.
+	\begin{obsHopf}\label{obs:hopf}
+		\begin{math}
+			S:\,H\rightarrow H^{\opp\,\copp}=
+				(H,\mu^\opp,\eta,\Delta^\opp,\varepsilon)
+		\end{math} es morfismo de bi\'{a}lgebras.
+		Si $H=k\{X\}/I$ es bi\'{a}lgebra, dado un morfismo de
+		\'{a}lgebras $S:\,H\rightarrow H^\opp$, basta verificar la
+		condici\'{o}n de ant\'{\i}poda en $X$.
+	\end{obsHopf}
+\end{frame}
+
+\begin{frame}{El \'{a}lgebra de un grupo}
+	Sean $G$ un grupo, $k[G]$ la bi\'{a}lgebra del monoide.
+	\begin{align*}
+		S(g) & \,=\,g^{-1}
+	\end{align*}
+	%
+	$g\in G$, define una ant\'{\i}poda: $\Delta(g)=g\tensor g$ y
+	$\varepsilon(g)=1$. Rec\'{\i}procamente, si $G$ es monoide y
+	$S:\,k[G]\rightarrow k[G]$ es ant\'{\i}poda,
+	\begin{align*}
+		g\,S(g) & \,=\,S(g)\,g \,=\,\varepsilon(g)\,1\,=\,1
+	\end{align*}
+	%
+	implica $S(g)\in G$ y es inverso de $g$.
+\end{frame}
+
+\subsection{Ejemplos}
+
+\begin{frame}{$\GL(2)$ y $\SL(2)$}
+	$\GL(2)$ y $\SL(2)$ son bi\'{a}lgebras conmutativas con
+	$\Delta,\varepsilon$ dados por
+	\begin{align*}
+		\Delta\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			\begin{bmatrix} a & b \\ c & d \end{bmatrix} \tensor
+			\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+			& \quad\text{,}\quad
+			\Delta(t)\,=\,t\tensor t \text{ ,} \\
+		\varepsilon\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			\begin{bmatrix} 1 & \\ & 1 \end{bmatrix}
+			& \quad\text{,}\quad
+			\varepsilon(t) \,=\,1
+		\text{ .}
+	\end{align*}
+	%
+	$\Delta$ no es coconmutativa:
+	\begin{align*}
+		\Delta(a) & \,=\,a\tensor a+b\tensor c\,\not=\,
+			a\tensor a+c\tensor b \,=\,\swap\circ\Delta(a)
+		\text{ .}
+	\end{align*}
+	%
+	La ant\'{\i}poda est\'{a} dada por
+	\begin{align*}
+		S\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			(ad-bc)^{-1}\,
+			\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+			& \quad\text{,}\quad
+			S(t) \,=\,t^{-1}
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{El grupo de un \'{a}lgebra}
+	Dada $(H,\Delta,\varepsilon)$,
+	\begin{align*}
+		\grouplike H & \,:=\,\big\{x\in H\,:\,x\not=0,\,
+			\Delta(x)=x\tensor x\big\}
+		\text{ .}
+	\end{align*}
+	%
+	Si $H$ es bi\'{a}lgebra, es monoide con unidad $\Delta(1)=1\tensor 1$ y
+	\begin{align*}
+		\Delta(xy) & \,=\,\Delta(x)\,\Delta(y)\,=\,
+			(x\tensor x)\,(y\tensor y) \,=\,xy\tensor xy
+		\text{ .}
+	\end{align*}
+	%
+	Si $H$ es de Hopf, $x\mapsto S(x)$ define un inverso en
+	$\grouplike H$:
+	\begin{align*}
+		\swap\circ(S\tensor S)\circ\Delta & \,=\,
+			\Delta\circ S
+		\text{ .}
+	\end{align*}
+	%
+	Si $H=k[G]$, entonces $\grouplike{k[G]}=G$.
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,A\big)$ (cont.)}
+	\begin{teoGrupoDeMorfismos}\label{thm:grupodemorfismos}
+		Sean $H$ un \'{a}lgebra de Hopf y $A$ un \'{a}lgebra
+		conmutativa. Los conjuntos $\Homalg\big(H,A\big)$ son grupos
+		con la convoluci\'{o}n heredada de $\Hom[k](H,A)$. El inverso
+		de $\psi:\,H\rightarrow A$ est\'{a} dado por $\psi\circ S$.
+	\end{teoGrupoDeMorfismos}
+	Comprobar que
+	\begin{itemize}
+		% \item
+			% \begin{math}
+				% (\psi\convol\varphi)\circ\mu_H =
+				% \mu_A\circ((\psi\convol\varphi)\tensor
+					% (\psi\convol\varphi))
+			% \end{math},
+		% \item
+			% \begin{math}
+				% (\psi\convol\varphi)\circ\eta_H =\eta_A
+			% \end{math},
+		\item $\psi\convol\varphi\in\Homalg\big(H,A\big)$,
+		\item $c =\eta_A\circ\varepsilon_H\in\Homalg\big(H,A\big)$ es
+			unidad,
+		\item $\psi\circ S\in\Homalg\big(H,A\big)$ es inverso.
+	\end{itemize}
+	%
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,A\big)$ (cont.)}
+	Si $\psi,\varphi\in\Homalg\big(H,A\big)$, como $H$ es bi\'{a}lgebra,
+	\begin{align*}
+		(\psi\convol\varphi)\circ\mu_H & \,=\
+			\mu_A\circ (\psi\tensor\varphi)\circ\Delta_H\circ\mu_H
+				\\
+		& \,=\,	\mu_A\,(\psi\tensor\varphi)\,(\mu_H\tensor\mu_H)\,
+			(\id[H]\tensor\swap[H]\tensor\id[H])\,
+			(\Delta_H\tensor\Delta_H) \\
+		& \,=\,\mu_A\,((\mu_A\,(\psi\tensor\varphi)\,\Delta_H)\tensor
+			(\mu_A\,(\psi\tensor\varphi)\,\Delta_H)) \\
+		& \,=\,\mu_A((\psi\convol\varphi)\tensor(\psi\convol\varphi))
+		\text{ .}
+	\end{align*}
+	%
+	Si $c=\eta_A\circ\varepsilon_H$,
+	\begin{align*}
+		\psi\convol c & \,=\,\mu_A\,(\psi\tensor\eta_A\varepsilon_H)\,
+								\Delta_H \\
+		& \,=\,\mu_A\,(\id[A]\tensor\eta_A)\,(\psi\tensor\id[k])\,
+			(\id[H]\tensor\varepsilon_H)\,\Delta_H \\
+		& \,=\,\psi\tensor\id[k]\,=\,\psi
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,A\big)$ (cont.)}
+	$G=(\Homalg\big(H,A\big),\convol,\eta_A\circ\varepsilon_H)$ es un
+	monoide y podemos definir $(k[G],\mu,\eta,\Delta,\varepsilon)$. Sea
+	$S_H$ la ant\'{\i}poda en $H$ y sea
+	$S(\psi)=\psi\circ S_H\in\Hom[k](H,A)$. Se verifica que
+	\begin{align*}
+		\mu\circ(\id\tensor S)\circ\Delta & \,=\,
+			\eta\circ\varepsilon\,=\,
+			\mu\circ(S\tensor\id)\circ\Delta
+	\end{align*}
+	%
+	Por ejemplo, $\eta\circ\varepsilon(\psi)=\eta(1)=\eta_A\varepsilon_H$ y
+	\begin{align*}
+		\mu\circ(\id\tensor S)\circ\Delta(\psi) & \,=\,
+			\mu(\psi\tensor S(\psi)) \,=\,\psi\convol S(\psi) \\
+		& \,=\, \mu_A\,(\psi\tensor\psi)\,(\id[H]\tensor S_H)\,
+								\Delta_H \\
+		& \,=\,\psi\,\mu_H\,(\id[H]\tensor S_H)\,\Delta_H \,=\,
+			(\psi\,\eta_H)\,\varepsilon_H \\
+		& \,=\,\eta_A\varepsilon_H
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{El grupo $\Homalg\big(H,A\big)$ (cont.)}
+	Resta verificar que $S(\psi)\in\Homalg\big(H,A\big)$:
+	\begin{align*}
+		(\psi\,S_H)\,\mu_H & \,=\,\psi\,(\mu_H\,\swap[H])\,
+			(S_H\tensor S_H) \,=\,
+			\mu_A\,(\psi\tensor\psi)\,\swap[H]\,(S_H\tensor S_H) \\
+		& \,=\,(\mu_A\,\swap[A])\,((\psi\,S_H)\tensor (\psi\,S_H))
+	\end{align*}
+	%
+	Si $\mu_A\circ\swap[A]=\mu_A$, entonces $\psi\circ S_H$ respeta
+	productos. En cuanto a la unidad,
+	\begin{align*}
+		(\psi\,S_H)\,\eta_H & \,=\,\psi\,\eta_H\,=\,\eta_H
+		\text{ .}
+	\end{align*}
+\end{frame}
+

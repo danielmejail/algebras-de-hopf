@@ -1,0 +1,570 @@
+\theoremstyle{plain}
+\newtheorem{teoEquivalencia}{Teorema}[section]
+\newtheorem{coroGrupoDeMorfismos}[teoEquivalencia]{Corolario}
+\newtheorem{propoYoneda}[teoEquivalencia]{Proposici\'{o}n}
+\newtheorem{teoMorfismoDeGrupos}[teoEquivalencia]{Teorema}
+
+\theoremstyle{definition}
+\newtheorem{obsGrupoDeMorfismos}[teoEquivalencia]{Observaci\'{o}n}
+\newtheorem{obsProductosEnGrupos}[teoEquivalencia]{Observaci\'{o}n}
+\newtheorem{obsRepresentabilidad}[teoEquivalencia]{Observaci\'{o}n}
+
+%-------------
+
+\subsection{Recapitulaci\'{o}n}\label{subsec:gruposafines:recap}
+
+Una manera un poco m\'{a}s clara de hacer estas cuentas es usar diagramas:
+el coproducto $\coproducto[H]:\,H\rightarrow H\tensor H$ induce
+\begin{center}
+	\begin{tikzcd}
+		H\tensor H &
+		\Homalg\big(H\tensor H,A\big)
+			\arrow[d,"{\pull{\coproducto[H]}}"'] &
+		\Homalg\big(H,A\big)\,\times\,
+			\Homalg\big(H,A\big) \arrow[l,"\sim"'] \\
+		H \arrow[u,"{\coproducto[H]}"] &
+		\Homalg\big(H,A\big) &
+	\end{tikzcd}
+\end{center}
+el isomorfismo horizontal est\'{a} dado por
+$(\psi,\phi)\mapsto\producto[A]\,(\psi\tensor\phi)$ y el morfismo vertical es
+precomponer con $\coproducto[H]$, mostrando que el producto es la
+convoluci\'{o}n; la counidad $\counidad[H]:\,H\rightarrow k$ induce
+\begin{center}
+	\begin{tikzcd}
+		k &
+		\Homalg\big(k,A\big)\,=\,\big\{\unidad[A]\big\}
+			\arrow[d,"{\pull{\counidad[H]}}"'] &
+		\big\{1\big\} \arrow[l,"\sim"'] \\
+		H \arrow[u,"{\counidad[H]}"] &
+		\Homalg\big(H,A\big) &
+	\end{tikzcd}
+\end{center}
+el isomorfismo horizontal es $1\mapsto\unidad[A]$ y el morismo vertical es
+precomponer con $\counidad[H]$, mostrando que el elemento neutro es
+$\unidad[A]\,\counidad[H]$; la ant\'{\i}poda $S_H:\,H\rightarrow H$ induce
+\begin{center}
+	\begin{tikzcd}
+		H & \Homalg\big(H,A\big) \arrow[d,"{\pull S_H}"'] \\
+		H \arrow[u,"S_H"] &
+		\Homalg\big(H,A\big)
+	\end{tikzcd}
+\end{center}
+es decir, el inverso es $\pull S_H(\psi)=\psi\,S_H$. Para que $\pull S_H$
+est\'{e} bien definido, se usa la conmutatividad de $A$. La estructura de
+\'{a}lgebra de $H$ define la base $\Homalg\big(H,A\big)$, la estructura de
+co\'{a}lgebra (bi\'{a}lgebra) da lugar al monoide
+$(\Homalg\big(H,A\big),\convol,c)$ y la ant\'{\i}poda, junto con la
+conmutatividad de $A$, permiten dar una noci\'{o}n de inverso. Los axiomas de
+monoide/grupo son consecuencia de los axiomas de coasociatividad, counidad y de
+la definici\'{o}n de ant\'{\i}poda.
+
+Sean $G_A=\Homalg\big(H,A\big)$,
+$G_A^{\otimes i}=\Homalg\big(H^{\otimes i},A\big)$ para $i\geq 1$. Entonces, la
+asociatividad del producto tensorial implica que el diagrama siguiente
+conmuta con todas las flechas isomorfismos:
+\begin{center}
+	\begin{tikzcd}
+		& G\times (G\times G) \arrow[r,
+			"\id\times({\producto[A]}\circ\tensor)"] &
+		G\times G^{\otimes 2}
+			\arrow[dr,"{\producto[A]}\circ\tensor"] & \\
+		G\times G\times G \arrow[ur,"\sim"]
+			\arrow[dr,"\sim"'] & & &
+		G^{\otimes 3} \\
+		& (G\times G)\times G\arrow[r,
+			"({\producto[A]}\circ\tensor)\times\id"'] &
+		G^{\otimes 2}\times G
+			\arrow[ur,"{\producto[A]}\circ\tensor"'] &
+	\end{tikzcd}
+\end{center}
+Ahora, el diagrama de coasociatividad para $\coproducto[H]$ induce un diagrama
+para $G_A$ que se interpreta como la asociatividad del producto en $G_A$:
+\begin{center}
+	\begin{tikzcd}
+		H\tensor H\tensor H &
+			H\tensor H
+				\arrow[l,"\id\tensor\Delta"'] \\
+		H\tensor H \arrow[u,"\Delta\tensor\id"] &
+			H \arrow[u,"\Delta"']
+				\arrow[l,"\Delta"]
+	\end{tikzcd}
+	$\rightsquigarrow$
+	\begin{tikzcd}
+		G_A^{\otimes 3} \arrow[r,"\pull{(\id\tensor\Delta)}"]
+			\arrow[d,"\pull{(\Delta\tensor\id)}"'] &
+			G_A^{\otimes 2} \arrow[d,"\pull\Delta"] \\
+		G_A^{\otimes 2} \arrow[r,"\pull\Delta"'] &
+			G_A
+	\end{tikzcd}
+\end{center}
+Expl\'{\i}citamente, $f\convol (g\convol h)=(f\convol g)\convol h$. De manera
+similar, el isomorfismo $k\tensor H\simeq H$ induce un isomorfismo
+\begin{align*}
+	G_A & \,=\,\Homalg\big(H,A\big)
+		\,\simeq\,\Homalg\big(k\tensor H,A\big) \\
+	& \,\simeq\,\Homalg\big(k,A\big)\times\Homalg\big(H,A\big)
+		\,=\,\{\unidad[A]\}\times G_A
+\end{align*}
+%
+y, an\'{a}logamente, $H\tensor k\simeq H$ induce
+$G_A\simeq G_A\times \{\unidad[A]\}$. As\'{\i},
+\begin{center}
+	\begin{tikzcd}
+		k\tensor H &
+		H\tensor H \arrow[l,"\counidad\tensor\id"']
+			\arrow[r,"\id\tensor\counidad"] &
+		H\tensor k \\
+		& H \arrow[u,"\coproducto"'] \arrow[ul,"\sim"]
+			\arrow[ur,"\sim"']
+	\end{tikzcd}
+	$\rightsquigarrow$
+	\begin{tikzcd}
+		\{\unidad[A]\}\times G_A
+			\arrow[r,"\pull{(\counidad\tensor\id)}"]
+			\arrow[dr, "\sim"'] &
+		G_A^{\otimes 2} \arrow[d,"\pull\coproducto"] &
+		G_A\times\{\unidad[A]\}
+			\arrow[l,"\pull{(\id\tensor\counidad)}"']
+			\arrow[dl,"\sim"] \\
+		& G_A &
+	\end{tikzcd}
+\end{center}
+Observamos, entonces que el elemento neutro de $G_A$ est\'{a} dado por
+$\pull\counidad(\unidad[A])=\unidad[A]\,\counidad$. Por \'{u}ltimo, para la
+ant\'{\i}poda tenemos diagramas conmutativos
+\begin{center}
+	\begin{tikzcd}
+		H\tensor H \arrow[r,"\producto"] &
+		H &
+		H\tensor H \arrow[l,"\producto"'] \\
+		H\tensor H \arrow[u,"S\tensor\id"] &
+		H \arrow[l,"\coproducto"] \arrow[r,"\coproducto"']
+			\arrow[u,"\unidad\,\counidad"'] &
+		H\tensor H \arrow[u,"\id\tensor S"']
+	\end{tikzcd}
+	$\rightsquigarrow$
+	\begin{tikzcd}
+		G_A^{\otimes 2} \arrow[d,"\pull{(S\tensor\id)}"'] &
+		G_A \arrow[l,"\pull\producto"']
+			\arrow[d,"\pull{(\unidad\,\counidad)}"]
+			\arrow[r,"\pull\producto"] &
+		G_A^{\otimes 2} \arrow[d,"\pull{(\id\tensor S)}"] \\
+		G_A^{\otimes 2} \arrow[r,"\pull\coproducto"'] &
+		G_A &
+		G_A^{\otimes 2} \arrow[l,"\pull\coproducto"]
+	\end{tikzcd}
+\end{center}
+Si $f\in G_A$, entonces
+\begin{math}
+	\pull{(\unidad\,\counidad)}\,f=f\circ(\unidad\,\counidad)=
+		\unidad[A]\,\counidad
+\end{math}, que es el elemento neutro de $G_A$; la aplicaci\'{o}n
+$\pull\producto:\,G_A\rightarrow G_A^{\otimes 2}$ est\'{a} dada por
+$f\mapsto f\circ\producto=\producto[A]\circ(f\tensor f)$ y, componiendo con el
+isomorfismo $G_A^{\otimes 2}\simeq G_A\times G_A$ se obtiene la diagonal
+$\diag:\,f\mapsto (f,f)$; v\'{\i}a este mismo isomorfismo,
+$\pull{(S\tensor\id)}$ se corresponde con $\pull S\times\id[G_A]$,
+$\pull{(\id\tensor S)}$ con $\id[G_A]\times\pull S$ y $\pull\coproducto$ con
+$(f,g)\mapsto f\convol g$, el producto en $G_A$. En definitiva, el diagrama
+siguiente conmuta, mostrando que $f\mapsto f\circ S$ es el inverso en $G_A$:
+\begin{center}
+	\begin{tikzcd}
+		G_A\times G_A \arrow[d,"\pull S\times\id"'] &
+		G_A \arrow[l,"\diag"'] \arrow[d,"1"]
+			\arrow[r,"\diag"] &
+		G_A\times G_A \arrow[d,"\id\times\pull S"] \\
+		G_A\times G_A \arrow[r,"\convol"'] & G_A &
+		G_A\times G_A \arrow[l,"\convol"]
+	\end{tikzcd}
+\end{center}
+
+\subsection{El grupo $\Homalg\big(H,-\big)$}%
+	\label{subsec:gruposafines:elgrupodemorfismos}
+
+\subsubsection{El funtor $\Homalg\big(H,-\big)$}
+Para cada \'{a}lgebra de Hopf $H$ y cada \'{a}lgebra conmutativa $A$,
+obtenemos un grupo en $G_A=\Homalg\big(H,A\big)$.%
+\footnote{
+	Si $H$ es bi\'{a}lgebra y $A$ no necesariamente es conmutativa,
+	entonces se obtiene un monoide.
+}
+Supongamos que tenemos, adem\'{a}s, un morfismo $\varphi:\,A\rightarrow B$ de
+$k$-\'{a}lgebras. Como $\Homalg\big(H,-\big):\,\Alg[k]\rightarrow\Set$ es
+funtor, $\varphi$ induce una funci\'{o}n $\push\varphi:\,G_A\rightarrow G_B$,
+dada por $f\mapsto \varphi\circ f$. Similarmente, se obtiene una
+$\push\varphi:\,G_A^{\otimes 2}\rightarrow G_B^{\otimes 2}$. Notamos que
+\begin{center}
+	\begin{tikzcd}
+		G_A^{\otimes 2} \arrow[d,"\push\varphi"']
+			\arrow[r,"\pull{\coproducto[A]}"] &
+		G_A \arrow[d,"\push\varphi"] \\
+		G_B^{\otimes 2} \arrow[r,"\pull{\coproducto[B]}"'] &
+		G_B
+	\end{tikzcd}
+\end{center}
+conmuta. Aqu\'{\i} $\pull{\coproducto[A]}$ y $\pull{\coproducto[B]}$ denotan
+precomposici\'{o}n con $\coproducto$ en $G_A$ y en $G_B$, respectivamente.
+Entonces ambos caminos son iguales: ambos son componer a derecha con
+$\coproducto$ y componer a izquierda con $\varphi$. En t\'{e}rminos de la
+convoluci\'{o}n,
+\begin{align*}
+	\push\varphi(f\convol g) & \,=\,
+		\varphi\circ\producto[A]\circ(f\tensor g)\circ\coproducto
+		\,=\,\producto[B]\circ(\varphi\tensor\varphi)\circ
+			(f\tensor g)\circ\coproducto
+		\,=\,\push\varphi(f)\convol\push\varphi(g)
+	\text{ .}
+\end{align*}
+%
+Es decir, $\push\varphi$ es morfismo de grupos. Dicho de otra manera, el funtor
+$\Homalg\big(H,-\big)$ se factoriza por la categor\'{\i}a de grupos.
+
+\begin{coroGrupoDeMorfismos}\label{coro:grupodemorfismos}
+	La aplicaci\'{o}n que a un \'{a}lgebra conmutativa $A$ le asigna el
+	grupo dado por el conjunto $\Homalg\big(H,A\big)$ junto con la
+	estructura definida en el Teorema~\ref{thm:grupodemorfismos} y que a un
+	morfismo $\varphi:\,A\rightarrow B$ le asigna $\push\varphi$ determina
+	un funtor $G:\,\CommAlg[k]\rightarrow\Grp$. Este funtor verifica
+	\begin{align*}
+		U\circ G & \,=\,\Homalg\big(H,-\big)
+		\text{ ,}
+	\end{align*}
+	%
+	donde $U:\,\Grp\rightarrow\Set$ denota el funtor olvido.
+\end{coroGrupoDeMorfismos}
+
+\begin{obsGrupoDeMorfismos}\label{obs:grupodemorfismos}
+	Los diagramas conmutativos que expresan que $\Homalg\big(H,-\big)$ se
+	factoriza por $\Grp$, es decir, que las $\push\varphi$ son morfismos de
+	grupos, son los mismos diagramas que expresan la naturalidad de
+	\begin{align*}
+		\pull\coproducto & \,:\,\Homalg\big(H,-\big)
+			\,\xrightarrow{\cdot}\,
+			\Homalg\big(H\tensor H,-\big)
+		\text{ .}
+	\end{align*}
+	%
+\end{obsGrupoDeMorfismos}
+
+\subsubsection{Grupos en $\CommAlg[k]\rightarrow\Set$}
+En la categor\'{\i}a $\CommAlg[k]\rightarrow\Set$ existen productos y objetos
+terminales. Denotamos por $X\times Y$ el producto de los conjuntos $X$ e $Y$ y
+por $1$ el conjunto con un \'{u}nico elemento, el objeto terminal en $\Set$.
+Entonces, dados $F,F':\,\CommAlg[k]\rightarrow\Set$, definimos un nuevo funtor
+\begin{align*}
+	(F\times F')(\varphi) & \,=\,F(\varphi)\times F'(\varphi):\,
+		F(A)\times F'(A)\rightarrow F(B)\times F'(B)
+\end{align*}
+%
+al que llamamos \emph{producto de $F$ con $F'$}; definimos, tambi\'{e}n el
+funtor $\mathsf{1}$ dado por $A\mapsto 1$ en objetos y por
+$\varphi\mapsto\id[1]$ en morfismos. Notemos que existe un isomorfismo natural
+\begin{align*}
+	\mathsf 1 & \,\simeq\,\Homalg\big(k,-\big)	
+\end{align*}
+%
+Para cada $F:\,\CommAlg[k]\rightarrow\Set$ existe una \'{u}nica
+transformaci\'{o}n natural $F\xrightarrow{\cdot}\mathsf{1}$; en cada objeto $A$
+est\'{a} dada por la \'{u}nica funci\'{o}n
+\begin{align*}
+	t & \,:\, F(A)\,\xrightarrow{\cdot}\,\mathsf 1(A)
+	\text{ .}
+\end{align*}
+%
+Esto nos permite definir \emph{grupos en $\CommAlg[k]\rightarrow\Set$}.
+
+\begin{obsProductosEnGrupos}\label{obs:productosengrupos}
+	Tambi\'{e}n existen productos y objetos terminales en la categor\'{\i}a
+	de funtores en $\Grp$, pero no los necesitaremos para definir grupos
+	afines.
+\end{obsProductosEnGrupos}
+
+\begin{coroGrupoDeMorfismos}\label{coro:grupodemorfismos:grupoenlacategoria}
+	Sea $G:\,\CommAlg[k]\rightarrow\Grp$ el funtor del Corolario~%
+	\ref{coro:grupodemorfismos}. Los morfismos
+	$\coproducto:\,H\rightarrow H\tensor H$, $\counidad:\,H\rightarrow k$ y
+	$S:\,H\rightarrow H$ determinan transformaciones naturales
+	\begin{align*}
+		\pull\coproducto\,:\,
+			UG\times UG\,\xrightarrow{\cdot}\,UG
+		& \quad\text{,}\quad
+		\pull\counidad\,:\,\mathsf 1\,\xrightarrow{\cdot}\,UG
+		\quad\text{y}\quad
+		\pull S\,:\,UG\xrightarrow{\cdot}\,UG
+	\end{align*}
+	%
+	que cumplen
+	\begin{equation}
+		\label{eq:grupodemorfismos}
+		\begin{aligned}
+			\pull\Delta\circ(\id\times\pull\Delta) & \,=\,
+				\pull\Delta\circ(\pull\Delta\times\id) \\
+			\pull\Delta\circ((\pull\varepsilon\circ t)\times\id)
+				\circ\diag & \,=\,\id
+				\,=\, \pull\Delta\circ
+					(\id\times (\pull\varepsilon\circ t))
+					\circ\diag \\
+			\pull\Delta\circ(\id\times\pull S)\circ\diag & \,=\,
+				\pull\varepsilon\circ t
+				\,=\, \pull\Delta\circ(\pull S\times\id)
+					\circ\diag
+		\end{aligned}
+	\end{equation}
+	%
+	donde $\id=\id[UG]$ y $\diag:\,UG\xrightarrow\cdot UG\times UG$
+	es la transformaci\'{o}n diagonal.
+\end{coroGrupoDeMorfismos}
+
+\begin{obsProductosEnGrupos}\label{obs:productosengrupos:objetoterminal}
+	En realidad, sabemos un poco m\'{a}s. La t.n. $\pull\counidad$ debe
+	provenir de la \'{u}nica flecha $\mathsf 1\xrightarrow\cdot G$,
+	donde $\mathsf 1$ es el objeto nulo (objeto inicial y final) de la
+	categor\'{\i}a.
+\end{obsProductosEnGrupos}
+
+\subsection{Equivalencia con grupos afines}%
+	\label{subsec:gruposafines:equivalencia}
+
+Sean $G,G':\,\CommAlg[k]\rightarrow\Grp$ dos funtores. Denotamos por
+$U:\,\Grp\rightarrow\Set$ el funtor olvido. En este contexto nos hacemos dos
+preguntas:
+\begin{itemize}
+	\item dada $\tilde\tau:\,UG\xrightarrow\cdot UG'$, ?`existe
+		$\tau:\,G\xrightarrow\cdot G'$ tal que $U\tau=\tilde\tau$?
+	\item dadas $\tau_1,\tau_2:\,G\xrightarrow\cdot G'$ tales que
+		$U\tau_1=U\tau_2$, ?`vale que $\tau_1=\tau_2$?
+\end{itemize}
+%
+En cuanto a la segunda pregunta, como $U$ es fiel, la conmutatividad del
+diagrama de la izquierda implica la conmutatividad del de la derecha:
+\begin{center}
+	\begin{tikzcd}
+		U(G(A)) \arrow[r,"U(\tau_{1A})"] \arrow[d,equal] &
+		U(G'(A)) \arrow[d,equal] \\
+		U(G(A)) \arrow[r,"U(\tau_{2A})"'] &
+		U(G'(A))
+	\end{tikzcd}
+	\begin{tikzcd}
+		G(A) \arrow[r,"\tau_{1A}"] \arrow[d,equal] &
+		G'(A) \arrow[d,equal] \\
+		G(A) \arrow[r,"\tau_{2A}"'] &
+		G'(A)
+	\end{tikzcd}
+\end{center}
+En cuanto a la primera pregunta, que $\tilde\tau$ sea igual a $U\tau$ es
+equivalente, por fidelidad de $U$ a que, para cada objeto $A$,
+$\tilde\tau_A:\,UG(A)\rightarrow UG'(A)$ sea morfismo de grupos.
+
+Para cada \'{a}lgebra $A$, el objeto $G(A)$ es un grupo. En particular, existe
+una \emph{funci\'{o}n} $m_A^G:\,U(G(A))\times U(G(A))\rightarrow U(G(A))$ para
+la cual se verifican los axiomas de grupos. Que $\tilde\tau_A$ sea morfismo de
+grupos de $G(A)$ en $G'(A)$ significa que existe un cuadrado conmutativo
+\begin{center}
+	\begin{tikzcd}
+		UG(A)\times UG(A) \arrow[r,"m_A^G"]
+			\arrow[d,"\tilde\tau_A\times\tilde\tau_A"'] &
+		UG(A) \arrow[d,"\tilde\tau_A"] \\
+		UG'(A) \times UG'(A) \arrow[r,"m_A^{G'}"'] &
+		UG'(A)
+	\end{tikzcd}
+\end{center}
+Pero esto querr\'{\i}a decir que, en cierto sentido, la multiplicaci\'{o}n
+deber\'{\i}a ser natural en los funtores $G$ y $G'$.
+
+Supongamos, entonces que $G$ y $G'$ son representables, en tanto existen
+\'{a}lgebras de Hopf $H$ y $H'$ tales que%
+\footnote{
+	En cuanto a por qu\'{e} deben ser de Hopf, ver la Observaci\'{o}n~%
+	\ref{obs:representabilidad}.
+	}
+\begin{align*}
+	U\circ G \,=\,\Homalg\big(H,-\big) & \quad\text{y}\quad
+	U\circ G' \,=\,\Homalg\big(H',-\big)
+	\text{ .}
+\end{align*}
+%
+
+\begin{propoYoneda}\label{propo:yoneda}
+	La aplicaci\'{o}n $\phi\mapsto(\pull\phi:\,f\mapsto f\circ\phi)$
+	determina una biyecci\'{o}n
+	\begin{equation}
+		\label{eq:yoneda}
+		\Homalg\big(H',H\big)\,=\,U\circ G'(H) \,\simeq\,
+			\Nat(U\circ G,U\circ G')
+	\end{equation}
+	%
+\end{propoYoneda}
+
+Los morfismos de la Proposici\'{o}n~\ref{propo:yoneda} son, \emph{a priori},
+morfismos de \'{a}lgebras, no necesariamente de \'{a}lgebras de Hopf, ni de
+bi\'{a}lgebras. Volviendo a las preguntas anteriores, dada
+$\phi:\,H'\rightarrow H$, ?`existe una t.n. $\tau:\,G\xrightarrow\cdot G'$ tal
+que $U\tau=\pull\phi$? Como ya hemos mencionado, esto significa que
+$\pull\phi:\,UG(A)\rightarrow UG'(A)$ es morfismo de grupos, para cada $A$. La
+estructura de grupo en estos conjuntos est\'{a} dada por el Teorema~%
+\ref{thm:grupodemorfismos}. En particular, $\pull\phi$ es morfismo de grupos,
+si y s\'{o}lo si el diagrama siguiente conmuta:
+\begin{center}
+	\begin{tikzcd}
+		UG(A)\times UG(A) \arrow[r,"\pull\phi\times\pull\phi"]
+			\arrow[d,"\pull{\coproducto[H]}"'] &
+		UG'(A)\times UG'(A) \arrow[d,"\pull{\coproducto[H']}"] \\
+		UG(A) \arrow[r,"\pull\phi"'] & UG'(A)
+	\end{tikzcd}
+\end{center}
+o, equivalentemente, v\'{\i}a el isomorfismo
+\begin{equation}
+	\label{eq:isomorfismoproducto}
+	\Homalg\big(H,A\big)\times\Homalg\big(H,A\big) \,\simeq\,
+		\Homalg\big(H\tensor H,A\big)
+\end{equation}
+%
+y el isomorfismo an\'{a}logo para $H'$, si y s\'{o}lo si el diagrama
+\begin{center}
+	\begin{tikzcd}
+		\Homalg\big(H\tensor H,A\big)
+			\arrow[r,"\pull{(\phi\tensor\phi)}"]
+			\arrow[d,"\pull{\coproducto[H]}"'] &
+		\Homalg\big(H'\tensor H',A\big)
+			\arrow[d,"\pull{\coproducto[H']}"] \\
+		\Homalg\big(H,A\big) \arrow[r,"\pull\phi"'] &
+		\Homalg\big(H',A\big)
+	\end{tikzcd}
+\end{center}
+conmuta. Es decir, para todo par $f,g:\,H\rightarrow A$, debe ser
+\begin{align*}
+	\producto[A]\,(f\tensor g)\,(\phi\tensor\phi)\,\coproducto[H'] & \,=\,
+		\producto[A]\,(f\tensor g)\,\coproducto[H]\,\phi
+	\text{ .}
+\end{align*}
+%
+Necesitamos que estos diagramas conmuten \emph{para toda $A$}. Pero la
+conmutatividad para toda \'{a}lgebra $A$ equivale a la conmutatividad de un
+\'{u}nico diagrama: tomando $A=H$ y evaluando en el par $(\id[H],\id[H])$,
+deducimos que
+\begin{center}
+	\begin{tikzcd}
+		H\tensor H &
+		H'\tensor H' \arrow[l,"\phi\tensor\phi"'] \\
+		H \arrow[u,"{\coproducto[H]}"] &
+		H' \arrow[u,"{\coproducto[H']}"'] \arrow[l,"\phi"]
+	\end{tikzcd}
+\end{center}
+debe conmutar. Pero esto quiere decir, exactamente, que
+$\phi:\,H'\rightarrow H$ es morfismos de co\'{a}lgebras, tambi\'{e}n.%
+\footnote{
+	En realidad, resta ver que respeta la counidad, pero esto se deduce
+	haciendo un razonamiento an\'{a}logo con los diagramas que involucran
+	$\pull{\counidad[H]}$ y $\pull{\counidad[H']}$ y el objeto terminal.
+	Si los diagramas
+	\begin{center}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathsf 1(A) \arrow[r,equal]
+				\arrow[d,"\pull{\counidad[H]}"'] \&
+			\mathsf 1(A) \arrow[d,"\pull{\counidad[H']}"] \\
+			UG(A) \arrow[r,"\pull\phi"'] \&
+			UG'(A)
+		\end{tikzcd}
+	\end{center}
+	conmutan para toda \'{a}lgebra $A$, en particular, conmutan para $A=H$
+	y, evaluando en $\unidad[H]$ --el \'{u}nico elemento de
+	$\mathsf 1(H)$--, se deduce que, para $x\in H'$,
+	\begin{align*}
+		\unidad[H]\,(\counidad[H]\,\phi) & \,=\,
+			\pull\phi\,\pull{\counidad[H]}(\unidad[H]) \,=\,
+			\pull{\counidad[H']}(\unidad[H]) \,=\,
+			\unidad[H]\,\counidad[H']
+		\text{ .}
+	\end{align*}
+	%
+	Pero entonces, componiendo con $\counidad[H]$ a izquierda, podemos
+	``cancelar'' y obtener $\counidad[H]\,\phi=\counidad[H']$.
+}
+En particular, $\phi$ es morfismo de bi\'{a}lgebras y, por lo tanto, de
+\'{a}lgebras de Hopf. Rec\'{\i}procamente, si $\phi$ es de \'{a}lgebras de
+Hopf, entonces el \'{u}ltimo diagrama conmuta y, aplicando el funtor
+$\Homalg\big(-,A\big)$ se obtiene el ante\'{u}ltimo diagrama, lo que muestra
+que, en ese caso, $\pull\phi:\,UG(A)\rightarrow UG'(A)$ es morfismo de grupos
+para toda $A$.
+
+\begin{teoMorfismoDeGrupos}\label{thm:morfismodegrupos}
+	Dadas \'{a}lgebras de Hopf $H,H'$, dado un morfismo de \'{a}lgebras
+	$\phi:\,H'\rightarrow H$, la transformaci\'{o}n natural
+	\begin{math}
+		\pull\phi:\,\Homalg\big(H,-\big)\xrightarrow\cdot
+			\Homalg\big(H',-\big)
+	\end{math} es morfismo de grupos, si y s\'{o}lo si $\phi$ es morfismo
+	de \'{a}lgebras de Hopf.
+\end{teoMorfismoDeGrupos}
+
+\begin{teoEquivalencia}\label{thm:equivalencia}
+	La aplicaci\'{o}n
+	\begin{align*}
+		H\,\mapsto\,\Homalg\big(H,-\big) &\quad\text{,}\quad
+			\phi\,\mapsto\,\pull\phi
+	\end{align*}
+	%
+	define un funtor contravariante fiel y pleno de la categor\'{\i}a de
+	\'{a}lgebras de Hopf en la categor\'{\i}a de grupos afines,
+	$(G,m,u,\sigma)$ donde
+	\begin{itemize}
+		\item $G:\,\CommAlg[k]\rightarrow\Grp$ es funtor,
+		\item $UG$ es representable: existe $H$ tal que
+			$UG\simeq\Homalg\big(H,-\big)$,
+		\item $m,u,\sigma$ son transformaciones naturales que hacen de
+			$UG$ un grupo en $\Set^{\CommAlg[k]}$.
+	\end{itemize}
+	%
+\end{teoEquivalencia}
+
+\begin{obsRepresentabilidad}\label{obs:representabilidad}
+	Sea $(G,m,u,\sigma)$ un grupo af\'{\i}n y sea $R$ un \'{a}lgebra
+	conmutativa que lo representa. Entonces $R$ admite una estructura de
+	\'{a}lgebra ed Hopf. Por definici\'{o}n, $m$ define, componiendo con el
+	isomorfismo \eqref{eq:isomorfismoproducto}, una t.n.
+	\begin{align*}
+		m & \,:\,\Homalg\big(R\tensor R,-\big) \,\xrightarrow\cdot\,
+			\Homalg\big(R,-\big)
+		\text{ .}
+	\end{align*}
+	%
+	Por la Proposici\'{o}n~\ref{propo:yoneda}, existe un morfismo de
+	\'{a}lgebras $\coproducto:\,R\rightarrow R\tensor R$ tal que
+	$\pull\coproducto=m$. Expl\'{\i}citamente, siguiendo la
+	demostraci\'{o}n de la Proposici\'{o}n~\ref{propo:yoneda}, definimos
+	\begin{align*}
+		\coproducto & \,:=\, m_{R\tensor R}(\id[R\tensor R])\,\in\,
+			\Homalg\big(R,R\tensor R\big)
+		\text{ .}
+	\end{align*}
+	%
+	Para cada $k$-\'{a}lgebra $A$, existe una funci\'{o}n
+	$m_A:\,\Homalg\big(R\tensor R,A\big)\rightarrow\Homalg\big(R,A\big)$.
+	Dado $f:\,R\tensor R\rightarrow A$, ?`qu\'{e} morfismo es $m_A(f)$?
+	?`Qu\'{e} funci\'{o}n es $m_A$? Por naturalidad,
+	\begin{center}
+		\begin{tikzcd}
+			\Homalg\big(R\tensor R,R\tensor R\big)
+				\arrow[r,"m_{R\tensor R}"]
+				\arrow[d,"\push f"'] &
+			\Homalg\big(R,R\tensor R\big)
+				\arrow[d,"\push f"] \\
+			\Homalg\big(R\tensor R,A\big) \arrow[r,"m_A"'] &
+			\Homalg\big(R,A\big)
+		\end{tikzcd}
+	\end{center}
+	conmuta y
+	\begin{align*}
+		f\circ\coproducto & \,=\,
+			\push f\circ m_{R\tensor R}(\id[R\tensor R])
+			\,=\,m_A\circ\push f(\id[R\tensor R])
+			\,=\,m_A(f)
+		\text{ .}
+	\end{align*}
+	%
+	Entonces $\pull\coproducto=m$. Hay que ver que $\coproducto$ es
+	coproducto, pero esto se deduce de aplicar la correspondencia de la
+	Proposici\'{o}n~\ref{propo:yoneda} a las transformaciones naturales que
+	aparecen en los diagramas que hacen de $m$ un producto.
+\end{obsRepresentabilidad}

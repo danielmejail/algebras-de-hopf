@@ -1,0 +1,270 @@
+\theoremstyle{plain}
+\newtheorem{obsCoconmutativa}{Observaci\'{o}n}[section]
+\newtheorem{ejemploCoalgebraProductoTensorial}[obsCoconmutativa]{Ejemplo}
+\newtheorem{obsPolinomios}[obsCoconmutativa]{Observaci\'{o}n}
+\newtheorem{obsBialgebraDeMatrices}[obsCoconmutativa]{Observaci\'{o}n}
+
+%-------------
+
+\subsection{Co\'{a}lgebras}
+\begin{frame}{Definici\'{o}n}
+	Una $k$-co\'{a}lgebra es un $k$-m\'{o}dulo $C$ y morfismos
+	$\Delta:\,C\rightarrow C\tensor[k]C$ y $\varepsilon:\,C\rightarrow k$
+	tales que los diagramas
+	\begin{center}
+		\begin{tikzcd}[column sep=small,ampersand replacement=\&]
+			C\tensor C\tensor C \&
+				C\tensor C\arrow[l,"\Delta\tensor\id"'] \\
+			C\tensor C\arrow[u,"\id\tensor\Delta"] \&
+				C \arrow[l,"\Delta"]\arrow[u,"\Delta"']
+		\end{tikzcd}
+		\begin{tikzcd}[column sep=small,ampersand replacement=\&]
+			k\tensor C \& C\tensor C
+				\arrow[l,"\varepsilon\tensor\id"']
+				\arrow[r,"\id\tensor\varepsilon"]
+				\& C\tensor k \\
+			\& C
+				\arrow[ur,"\simeq"']
+				\arrow[u,"\Delta"']
+				\arrow[ul,"\simeq"]
+				\&
+		\end{tikzcd}
+	\end{center}
+	conmutan. $(C,\Delta,\varepsilon)$ es coconmutativa, si
+	$\Delta\circ\swap=\Delta$, donde $\swap(c\tensor c')=c'\tensor c$.
+	$f:\,C\rightarrow D$ es morfismo de co\'{a}lgebras, si
+	\begin{align*}
+		\Delta_D\circ f & \,=\,(f\tensor f)\circ\Delta_C
+			\quad\text{y} \\
+		\varepsilon_D\circ f & \,=\,\varepsilon_C
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{Ejemplos}
+	\begin{itemize}
+		\item $(k,\Delta,\varepsilon)$ con $\Delta(1)=1\tensor 1$ y
+			$\varepsilon(1)=1$;
+		\item en el $k$-m\'{o}dulo $k[x]$ (polinomios),
+			\begin{align*}
+				\Delta(x) \,=\,x\tensor 1 + 1\tensor x
+					& \quad\text{y}\quad
+				\varepsilon(x)\,=\,0
+				\text{ ;}
+			\end{align*}
+			%
+		% \item en $k[x_1,\,\dots,\,x_n]$,
+			% $\Delta(x_i)=x_i\tensor 1 + 1\tensor x_i$,
+			% $\varepsilon(x_i)=0$;
+		\item dado un conjunto $G$, en el $k$-m\'{o}dulo libre
+			$k[G]$ con base $G$
+			\begin{align*}
+				\Delta(g) \,=\, g\tensor g
+					& \quad\text{y}\quad
+				\varepsilon(g)\,=\,1
+				\text{ ;}
+			\end{align*}
+			%
+		\item dada $(C,\Delta,\varepsilon)$,
+			$C^\copp=(C,\Delta^\opp,\varepsilon)$, con
+			$\Delta^\opp=\swap\circ\Delta$.
+	\end{itemize}
+	%
+	\begin{obsCoconmutativa}\label{obs:coconmutativa}
+		$k[G]^\copp=k[G]$.
+	\end{obsCoconmutativa}
+\end{frame}
+
+\begin{frame}{Co\'{a}lgebra de matrices}
+	$A=\MM[m\times m](k)$ con base $\{E_{ij}\}_{ij}$. Sea $\{x_{ij}\}_{ij}$
+	la base dual en $\dual A$. Los morfismos de $k$-m\'{o}dulos
+	determinados por
+	\begin{align*}
+		\Delta(x_{ij}) \,=\,\sum_{k=1}^{m}\,x_{ik}\tensor x_{kj}
+			& \quad\text{y}\quad
+		\varepsilon(x_{ij}) \,=\,\delta_{ij}
+	\end{align*}
+	%
+	definen una co\'{a}lgebra $(\dual A,\Delta,\varepsilon)$:
+	% ${\dual A}^{\copp}\not=\dual A$
+	\begin{align*}
+		(\id\tensor\Delta)\circ\Delta(x_{ij}) & \,=\,
+			\sum_{k=1}^{m}\,x_{ik}\tensor\Delta(x_{kj}) \,=\,
+			\sum_{k=1}^{m}\,\sum_{l=1}^{m}\,
+				x_{ik}\tensor x_{kl}\tensor x_{lj} \\
+		& \,=\, \sum_{l=1}^{m}\,\Delta(x_{il})\tensor x_{lj} \,=\,
+			(\Delta\tensor\id)\circ\Delta(x_{ij})
+		\text{ .}
+	\end{align*}
+	%
+	\begin{obsCoconmutativa}\label{obs:nococonmutativa}
+		${\dual A}^\copp\not=\dual A$.
+	\end{obsCoconmutativa}
+\end{frame}
+
+\begin{frame}{Producto tensorial de co\'{a}lgebras}
+	Dadas co\'{a}lgebras $(C,\Delta_C,\varepsilon_C)$,
+	$(D,\Delta_D,\varepsilon_D)$, el $k$-m\'{o}dulo $C\tensor[k]D$ es
+	co\'{a}lgebra con
+	\begin{align*}
+		\Delta & \,:=\,(\id[C]\tensor\swap\tensor\id[D])\circ
+			(\Delta_C\tensor\Delta_D) \quad\text{y} \\
+		\varepsilon & \,:=\,\varepsilon_C\tensor\varepsilon_D
+	\end{align*}
+	%
+	($\tau(c\tensor d)=d\tensor c$).
+	\begin{ejemploCoalgebraProductoTensorial}%
+		\label{ejemplo:coalgebraproductotensorial}
+		Dados conjuntos $G$ e $H$, el $k$-isomorfismo
+		\begin{align*}
+			k[G]\tensor[k]k[H] & \,\simeq\, k[G\times H]
+			\text{ ,}
+		\end{align*}
+		%
+		dado por $(g,h)\mapsto g\tensor h$, es isomorfismo de
+		co\'{a}lgebras.
+	\end{ejemploCoalgebraProductoTensorial}
+\end{frame}
+
+\subsection{Bi\'{a}lgebras}
+
+\begin{frame}{La bi\'{a}lgebra $k$}
+	Sobre el anillo $k$ tenemos $(k,\mu,\eta)$ y $(k,\Delta,\varepsilon)$.
+	Son ``compatibles'': por ejemplo, evaluando en $1\tensor 1$,
+	\begin{align*}
+		\Delta\circ\mu & \,=\,
+			(\mu\tensor\mu)\circ (\id\tensor\swap\tensor\id)\circ
+				(\Delta\tensor\Delta)
+				% \text{ ,} \\
+		\text{ .}
+	\end{align*}
+	%
+	$\mu:\,k\tensor k\rightarrow k$ y $\eta:\,k\rightarrow k$ son morfismos
+	de co\'{a}lgebras; $\Delta:\,k\rightarrow k\tensor k$ y
+	$\varepsilon:\,k\rightarrow k$ son morfismos de \'{a}lgebras.
+	% \begin{align*}
+		% \mu\circ (\varepsilon\tensor\varepsilon) & \,=\,
+			% \varepsilon\circ\mu \,=\,\varepsilon\tensor\varepsilon
+			% \text{ ,} \\
+		% (\eta\tensor\eta)\circ\Delta & \,=\,\Delta\circ\eta \,=\,
+			% \eta\tensor\eta	\quad\text{y} \\
+		% \eta & \,=\,\varepsilon\circ\eta\,=\,\varepsilon
+		% \text{ .}
+	% \end{align*}
+	% %
+\end{frame}
+
+\begin{frame}{Definici\'{o}n}
+	Una bi\'{a}lgebra es un $k$-m\'{o}dulo $B$ con estructuras
+	$(B,\mu,\eta)$ y $(B,\Delta,\varepsilon)$ tales que
+	$\mu,\eta$ son morfismos de co\'{a}lgebras (equivalentemente,
+	$\Delta,\varepsilon$ son morfismos de \'{a}lgebras):
+	\begin{align*}
+		\Delta\circ\mu & \,=\,
+			(\mu\tensor\mu)\circ (\id\tensor\swap\tensor\id)\circ
+				(\Delta\tensor\Delta)
+				\text{ ,} \\
+		\mu_k\circ (\varepsilon\tensor\varepsilon) & \,=\,
+			\varepsilon\circ\mu \,=\,\varepsilon\tensor\varepsilon
+			\text{ ,} \\
+		(\eta\tensor\eta)\circ\Delta_k & \,=\,\Delta\circ\eta \,=\,
+			\eta\tensor\eta	\quad\text{y} \\
+		\eta_k & \,=\,\varepsilon\circ\eta\,=\,\varepsilon_k
+		\text{ .}
+	\end{align*}
+	Un morfismo de bi\'{a}lgebras es un morfismo $f:\,B\rightarrow B'$ de
+	\'{a}lgebras y co\'{a}lgebras:
+	\begin{align*}
+		\Delta_{B'}\circ f \,=\,(f\tensor f)\circ\Delta_B
+			& \quad\text{,}\quad
+			\varepsilon_{B'}\circ f \,=\,\varepsilon_B
+			\text{ ,} \\
+		f\circ\mu_B \,=\,\mu_{B'}\circ (f\tensor f)
+			& \quad\text{y}\quad
+			f\circ\eta_B \,=\,\eta_{B'}
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{Polinomios}
+	En el \'{a}lgebra $k[x]$,
+	\begin{align*}
+		\Delta(x) \,=\,x\tensor 1 + 1\tensor x
+			& \quad\text{y}\quad \varepsilon(x)\,=\,0
+	\end{align*}
+	%
+	determinan morfismos de \'{a}lgebras. $(k[x],\Delta,\varepsilon)$ es
+	co\'{a}lgebra:
+	\begin{align*}
+		(\Delta\tensor\id)\circ\Delta(x) & \,=\,
+			(\Delta\tensor\id)(x\tensor 1 + 1\tensor x) \\
+		& \,=\,(x\tensor 1 + 1\tensor x)\tensor 1 + 1\tensor 1\tensor x
+			\text{ ,} \\
+		(\id\tensor\Delta)\circ\Delta(x) & \,=\,
+			(\id\tensor\Delta)(x\tensor 1 + 1\tensor x) \\
+		& \,=\,x\tensor 1\tensor 1 + 1\tensor (x\tensor 1 + 1\tensor x)
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}
+
+\begin{frame}{Polinomios (cont.)}
+	En $k[x_1,\,\dots,\,x_n]$,
+	$\Delta(x_i)=x_i\tensor 1 + 1\tensor x_i$, $\varepsilon(x_i)=0$.
+	$k[x_1,\,\dots,\,x_n]^\copp=k[x_1,\,\dots,\,x_n]$.
+
+	\begin{obsPolinomios}\label{obs:polinomios}
+		El isomorfismo de \'{a}lgebras
+		$k[x',x'']\simeq k[x]\tensor k[x]$ dado por
+		$\phi(x')\mapsto x\tensor 1$, $\phi(x'')\mapsto 1\tensor x$ es
+		isomorfismo de co\'{a}lgebras:
+		\begin{align*}
+			(\phi\tensor\phi)\circ\Delta(x') & \,=\,
+				\phi(x')\tensor\phi(1) + \phi(1)\tensor\phi(x')
+				\\
+			& \,=\,x\tensor 1\tensor 1\tensor 1 +
+				1\tensor 1\tensor x\tensor 1 \\
+			\Delta\circ\phi(x') & \,=\,
+				(\id\tensor\swap\tensor\id)\circ
+				(\Delta\tensor\Delta)(x\tensor 1) \\
+			& \,=\,(\id\tensor\swap\tensor\id)(
+				(x\tensor 1 +1\tensor x)\tensor 1\tensor 1)
+			\text{ .}
+		\end{align*}
+		%
+	\end{obsPolinomios}
+\end{frame}
+
+\begin{frame}{Bi\'{a}lgebra de matrices}
+	En el \'{a}lgebra de polinomios $\MM(m)=k[x_{11},\,\cdots,\,x_{mm}]$,
+	\begin{align*}
+		\Delta(x_{ij}) \,=\,\sum_{k=1}^{m}\,
+			x_{ik}\tensor x_{kj} & \quad\text{y}\quad
+		\varepsilon(x_{ij}) \,=\,\delta_{ij}
+	\end{align*}
+	%
+	determinan morfismos de \'{a}lgebras. Pero
+	$(\MM(m),\Delta,\varepsilon)$ es co\'{a}lgebra (an\'{a}logo a
+	co\'{a}lgebra de matrices).
+	\begin{obsBialgebraDeMatrices}\label{obs:bialgebradematrices}
+		Como co\'{a}lgebras
+		$\MM(m)\not\simeq k[x_{11},\,\dots,\,x_{mm}]$
+	\end{obsBialgebraDeMatrices}
+\end{frame}
+
+\begin{frame}{Bi\'{a}lgebra de un monoide}
+	Sea $G$ un monoide con producto $\mu:\,G\times G\rightarrow G$ y unidad
+	$e\in G$, $(k[G],\Delta,\varepsilon)$ la co\'{a}lgebra del conjunto.
+	$(k[G],\mu,e)$ es \'{a}lgebra y $\mu$ y $1\mapsto e$ son morfismos de
+	co\'{a}lgebras:
+	\begin{align*}
+		\Delta\circ\mu(x,y) & \,=\,\mu(x,y)\tensor\mu(x,y) \,=\,
+			\mu_{\tensor}\big((x\tensor x),(y\tensor y)\big) \\
+		& \,=\,\mu(\Delta(x),\Delta(y)) \quad\text{y} \\
+		\varepsilon\circ\mu(x,y) & \,=\,1 \,=\,
+			\mu(\varepsilon(x),\varepsilon(y))
+		\text{ .}
+	\end{align*}
+	%
+\end{frame}

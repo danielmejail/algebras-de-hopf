@@ -1,0 +1,679 @@
+\theoremstyle{plain}
+\newtheorem{defCoalgebra}{Definici\'{o}n}[section]
+\newtheorem{defBialgebra}[defCoalgebra]{Definici\'{o}n}
+\newtheorem{teoIsomorfismoProductoTensorialDeMorfismosDeModulos}[defCoalgebra]%
+	{Teorema}
+\newtheorem{coroIsomorfismoProductoTensorialDeMorfismosDeModulos}%
+	[defCoalgebra]{Corolario}
+\newtheorem{propoAlgebraDual}[defCoalgebra]{Proposici\'{o}n}
+\newtheorem{propoCoalgebraDual}[defCoalgebra]{Proposici\'{o}n}
+
+\theoremstyle{definition}
+\newtheorem{obsCoalgebra}[defCoalgebra]{Observaci\'{o}n}
+\newtheorem{ejemploCoalgebra}[defCoalgebra]{Ejemplo}
+\newtheorem{ejemploCoalgebraProductoTensorial}[defCoalgebra]{Ejemplo}
+\newtheorem{ejemploAlgebraDual}[defCoalgebra]{Ejemplo}
+\newtheorem{ejemploCoalgebraDualDeMatrices}[defCoalgebra]{Ejemplo}
+\newtheorem{obsPolinomios}[defCoalgebra]{Observaci\'{o}n}
+\newtheorem{obsBialgebraDeMatrices}[defCoalgebra]{Observaci\'{o}n}
+\newtheorem{ejemploBialgebra}[defCoalgebra]{Ejemplo}
+
+%-------------
+
+\subsection{Co\'{a}lgebras}\label{subsec:coalgebras:coalgebras}
+
+\subsubsection{Definiciones}
+
+En la Definici\'{o}n~\ref{def:algebraalternativa}, dimos una definici\'{o}n de
+$k$-\'{a}lgebra en t\'{e}rminos de ciertos diagramas. La idea en la
+definici\'{o}n de $k$-co\'{a}lgebra es dar vuelta todas las flechas que
+aparecen en aquellos diagramas. Adelant\'{a}ndonos a la secci\'{o}n
+\ref{sec:gruposafines}, la noci\'{o}n de co\'{a}lgebra aparece naturalmente,
+teniendo en cuenta que el funtor $\Homalg\big(-,-\big)$ es
+\emph{contra}variante en el primer lugar: si un grupo af\'{\i}n es un funtor
+representable por una $k$-\'{a}lgebra conmutativa, $G=\Homalg\big(H,-\big)$,
+junto con (entre otras cosas) una transformaci\'{o}n natural
+$m:\,G\times G\xrightarrow\cdot G$ --la multiplicaci\'{o}n en el grupo--,
+entonces esta transformaci\'{o}n $m$ deber\'{a} estar inducida por un morfismo
+correspondiente $\coproducto:\,H\rightarrow H\tensor H$ (!`en la direcci\'{o}n
+opuesta!) y las propiedades de $m$ deber\'{a}n verse reflejadas en propiedades
+de $\coproducto$.
+
+\begin{defCoalgebra}\label{def:coalgebra}
+	Una $k$-co\'{a}lgebra es un $k$-m\'{o}dulo $C$ junto con morfismos de
+	$k$-m\'{o}dulos $\counidad[C]:\,C\rightarrow k$ --la counidad de $C$--
+	y $\coproducto[C]:\,C\rightarrow C\tensor C$ --el coproducto en $C$--
+	que verifican que los siguientes diagramas conmutan.
+	\begin{center}
+	\begin{tikzcd}[column sep=large]
+		C\tensor C\tensor C & C\tensor C
+			\arrow[l,"{\coproducto[C]\tensor\id[C]}"'] \\
+		C\tensor C \arrow[u,"{\id[C]\tensor\coproducto[C]}"] &
+		C\arrow[l,"{\coproducto[C]}"]\arrow[u,"{\coproducto[C]}"']
+	\end{tikzcd}
+	\begin{tikzcd}[column sep=large]
+		k\tensor C & C\tensor C
+			\arrow[l,"{\counidad[C]\tensor\id[C]}"']
+			\arrow[r,"{\id[C]\tensor\counidad[C]}"] & C\tensor k \\
+		& C \arrow[ul,"\sim"] \arrow[ur,"\sim"']
+			\arrow[u,"{\coproducto[C]}"'] &
+	\end{tikzcd}
+	\end{center}
+	Una $k$-co\'{a}lgebra es coconmutativa, si
+	\begin{align*}
+		\swap\circ\coproducto[C] & \,=\,\coproducto[C]
+		\text{ .}
+	\end{align*}
+	%
+	Un morfismo de $k$-co\'{a}lgebras es un morfismo de $k$-m\'{o}dulos
+	$f:\,C\rightarrow D$ tal que
+	\begin{align*}
+		\coproducto[D]\circ f \,=\,(f\tensor f)\circ\coproducto[C]
+			& \quad\text{y}\quad
+		\counidad[D]\circ f \,=\,\counidad[C]
+		\text{ .}
+	\end{align*}
+\end{defCoalgebra}
+
+\begin{obsCoalgebra}\label{obs:coalgebraopuesta}
+	Si $(C,\coproducto[C],\counidad[C])$ es una $k$-co\'{a}lgebra, su
+	\emph{co\'{a}lgebra opuesta} es $(C,\coproducto[C]^\opp,\counidad[C])$,
+	donde
+	\begin{align*}
+		\coproducto[C]^\opp & \,=\,\swap\circ\coproducto[C]
+		\text{ .}
+	\end{align*}
+	%
+	Dentamos esta co\'{a}lgebra por $C^\copp$. La co\'{a}lgebra $C$ es
+	coconmutativa, si $C^\copp=C$, es decir, si el morfismo de m\'{o}dulos
+	$\id[C]:\,C\rightarrow C^\copp$ es morfismo de co\'{a}lgebras.
+\end{obsCoalgebra}
+
+\subsubsection{Ejemplos}
+
+\begin{ejemploCoalgebra}\label{ejemplo:coalgebraanillodebase}
+	El $k$-m\'{o}dulo $k$ es el $k$-m\'{o}dulo libre generado por el
+	elemento $1$. Las expresiones
+	\begin{align*}
+		\coproducto(1) \,=\,1\tensor 1 & \quad\text{y}\quad
+			\counidad(1)\,=\,1
+	\end{align*}
+	%
+	determinan un\'{\i}vocamente morfismos de $k$-m\'{o}dulos
+	$\coproducto:\,k\rightarrow k\tensor k$ y $\counidad:\,k\rightarrow k$.
+	Estos morfismos dan a $k$ una estructura de co\'{a}lgebra que
+	denominaremos ``estructura usual de co\'{a}lgebra en $k$''. Nos
+	estaremos refiriendo a esta estructura, si usamos la notaci\'{o}n
+	$\coproducto[k]$ o $\counidad[k]$. Con esta estructura, dada una
+	co\'{a}lgebra $(C,\coproducto[C],\counidad[C])$, el morfismo de
+	m\'{o}dulos $\counidad[C]:\,C\rightarrow k$ es morfismo de
+	co\'{a}lgebras.
+\end{ejemploCoalgebra}
+
+\begin{ejemploCoalgebra}\label{ejemplo:coalgebradeconjunto}
+	Sea $X$ un conjunto y sea $k[X]$ el $k$-m\'{o}dulo libre con base $X$.
+	Definimos morfismos de m\'{o}dulos
+	$\coproducto:\,k[X]\rightarrow k[X]\tensor k[X]$ y
+	$\counidad:\,k[X]\rightarrow k$ dando sus valores en los generadores:
+	\begin{align*}
+		\coproducto(x) \,=\, x\tensor x & \quad\text{y}\quad
+			\counidad(x)\,=\,1
+		\text{ .}
+	\end{align*}
+	%
+	La terna $(k[X],\coproducto,\counidad)$ es una co\'{a}lgebra: como los
+	diagramas en la Definici\'{o}n~\ref{def:coalgebra} son diagramas de
+	$k$-m\'{o}dulos, basta notar que, para todo generador $x\in X$, se
+	cumple
+	\begin{align*}
+		(\coproducto\tensor\id)\circ\coproducto(x) & \,=\,
+			(x\tensor x)\tensor x \,=\,
+			x\tensor (x\tensor x) \,=\,
+			(\id\tensor\coproducto)\circ\coproducto(x) \text{ ,} \\
+		(\counidad\tensor\id)\circ\coproducto(x) & \,=\,
+			1\tensor x \,\sim\, x \quad\text {y} \\
+		(\id\tensor\counidad)\circ\coproducto(x) & \,=\,
+			x\tensor 1 \,\sim\,x
+	\end{align*}
+	%
+	El Ejemplo~\ref{ejemplo:coalgebraanillodebase} es un caso particular de
+	esta construcci\'{o}n.
+\end{ejemploCoalgebra}
+
+\begin{ejemploCoalgebra}\label{ejemplo:coalgebradepolinomios}
+	Sea $k[x]$ el \'{a}lgebra de polinomios en una indeterminada. Sean
+	$\coproducto:\,k[x]\rightarrow k[x]\tensor k[x]$ y
+	$\counidad:\,k[x]\rightarrow k$ los morfismos \emph{de \'{a}lgebras}
+	dados en el generador $x$ por
+	\begin{align*}
+		\coproducto(x) \,=\,x\tensor 1 + 1\tensor x
+			& \quad\text{y}\quad
+		\counidad(x) \,=\,0
+		\text{ .}
+	\end{align*}
+	%
+	En particular, $\coproducto$ y $\counidad$ definen, olvid\'{a}ndonos de
+	la estructura adicional, morfismos de m\'{o}dulos cuyo dominio es el
+	$k$-m\'{o}dulo libre con base en el conjunto $\{1,\,x,\,x^2,\,\dots\}$.
+	Por ejemplo,
+	\begin{align*}
+		\coproducto(1) & \,=\,1\tensor 1 \quad\text{y} \\
+		\coproducto(x^2) & \,=\,\coproducto(x)^2 \,=\,
+			\big(x\tensor 1 + 1\tensor x\big)^2 \,=\,
+			x^2\tensor 1 \,+\, 2\,(x\tensor x) \,+\, 1\tensor x^2
+		\text{ .}
+	\end{align*}
+	%
+	Estos morfismos satisfacen
+	\begin{align*}
+		(\coproducto\tensor\id)\circ\coproducto(x) & \,=\,
+			(x\tensor 1)\tensor 1 + x \tensor (1\tensor 1) \,=\,
+			x\tensor (1\tensor 1) + (x\tensor 1)\tensor 1 \\
+		& \,=\, (\id\tensor\coproducto)\circ\coproducto(x) \text{ ,} \\
+		(\counidad\tensor\id)\circ\coproducto(x) & \,=\,
+			0\tensor 1 + 1\tensor x \,=\, 1\tensor x
+			\quad\text{y} \\
+		(\id\tensor\counidad)\circ\coproducto(x) & \,=\,
+			x\tensor 1 + 1\tensor 0 \,=\, x\tensor 1
+		\text{ .}
+	\end{align*}
+	%
+	Para demostrar que los diagramas de la Definici\'{o}n~%
+	\ref{def:coalgebra} conmutan y que $(k[x],\coproducto,\counidad)$
+	es una co\'{a}lgebra, necesitamos, en principio, demostrar, al menos,
+	que estas igualdades son v\'{a}lidas reemplazando $x$ por cualquier
+	otra potencia, ya que los morfismos en la definici\'{o}n de
+	co\'{a}lgebra son morfismos de m\'{o}dulos. Pero, por definici\'{o}n,
+	$\coproducto$ y $\counidad$ son morfismos de \'{a}lgebras. Esto implica
+	que $\id\tensor\coproducto$, $\coproducto\tensor\id$,
+	$\counidad\tensor\id$ e $\id\tensor\counidad$ son morfismos de
+	\'{a}lgebras, como as\'{\i} tambi\'{e}n las identificaciones
+	$k\tensor k[x]\simeq k[x]\simeq k[x]\tensor k$. Asumiendo que esta
+	afirmaci\'{o}n es cierta (ver las Observaciones~%
+	\ref{obs:productotensorialdealgebrasejemplomodulos} y
+	\ref{obs:productotensorialdealgebrasesfuntorial}), basta verificar las
+	igualdades
+	\begin{align*}
+		(\coproducto\tensor\id)\circ\coproducto & \,=\,
+			(\id\tensor\coproducto)\circ\coproducto \text{ ,} \\
+		(\counidad\tensor\id)\circ\coproducto & \,=\, j
+			\quad\text{y} \\
+		(\id\tensor\counidad)\circ\coproducto & \,=\, j
+		\text{ ,}
+	\end{align*}
+	%
+	para el generador $x$ del \'{a}lgebra $k[x]$ (aqu\'{\i},
+	$j:\,k[x]\rightarrow k\tensor k[x]$ es el isomorfismo de \'{a}lgebras
+	$x\mapsto 1\tensor x$ y $j:\,k[x]\rightarrow k[x]\tensor k$ es
+	$x\mapsto x\tensor 1$). Pero esto ya lo hemos demostrado.
+\end{ejemploCoalgebra}
+
+\subsubsection{Producto tensorial de co\'{a}lgebras}
+
+Dadas co\'{a}lgebras $(C,\coproducto[C],\counidad[C])$ y
+$(D,\coproducto[D],\counidad[D])$, el producto tensorial de m\'{o}dulos
+$C\tensor D$ admite una estructura natural de co\'{a}lgebra de manera que los
+morfismos de m\'{o}dulos $p_C:\,C\tensor D\rightarrow C$ y
+$p_D:\,C\tensor D\rightarrow D$ dados por
+\begin{align*}
+	p_C(c\tensor d) \,=\,c\,\counidad[D](d)
+		& \quad\text{y}\quad
+	p_D(c\tensor d) \,=\,\counidad[C](c)\,d
+\end{align*}
+%
+sean morfismos de co\'{a}lgebras. Definimos
+\begin{equation}
+	\label{eq:productotensorialdecoalgebras}
+	\coproducto[C\tensor D] \,=\,
+		(\id[C]\tensor\swap[C\tensor D]\tensor\id[D])\circ
+		(\coproducto[C]\tensor\coproducto[D])
+		\quad\text{y}\quad
+	\counidad[C\tensor D] \,=\,\counidad[C]\tensor\counidad[D]
+	\text{ .}
+\end{equation}
+%
+En cuanto a la counidad, estamos identificando $k\tensor k\simeq k$ (como
+$k$-m\'{o}dulos):
+\begin{align*}
+	\counidad[C\tensor D](c\tensor d) & \,=\,
+		(\counidad[C]\tensor\counidad[D])(c\tensor d) \,=\,
+		\counidad[C](c)\,\counidad[D](d)
+\end{align*}
+%
+(es decir,
+\begin{math}
+	\counidad[C\tensor D]=
+		\producto[k]\circ(\counidad[C]\tensor\counidad[D])
+\end{math}). Veamos que, con estas definiciones, $p_C$ y $p_D$ son morfismos de
+co\'{a}lgebras: por un lado,
+\begin{align*}
+	\coproducto[C]\circ p_C(c\tensor d) & \,=\,
+		\coproducto[C](c\,\counidad[D](d)) \,=\,
+		\coproducto[C](c)\,\counidad[D](d)
+\end{align*}
+%
+y, por otro, si escribimos $\coproducto[C](c)=\sum_{(c)}\,c'\tensor c''$ y
+$\coproducto[D](d)=\sum_{(d)}\,d'\tensor d''$, 
+\begin{align*}
+	& (p_C\tensor p_C)\circ\coproducto[C\tensor D] (c\tensor d) \,=\,
+		(p_C\tensor p_C)\Big(\sum_{(c)\,(d)}\,
+			c'\tensor d'\tensor c''\tensor d''\Big) \\
+	& \qquad\qquad\,=\,
+		\sum_{(c)\,(d)}\,c'\,\counidad[D](d')\tensor
+			c''\,\counidad[D](d'') \,=\,
+		\Big(\sum_{(c)}\,c'\tensor c''\Big)\,\cdot\,
+			\counidad[D]\Big(\sum_{(d)}\,d'\counidad[D](d'')
+			\Big) \\
+	& \qquad\qquad\,=\,
+		\coproducto[C](c)\,\counidad[D](d)
+	\text{ .}
+\end{align*}
+%
+Entonces $p_C$ respeta coproductos; en cuanto a las counidades,
+\begin{align*}
+	\counidad[C]\circ p_C(c\tensor d) & \,=\,
+		\counidad[C](c\,\counidad[D](d)) \,=\,
+		\counidad[C](c)\,\counidad[D](d) \,=\,
+		\counidad[C\tensor D](c\tensor d)
+	\text{ .}
+\end{align*}
+%
+La verificaci\'{o}n para $p_D$ es an\'{a}loga.
+
+\begin{ejemploCoalgebra}\label{ejemplo:coalgebradeconjuntoproducto}
+	Dados conjuntos $X$ e $Y$, el isomorfismo de m\'{o}dulos
+	\begin{align*}
+		k[X\times Y] & \,\simeq\,k[X]\tensor k[Y]
+		\text{ ,}
+	\end{align*}
+	%
+	dado por $(x,y)\mapsto x\tensor y$, es un morfismo de co\'{a}lgebras:
+	\begin{align*}
+		\coproducto[{k[X\times Y]}](x,y) & \,=\,(x,y)\tensor (x,y)
+			\,\mapsto\,(x\tensor y)\tensor (x\tensor y)
+			\text{ ,} \\
+		\coproducto[{k[X]\tensor k[Y]}](x\tensor y) & \,=\,
+			(\id\tensor\swap\tensor\id)
+				((x\tensor x)\tensor (y\tensor y))
+		\text{ ;}
+	\end{align*}
+	%
+	en cuanto a la counidad,
+	\begin{align*}
+		\counidad[{k[X\times Y]}](x,y) & \,=\, 1 \,=\,1\cdot 1\,=\,
+			(\counidad[{k[X]}]\tensor\counidad[{k[Y]}])(x\tensor y)
+		\text{ .}
+	\end{align*}
+	%
+\end{ejemploCoalgebra}
+
+\subsubsection{Dualidad}\label{subsubsec:coalgebras:dualidad}
+
+Sean $U$, $U'$, $V$ y $V'$ cuatro $k$-m\'{o}dulos. Sean $f:\,U\rightarrow U'$ y
+$g:\,V\rightarrow V'$ morfismos de m\'{o}dulos. Recordemos que podemos definir
+el producto tensorial $f\tensor g:\,U\tensor V\rightarrow U'\tensor V'$ como el
+morfismo determinado por
+\begin{align*}
+	(f\tensor g)(u\tensor v) & \,=\,f(u)\tensor g(v)
+	\text{ ,}
+\end{align*}
+%
+en tensores elementales. Esto determina un\'{\i}vocamente un morfismo
+\begin{equation}
+	\label{eq:productotensorialdemorfismosdemodulos}
+	\lambda \,:\,\Hom[k]\big(U,U'\big)\,\tensor\,\Hom[k]\big(V,V'\big)
+		\,\rightarrow\,\Hom[k]\big(V\tensor U,U'\tensor V'\big)
+	\text{ ,}
+\end{equation}
+%
+de manera que $\lambda(f\tensor g)$ sea el morfismo dado por
+$v\tensor u\mapsto f(u)\tensor g(v)$. Notamos que este morfismo incorpora un
+intercambio en el orden de $U$ y de $V$. Notamos, tambi\'{e}n, que los grupos
+abelianos $\Hom[k]\big(-,-\big)$ son $k$-m\'{o}dulos y el morfismo $\lambda$ es
+$k$-lineal.
+
+\begin{teoIsomorfismoProductoTensorialDeMorfismosDeModulos}%
+	\label{thm:isomorfismoproductotensorialdemorfismosdemodulos}
+	Si, en \eqref{eq:productotensorialdemorfismosdemodulos}, alguno de los
+	pares $(U,U')$, $(V,V')$ o $(U,V)$ est\'{a} compuesto por
+	$k$-m\'{o}dulos libres f.g., entonces $\lambda$ es un isomorfismo.
+\end{teoIsomorfismoProductoTensorialDeMorfismosDeModulos}
+
+\begin{proof}
+	Usar que $\prod_i=\bigoplus_i$, si el conjunto de \'{\i}ndices es
+	finito y que conmutan con $\Hom[k]$ y con $\tensor$.
+\end{proof}
+
+\begin{coroIsomorfismoProductoTensorialDeMorfismosDeModulos}%
+	\label{coro:isomorfismoproductotensorialdemorfismosdemodulos}
+	\begin{enumerate}
+		\item El morfismo de m\'{o}dulos
+			\begin{math}
+				\lambda:\,\dual U\tensor\dual V\rightarrow
+					\dual{(V\tensor U)}
+			\end{math} es un isomorfismo, si $U$ o si $V$ son
+			libres f.g.
+		\item El morfismo de m\'{o}dulos
+			\begin{math}
+				\lambda:\,V\tensor\dual U\rightarrow
+					\Hom[k]\big(U,V\big)
+			\end{math} es un isomorfismo, si $U$ o si $V$ son
+			libres f.g.
+	\end{enumerate}
+\end{coroIsomorfismoProductoTensorialDeMorfismosDeModulos}
+
+En el primer caso, $\lambda$ est\'{a} dado por
+\begin{align*}
+	\lambda(f\tensor g) & \,=\,\big(v\tensor u\mapsto f(u)\,g(v)\big)
+\end{align*}
+%
+y, en el segundo caso, por
+\begin{align*}
+	\lambda(v\tensor f) & \,=\,\big(u\mapsto f(u)\,v\big)
+	\text{ .}
+\end{align*}
+%
+
+\begin{propoAlgebraDual}\label{propo:algebradual}
+	Sea $(C,\coproducto,\counidad)$ una co\'{a}lgebra. Entonces, la terna
+	$(\dual C,\dual\coproducto\circ(\lambda\circ\swap),\dual\counidad)$,
+	donde $\lambda:\,\dual C\tensor\dual C\rightarrow\dual{(C\tensor C)}$
+	es el morfismo \eqref{eq:productotensorialdemorfismosdemodulos}, es un
+	\'{a}lgebra.
+\end{propoAlgebraDual}
+
+\begin{proof}
+	El primer diagrama de la Definici\'{o}n~\ref{def:coalgebra} induce
+	\begin{center}
+		\begin{tikzcd}[column sep=large]
+			\dual C\tensor\dual C\tensor\dual C
+				\arrow[r,"{\lambda\circ\swap\tensor\id}"]
+				\arrow[d,"{\id\tensor\lambda\circ\swap}"'] &
+			\dual{(C\tensor C)}\tensor\dual C
+				\arrow[r,dashed,
+					"{\dual\coproducto\tensor\dual\id}"]
+				\arrow[d,"{\lambda\circ\swap}"'] &
+			\dual C\tensor\dual C
+				\arrow[d,"{\lambda\circ\swap}"] \\
+			\dual C\tensor\dual{(C\tensor C)}
+				\arrow[r,"{\lambda\circ\swap}"]
+				\arrow[d,dashed,
+					"{\dual\id\tensor\dual\coproducto}"'] &
+			\dual{\big(C\tensor C\tensor C\big)}
+				\arrow[r,"\dual{(\coproducto\tensor\id)}"]
+				\arrow[d,"\dual{(\id\tensor\coproducto)}"'] &
+			\dual{\big(C\tensor C\big)}
+				\arrow[d,"\dual\coproducto"] \\
+			\dual C\tensor\dual C
+				\arrow[r,"{\lambda\circ\swap}"'] &
+			\dual{\big(C\tensor C\big)}
+				\arrow[r,"\dual\coproducto"'] &
+			\dual C
+		\end{tikzcd}
+	\end{center}
+	Es decir, $\dual\coproducto\circ(\lambda\circ\swap)$ es asociativo. De
+	manera an\'{a}loga, mediante dualizando el diagrama de la counidad, se
+	deduce que $\dual\counidad$ es una unidad para este producto.
+\end{proof}
+
+\begin{propoCoalgebraDual}\label{propo:coalgebradual}
+	Sea $(A,\producto,\unidad)$ un \'{a}lgebra. Si $A$ es libre y f.g. como
+	$k$-m\'{o}dulo, entonces la terna
+	$(\dual A,(\lambda\circ\swap)^{-1}\circ\dual\producto,\dual\unidad)$ es
+	una co\'{a}lgebra.
+\end{propoCoalgebraDual}
+
+\begin{proof}
+	La demostraci\'{o}n es dual a la de la Proposici\'{o}n~%
+	\ref{propo:algebradual}. Para poder definir el coproducto, necesitamos
+	que $\lambda$ sea un isomorfismo, lo cual es cierto, bajo las
+	hip\'{o}tesis del enunciado.
+\end{proof}
+
+\subsubsection{Ejemplos}\label{subsubsec:coalgebras:dualidad:ejemplos}
+
+\begin{ejemploAlgebraDual}\label{ejemplo:algebradual}
+	Sea $C$ la co\'{a}lgebra de un conjunto $X$. El \'{a}lgebra dual
+	$\dual C$ se identifica con el \'{a}lgebra de funciones
+	$X\rightarrow k$. Toda funcional $f:\,C\rightarrow k$ est\'{a}
+	determinada por sus valores en $X$. Dadas $f,f_1\in\dual C$, el
+	producto $\producto(f\tensor f_1)$ es la funcional determinada por
+	\begin{align*}
+		\producto(f\tensor f_1) (x) & \,=\,
+			(\lambda\circ\swap)(f\tensor f_1)(\coproducto(x)) \,=\,
+			f(x)\,f_1(x)
+		\text{ .}
+	\end{align*}
+	%
+	(El orden del producto del lado derecho, si bien superfluo, es el
+	correcto). En cuanto a la unidad, el isomorfismo $\dual k\simeq k$
+	est\'{a} dado por identificar $\id[k]$ con $1$. Entonces la unidad de
+	$\dual C$ es la funci\'{o}n
+	\begin{align*}
+		\unidad(1)(x) & \,=\,\id[k](\counidad(x))\,=\,1
+		\text{ .}
+	\end{align*}
+	%
+\end{ejemploAlgebraDual}
+
+\begin{ejemploCoalgebraDualDeMatrices}\label{ejemplo:coalgebradualdematrices}
+	Sea $A=\MM[n\times n](k)$ el \'{a}lgebra de matrices cuadradas con
+	coeficientes en el anillo conmutativo $k$, con el producto e identidad
+	usuales. Como $k$-m\'{o}dulo, $A$ es libre con base las matrices
+	$E^{ij}$. Sea $\{x_{ij}\}_{i,j}$ la base dual en $\dual A$. La
+	estructura de co\'{a}lgebra dual est\'{a} dada por los morfismos
+	\begin{align*}
+		\coproducto(x_{ij}) \,=\,\sum_{k=1}^n\,x_{ik}\tensor x_{kj}
+			& \quad\text{y}\quad
+		\counidad(x_{ij}) \,=\,\delta_{ij}
+		\text{ .}
+	\end{align*}
+	%
+	Notamos que
+	\begin{math}
+		\dual\producto(x_{ij})(E^{pq}\tensor E^{rs})=
+			x_{ij}(E^{pq}\,E^{rs})=\delta^{qr}\,x_{ij}(E^{ps})=
+			\delta^{qr}\delta_{ip}\delta_{js}
+	\end{math} y que esto coincide con
+	\begin{align*}
+		\lambda\circ\swap\Big(\sum_{k=1}^n\,x_{ik}\tensor x_{kj}\Big)
+			(E^{pq}\tensor E^{rs}) & \,=\,
+			\sum_{k=1}^n\,x_{ik}(E^{pq})\,x_{kj}(E^{rs})
+		\text{ .}
+	\end{align*}
+	%
+	En cuanto a la counidad, $\counidad(x_{ij})\in \dual k\simeq k$ y el
+	isomorfismo est\'{a} dado por identificar $f\in\dual k$ con $f(1)$.
+	Entonces, como $\unidad(1)=I$, la matriz identidad,
+	\begin{align*}
+		\counidad(x_{ij})(1) & \,=\,x_{ij}(I) \,=\,\delta_{ij}
+		\text{ .}
+	\end{align*}
+	%
+\end{ejemploCoalgebraDualDeMatrices}
+
+\subsection{Bi\'{a}lgebras}\label{subsec:coalgebras:bialgebras}
+
+El $k$-m\'{o}dulo $k$ tiene estructura de \'{a}lgebra, dada por el producto y
+la unidad del anillo $k$, y  estructura de co\'{a}lgebra como en el Ejemplo~%
+\ref{ejemplo:coalgebraanillodebase}. Denotamos, por el momento, estas
+estructuras por $(k,\producto,\unidad)$ y por $(k,\coproducto,\counidad)$,
+respectivamente. Entonces podemos verificar que se cumplen las siguientes
+igualdades:
+\begin{align*}
+	(\producto\tensor\producto)\circ(\id\tensor\swap\tensor\id)\circ
+		(\coproducto\tensor\coproducto)(1\tensor 1) & \,=\,
+		1\tensor 1 \,=\,
+		\coproducto\circ\producto(1\tensor 1) \text{ ,} \\
+	\producto\circ(\counidad\tensor\counidad) (1\tensor 1) & \,=\,
+		1 \,=\,\counidad\circ\producto(1\tensor 1) \text{ ,} \\
+	(\unidad\tensor\unidad)\circ\coproducto(1) & \,=\, 1\tensor 1\,=\,
+		\coproducto\circ\unidad(1) \text{ ,} \\
+	\counidad\circ\unidad(1) \,=\,1\,=\,\counidad(1) & \quad\text{y}\quad
+	\unidad\circ\counidad(1) \,=\,1\,=\,\unidad(1)
+	\text{ .}
+\end{align*}
+%
+Las primeras dos ecuaciones implican que $\producto:\,k\tensor k\rightarrow k$
+es morfismo de co\'{a}lgebras. An\'{a}logamente, la primera y la tercera
+implican que $\coproducto:\,k\rightarrow k\tensor k$ es morfismo de
+\'{a}lgebras. Tambi\'{e}n se comprueba que $\unidad$ es morfismo de
+co\'{a}lgebras y que $\counidad$ es morfismo de \'{a}lgebras. Es decir,
+$(k,\producto,\unidad)$ y $(k,\coproducto,\counidad)$ son compatibles y
+forman lo que se llama una bi\'{a}lgebra.
+
+\subsubsection{Definiciones}
+
+\begin{defBialgebra}\label{def:bialgebra}
+	Sea $B$ un $k$-m\'{o}dulo con estructuras de \'{a}lgebra
+	$(B,\producto,\unidad)$ y de co\'{a}lgebra $(B,\coproducto,\counidad)$.
+	Entonces $B$ se dice \emph{$k$-bi\'{a}lgebra}, si se cumple cualquiera
+	de las dos condiciones equivalentes siguientes:
+	\begin{itemize}
+		\item $\producto$ y $\unidad$ son morfismos de co\'{a}lgebras;
+		\item $\coproducto$ y $\counidad$ son morfismos de
+			\'{a}lgebras.
+	\end{itemize}
+	%
+	Un morfismo de bi\'{a}lgebras es un morfismo de m\'{o}dulos que es
+	morfismo de \'{a}lgebras y co\'{a}lgebras.
+\end{defBialgebra}
+
+Si $(B,\producto,\unidad,\coproducto,\counidad)$ es una bi\'{a}lgebra,
+\begin{align*}
+	B^\opp & \,:=\,(B,\producto^\opp,\unidad,\coproducto,\counidad)
+		\text{ ,} \\
+	B^\copp & \,:=\,(B,\producto,\unidad,\coproducto^\opp,\counidad)
+		\quad\text{y} \\
+	B^{\opp\,\copp} & \,:=\,
+		(B,\producto^\opp,\unidad,\coproducto^\opp,\counidad)
+\end{align*}
+%
+son bi\'{a}lgebras. Por ejemplo, si queremos ver que $B^\opp$ es bi\'{a}lgebra,
+tenemos que verificar que $\producto^\opp:\,B\tensor B\rightarrow B$ es
+morfismo de co\'{a}lgebras, es decir, que se cumple
+\begin{align*}
+	(\producto^\opp\tensor\producto^\opp)\circ\coproducto[\tensor] & \,=\,
+		\coproducto\circ\producto^\opp \quad\text{y} \\
+	\counidad\circ\producto^\opp & \,=\,\counidad[\tensor]
+	\text{ ,}
+\end{align*}
+%
+donde
+\begin{math}
+	\coproducto[\tensor]=(\id\tensor\swap\tensor\id)\circ
+		(\coproducto\tensor\coproducto)
+\end{math}. El lado derecho de la primera igualdad es igual a
+\begin{align*}
+	\coproducto\circ\producto\circ\swap & \,=\,
+		(\producto\tensor\producto)\circ\coproducto[\tensor]\circ\swap
+	\text{ ,}
+\end{align*}
+%
+porque $\producto$ es morfismo de co\'{a}lgebras, mientras que el lado
+izquierdo es igual a
+\begin{align*}
+	(\producto\tensor\producto)\circ(\swap\tensor\swap)\circ
+		\coproducto[\tensor]
+	\text{ .}
+\end{align*}
+%
+Ser\'{a} suficiente demostrar que
+\begin{align*}
+	(\swap\tensor\swap)\circ(\id\tensor\swap\tensor\id)\circ
+		(\coproducto\tensor\coproducto) & \,=\,
+	(\id\tensor\swap\tensor\id)\circ(\coproducto\tensor\coproducto)\circ
+		\swap
+	\text{ .}
+\end{align*}
+%
+Evaluando el lado derecho en un tensor elemental $x\tensor y$, se obtiene
+\begin{align*}
+	& x\tensor y \,\mapsto\, y\tensor x\,\mapsto\,
+		\Big(\sum_{(y)}\,y'\tensor y''\Big)\tensor
+			\Big(\sum_{(x)}\,x'\tensor x''\Big)\,\mapsto\,
+		\sum_{(y)\,(x)}\,y'\tensor x'\tensor y''\tensor x''
+	\text{ ,}
+\end{align*}
+%
+pero si evaluamos el lado izquierdo,
+\begin{align*}
+	& x\tensor y\,\mapsto\, \Big(\sum_{(x)}\,x'\tensor x''\Big)\tensor
+		\Big(\sum_{(y)}\,y'\tensor y''\Big)\,\mapsto\,
+		\sum_{(x)\,(y)}\,x'\tensor y'\tensor x''\tensor y''\\
+	& \qquad\qquad\,\mapsto\,
+		\sum_{(x)\,(y)}\,y'\tensor x'\tensor y''\tensor x''
+	\text{ .}
+\end{align*}
+%
+Para ver que $\producto^\opp$ respeta la counidad, como $k$ es conmutativo, se
+comprueba que
+\begin{align*}
+	\counidad\circ\producto^\opp & \,=\,\counidad[\tensor]\circ\swap\,=\,
+		\producto[k]\circ(\counidad\tensor\counidad)\circ
+			\swap[B\tensor B] \,=\,
+		\producto[k]\circ\swap[k\tensor k]\circ
+			(\counidad\tensor\counidad) \\
+	& \,=\, \producto[k]\circ(\counidad\tensor\counidad)\,=\,
+		\counidad[\tensor]
+	\text{ .}
+\end{align*}
+%
+
+\subsubsection{Ejemplos}
+
+\begin{ejemploBialgebra}\label{ejemplo:bialgebramatrices}
+	Sea $\MM(m)=k[\lista[11]{x}{mm}]$ el \'{a}lgebra de polinomios en $m^2$
+	variables. Si definimos
+	\begin{align*}
+		\coproducto(x_{ij}) \,=\,\sum_k\,x_{ik}\tensor x_{kj}
+			& \quad\text{y}\quad
+		\counidad(x_{ij}) \,=\,\delta_{ij}
+		\text{ ,}
+	\end{align*}
+	%
+	entonces $\coproducto$ y $\counidad$ se extienden de manera \'{u}nica
+	como \emph{morfismos de \'{a}lgebras}
+	$\coproducto:\,\MM(m)\rightarrow\MM(m)\tensor\MM(m)$ y
+	$\counidad:\,\MM(m)\rightarrow k$. Entonces, por c\'{o}mo fueron
+	definidos, $\MM(m)$, junto con $\coproducto$ y $\counidad$ es una
+	bi\'{a}lgebra (lo \'{u}nico que hay que verificar es que
+	$\coproducto$ y $\counidad$ dan una estructura de co\'{a}lgebra, la
+	compatibilidad con el \'{a}lgebra polinomial es autom\'{a}tica).
+\end{ejemploBialgebra}
+
+\begin{ejemploBialgebra}\label{ejemplo:bialgebramonoide}
+	Sea $X$ un monoide con producto $\producto:\,X\times X\rightarrow X$ y
+	elemento neutro $e\in X$ y sea $k[X]$ la co\'{a}lgebra en el conjunto
+	subyacente a $X$ (c.f. el Ejemplo~\ref{ejemplo:coalgebradeconjunto}).
+	Le damos al $k$-m\'{o}dulo $k[X]$ (libre en $X$) una estructura de
+	\'{a}lgebra con producto y unidad
+	\begin{align*}
+		x\tensor y\,\mapsto\,\producto(x,y) & \quad\text{y}\quad
+			\unidad(1_k) \,=\,e\in X
+		\text{ .}
+	\end{align*}
+	%
+	Contamos, entonces, con estructuras de \'{a}lgebra y de co\'{a}lgebra
+	en $k[X]$. Pero, como $\producto(x\tensor y)=\producto(x,y)\in X$, si
+	$x,y\in X$, deducimos que
+	\begin{align*}
+		\coproducto(\producto(x,y)) & \,=\,
+			\producto(x,y)\tensor\producto(x,y) \,=\,
+			\producto[\tensor]((x\tensor x)\tensor (y\tensor y))
+				\,=\,
+			\producto[\tensor](\coproducto(x)\tensor\coproducto(y))
+				\text{ ,} \\
+		\counidad(\producto(x,y)) & \,=\,1\,=\,
+			\producto[k](\counidad(x)\tensor\counidad(y))
+				\text{ ,} \\
+		\coproducto(\unidad(1)) & \,=\,\coproducto(e)\,=\,e\tensor e
+			\,=\,\unidad\tensor\unidad(1) \text{ ,} \\
+		\counidad\circ\unidad(1) & \,=\,\counidad(e) \,=\,1 \,=\,
+			\unidad[k](1)
+		\text{ ,}
+	\end{align*}
+	%
+	de lo que se deduce que $\coproducto$ y $\counidad$ son morfismos de
+	\'{a}lgebras.
+\end{ejemploBialgebra}

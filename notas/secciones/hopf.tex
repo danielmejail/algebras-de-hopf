@@ -1,0 +1,492 @@
+\theoremstyle{plain}
+\newtheorem{defAntipoda}{Definici\'{o}n}[section]
+\newtheorem{defHopf}[defAntipoda]{Definici\'{o}n}
+\newtheorem{propoProductoDeConvolucion}[defAntipoda]{Proposici\'{o}n}
+\newtheorem{teoGrupoDeMorfismos}[defAntipoda]{Teorema}
+
+\theoremstyle{definition}
+\newtheorem{obsHopf}[defAntipoda]{Observaci\'{o}n}
+\newtheorem{obsAntipoda}[defAntipoda]{Observaci\'{o}n}
+\newtheorem{ejemploAlgebraDeGrupo}[defAntipoda]{Ejemplo}
+\newtheorem{obsGeneralLinealNoEsCoconmutativa}[defAntipoda]{Observaci\'{o}n}
+\newtheorem{obsElementosPrimitivos}[defAntipoda]{Observaci\'{o}n}
+\newtheorem{obsElementosDeGrupo}[defAntipoda]{Obervaci\'{o}n}
+
+%-------------
+
+\subsection{La ant\'{\i}poda}
+
+Sea $(A,\producto,\unidad)$ un \'{a}lgebra y $(C,\coproducto,\counidad)$ una
+co\'{a}lgebra. El grupo abeliano $\Hom[k]\big(C,A\big)$ de $k$-morfismos es,
+en realidad, un $k$-m\'{o}dulo y viene equipado con una aplicaci\'{o}n $k$-%
+bilineal denominada \emph{producto de convoluci\'{o}n}: dados
+$f,g:\,C\rightarrow A$ (de m\'{o}dulos), la \emph{convoluci\'{o}n de $f$ con %
+$g$} es la composici\'{o}n
+\begin{equation}
+	\label{eq:convolucion}
+	f\convol g \,=\,\producto\circ(f\tensor g)\circ\coproducto
+	\text{ .}
+\end{equation}
+%
+Dado que \eqref{eq:convolucion} es una composici\'{o}n de morfismos de
+m\'{o}dulos, deducimos que $f\convol g\in\Hom[k]\big(C,A\big)$. Si $x\in C$,
+entonces $\coproducto(x)=\sum_{(x)}\,x'\tensor x''$ y
+% en t\'{e}rminos de la expansi\'{o}n de $x$,
+\begin{equation}
+	\label{eq:convolucionexplicita}
+	f\convol g(x) \,=\,\sum_{(x)}\,f(x')\,g(x'')
+	\text{ .}
+\end{equation}
+%
+
+\begin{propoProductoDeConvolucion}\label{propo:productodeconvolucion}
+	La terna $(\Hom[k]\big(C,A\big),\convol,\unidad[A]\circ\counidad[C])$
+	es una $k$-\'{a}lgebra. Adem\'{a}s, el morfismo de $k$-m\'{o}dulos
+	$\lambda:\,A\tensor\dual C\rightarrow\Hom[k]\big(C,A\big)$ es morfismo
+	de $k$-\'{a}lgebras.
+\end{propoProductoDeConvolucion}
+
+En el enunciado, haciendo abuso de notaci\'{o}n, estamos denotando la unidad
+del \'{a}lgebra por $\unidad[A]\circ\counidad[C]$, cuando, precisamente, es el
+morfismo $1\mapsto\unidad[A]\circ\counidad[C]$. Notemos que
+$\unidad[A]\circ\counidad[C]\in\Hom[k]\big(C,A\big)$ por ser composici\'{o}n de
+morfismos de m\'{o}dulos, con lo que la unidad propuesta tiene el dominio y el
+codominio correctos.
+
+\begin{proof}
+	En primer lugar, observamos que, tanto $f\tensor g\mapsto f\convol g$,
+	como $1\mapsto\unidad[A]\,\counidad[C]$ son morfismos de m\'{o}dulos.
+	Lo que se afirma en el enunciado es que la convoluci\'{o}n es, como
+	operaci\'{o}n binaria, asociativa y que $\unidad[A]\,\counidad[C]$ es
+	un elemento neutro (a izquierda y a derecha) para este producto.
+	\begin{align*}
+		f\convol (g\convol h) & \,=\,\producto[A]\,(f\tensor
+			(\producto[A]\,(g\tensor h)\,\coproducto[C]))\,
+				\coproducto[C] \\
+		& \,=\, \producto[A]\,(\id[A]\tensor\producto[A])\,
+				(f\tensor(g\tensor h))\,
+			(\id[C]\tensor\coproducto[C])\,\coproducto[C] \\
+		& \,=\, \producto[A]\,(\producto[A]\tensor\id[A])\,
+				((f\tensor g)\tensor h)\,
+			(\coproducto[C]\tensor\id[C])\,\coproducto[C] \\
+		& \,=\,(f\convol g)\convol h
+		\text{ .}
+	\end{align*}
+	%
+	En cuanto a la unidad,
+	\begin{align*}
+		(\unidad[A]\,\counidad[C])\convol f & \,=\,\producto[A]\,
+			(\unidad[A]\tensor\id[A])\,(\id[k]\tensor f)\,
+			(\counidad[C]\tensor\id[C])\,\coproducto[C] \,=\,
+			\id[k]\tensor f\,=\,f
+		\text{ .}
+	\end{align*}
+	%
+	An\'{a}logamente, $f\convol(\unidad[A]\,\counidad[C])=f$.
+
+	En cuanto al morfismo
+	$\lambda:\,A\tensor\dual C\rightarrow\Hom[k]\big(C,A\big)$, dados
+	$a\tensor f,a_1\tensor f_1\in A\tensor\dual C$, y $x\in C$,
+	\begin{align*}
+		\lambda(a\tensor f)\convol\lambda(a_1\tensor f_1)(x) & \,=\,
+			\sum_{(x)}\,\big(f(x')\,a\big)\,\big(f_1(x'')\,a_1\big)
+			\,=\,\Big(\sum_{(x)}f(x')\,f_1(x'')\Big)\,aa_1
+		\text{ ,}
+	\end{align*}
+	%
+	que es igual a $\lambda(aa_1\tensor ff_1)(x)$, !`pues el producto en
+	$\dual C$ es exactamente, la convoluci\'{o}n en $\Hom[k]\big(C,k\big)$!
+\end{proof}
+
+\subsubsection{Definiciones}
+
+En particular, si $(H,\producto,\unidad,\coproducto,\counidad)$ es una
+bi\'{a}lgebra, podemos considerar la convoluci\'{o}n en $\Endo[k](H)$.
+
+\begin{defAntipoda}\label{def:antipoda}
+	Un endomorfismo $S\in\Endo[k](H)$ es una \emph{ant\'{\i}poda}, si
+	\begin{equation}
+		\label{eq:antipoda}
+		S\convol\id \,=\,\id\convol S\,=\,\unidad\circ\counidad
+		\text{ .}
+	\end{equation}
+\end{defAntipoda}
+
+\begin{defHopf}\label{def:hopf}
+	Un \emph{\'{a}lgebra de Hopf} es una bi\'{a}lgebra con ant\'{\i}poda y
+	un morfismo de \'{a}lgebras de Hopf es un morfismo de las
+	bi\'{a}lgebras correspondientes.
+\end{defHopf}
+
+\begin{obsHopf}\label{obs:hopf}
+	La condici\'{o}n natural $S'\circ f=f\circ S$ para un morfismo
+	$f:\,H\rightarrow H'$ es redundante.
+\end{obsHopf}
+
+\begin{obsAntipoda}\label{obs:antipoda:unicidad}
+	No toda bi\'{a}lgebra admite una ant\'{\i}poda, pero, si existe, es
+	\'{u}nica: si $S,S_1\in\Endo[k](H)$ son ant\'{\i}podas en una
+	bi\'{a}lgebra $H$, entonces
+	\begin{align*}
+		S & \,=\,S\convol(\unidad\,\counidad) \,=\,
+			S\convol (\id\convol S_1) \,=\,
+			(S\convol\id)\convol S_1 \,=\,
+			(\unidad\,\counidad)\convol S_1 \,=\, S_1
+		\text{ .}
+	\end{align*}
+	%
+\end{obsAntipoda}
+
+\begin{obsAntipoda}\label{obs:antipoda:tensoreselementales}
+	Un endomorfismo $S\in\Endo[k](H)$ es una ant\'{\i}poda, si satisface
+	\begin{equation}
+		\label{eq:antipoda:tensoreselementales}
+		\sum_{(x)}\,x'\,S(x'') \,=\,\counidad(x)\,1 \,=\,
+			\sum_{(x)}\,S(x')\,x''
+		\text{ ,}
+	\end{equation}
+	%
+	para todo $x\in H$.
+\end{obsAntipoda}
+
+\begin{obsAntipoda}\label{obs:antipoda:morfismodealgebrasopuestas}
+	Sea $B$ una bi\'{a}lgebra. Toda ant\'{\i}poda $S\in\Endo[k](B)$ da
+	lugar a un morfismo de bi\'{a}lgebras
+	$S:\,B\rightarrow B^{\opp\,\copp}$. Rec\'{\i}procamente, si
+	$S:\,B\rightarrow B^\opp$ es un morfismo \emph{de \'{a}lgebras} y $B$
+	est\'{a} generada, como \'{a}lgebra, por un conjunto $X$, entonces $S$
+	es ant\'{\i}poda, si verifica \eqref{eq:antipoda:tensoreselementales}
+	para todo $x\in X$.
+\end{obsAntipoda}
+
+\begin{ejemploAlgebraDeGrupo}\label{ejemplo:algebradegrupo}
+	Sea $G$ un grupo y sea $k[G]$ la bi\'{a}lgebra del monoide subyacente.
+	Si definimos $S:\,k[G]\rightarrow k[G]$ por $S(x)=x^{-1}$ para
+	$x\in G$, podemos ver, usando que $\coproducto(x)=x\tensor x$, que
+	$S$ es ant\'{\i}poda:
+	\begin{equation}
+		\label{eq:ejemplo:algebradegrupo}
+		x\,S(x) \,=\, S(x)\,x \,=\, 1 \,=\, \counidad(x)\,1
+		\text{ .}
+	\end{equation}
+	Rec\'{\i}procamente, si $G$ es un monoide y $k[G]$ admite una
+	ant\'{\i}poda $S$, entonces \eqref{eq:ejemplo:algebradegrupo} implica
+	que $S(x)\in G$ y es un inverso para $x$ en $G$.
+\end{ejemploAlgebraDeGrupo}
+
+\subsubsection{Relaci\'{o}n con \S~\ref{subsec:kalgebras:ejemplos}}
+
+\begin{propoLinealGeneral}\label{propo:bialgebralinealgeneral}
+	Las \'{a}lgebras $\GL(2)$ y $\SL(2)$, junto con los morfismos
+	$\coproducto$ y $\counidad$ dadas por las expresiones
+	\begin{align*}
+		\coproducto\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			\begin{bmatrix} a & b \\ c & d \end{bmatrix} \tensor
+			\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+			& \quad\text{,}\quad
+			\coproducto(t) \,=\,t\tensor t \text{ ,} \\
+		\counidad\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			\begin{bmatrix} 1 & \\ & 1 \end{bmatrix}
+			& \quad\text{,}\quad
+			\counidad(t) \,=\,1
+		\text{ ,}
+	\end{align*}
+	%
+	son ejemplos de bi\'{a}lgebras conmutativas.
+\end{propoLinealGeneral}
+
+% \begin{proof}
+	% Basta con verificar las condiciones de coasociatividad y counidad en
+	% los generadores:
+	% \begin{align*}
+		% \bigg(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\tensor
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix}\bigg)
+			% \tensor
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix} & \,=\,
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix} \tensor
+			% \bigg(\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+				% \tensor
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix}\bigg) \\
+		% (t\tensor t) \tensor t & \,=\, t\tensor (t\tensor t) \\
+		% \begin{bmatrix} a & b \\ c & d \end{bmatrix}\,
+			% \begin{bmatrix} 1 & \\ & 1 \end{bmatrix} & \,=\,
+		% \begin{bmatrix} 1 & \\ & 1 \end{bmatrix}\,
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix} \\
+			% t\,1 & \,=\,1\,t
+		% \text{ .}
+	% \end{align*}
+	% %
+% \end{proof}
+
+\begin{propoLinealGeneral}\label{propo:hopflinealgeneral}
+	Las bi\'{a}lgebras $\GL(2)$ y $\SL(2)$, junto con el morfismo $S$
+	definido por
+	\begin{align*}
+		S\,\begin{bmatrix} a & b \\ c & d \end{bmatrix} \,=\,
+			(ad-bc)^{-1}\,
+				\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+			& \quad\text{y}\quad
+		S(t) \,=\,t^{-1}\,=\,ad-bc
+			\quad\text{(\phantom)}=1\text{\phantom(),}
+	\end{align*}
+	%
+	son ejemplos de \'{a}lgebras de Hopf conmutativas.
+\end{propoLinealGeneral}
+
+% \begin{proof}
+	% \begin{align*}
+		% \begin{bmatrix} a & b \\ c & d \end{bmatrix}\,
+			% S\,\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+		% & \,=\,
+		% \counidad\,\begin{bmatrix} a & b \\ c & d \end{bmatrix}\,1
+			% \,=\,
+		% S\,\begin{bmatrix} a & b \\ c & d \end{bmatrix}\,
+			% \begin{bmatrix} a & b \\ c & d \end{bmatrix} \\
+		% t\,S(t) & \,=\,\counidad(t)\,1\,=\,S(t)\,t
+		% \text{ .}
+	% \end{align*}
+	% %
+% \end{proof}
+
+La conmutatividad de $\GL(2)$ y $\SL(2)$ implica que $S$ es una
+\emph{involuci\'{o}n}: $S^2=\id$.
+
+\begin{obsGeneralLinealNoEsCoconmutativa}%
+	\label{obs:generallinealnoescoconmutativa}
+	Las \'{a}lgebras de Hopf $\GL(2)$ y $\SL(2)$ no son coconmutativas:
+	\begin{align*}
+		\coproducto(a) & \,=\,a\tensor a+b\tensor c \,\not=\,
+			a\tensor a+c\tensor b\,=\,\swap\circ\coproducto(a)
+		\text{ .}
+	\end{align*}
+	%
+\end{obsGeneralLinealNoEsCoconmutativa}
+
+\subsection{Observaciones}\label{subsec:hopf:observaciones}
+
+\begin{obsElementosPrimitivos}\label{obs:elementosprimitivos}
+	Dada una co\'{a}lgebra $(C,\coproducto,\counidad)$, decimos que
+	$x\in C$ es \emph{primitivo}, si
+	\begin{equation}
+		\label{eq:elementosprimitivos}
+		\coproducto(x) \,=\,x\tensor 1+1\tensor x
+		\text{ .}
+	\end{equation}
+	%
+	El conjunto $\Prim C$ de elementos primitivos es un $k$-subm\'{o}dulo.
+	Definimos el \emph{conmutador} de $x,y\in C$ como
+	\begin{equation}
+		\label{eq:conmutador}
+		\conmutador{x,y} \,=\,\producto(x\tensor y)-
+			\producto(y\tensor x) \,=\,x\cdot y-y\cdot x
+		\text{ .}
+	\end{equation}
+	%
+	Si ahora $B$ es bi\'{a}lgebra, entonces, para todo $x\in\Prim B$, se
+	verifica que
+	\begin{align*}
+		x & \,=\,\counidad(x)\,1+x\,\counidad(1) \,=\,
+			\counidad(x)\,1+x
+		\text{ ,}
+	\end{align*}
+	%
+	pues $\counidad(1)=1$ ($\counidad:\,B\rightarrow k$ es morfismo de las
+	estructuras de \'{a}lgebras) y, por lo tanto,
+	\begin{align*}
+		\counidad(x) & \,=\,0
+		\text{ .}
+	\end{align*}
+	%
+	Por otro lado, la igualdad
+	$\coproducto(x\cdot y)=\coproducto(x)\,\coproducto(y)$ ($\coproducto$
+	es morfismo) implica que
+	\begin{align*}
+		\coproducto\conmutador{x,y} & \,=\,
+			\conmutador{\coproducto(x),\coproducto(y)}
+		\text{ .}
+	\end{align*}
+	%
+	En particular, para $x,y\in\Prim B$,
+	\begin{align*}
+		\coproducto(x\cdot y) & \,=\,1\tensor(x\cdot y)+
+			(x\cdot y)\tensor 1 + x\tensor y + y\tensor x
+			\quad\text{y} \\
+		\coproducto\,\conmutador{x,y} & \,=\,
+			\conmutador{x,y}\tensor 1+1\tensor\conmutador{x,y}
+		\text{ .}
+	\end{align*}
+	%
+	En definitiva, el subm\'{o}dulo $\Prim B$ es cerrado por el
+	``corchete'' $\conmutador{x,y}$. Toda bi\'{a}lgebra tiene asociada, de
+	esta manera, una $k$-\'{a}lgebra de Lie.
+\end{obsElementosPrimitivos}
+
+\begin{obsElementosDeGrupo}\label{obs:elementosdegrupo}
+	Dada una co\'{a}lgebra $(C,\coproducto,\counidad)$, decimos que
+	$x\in C$ es \emph{grouplike} o \emph{de grupo}, si $x\not=0$ y
+	$\coproducto(x)=x\tensor x$. Denotamos por $\grouplike C$ el conjunto
+	de elementos de grupo de $C$. Si $B$ es bi\'{a}lgebra, entonces
+	$1\in\grouplike B\not=\varnothing$ y, m\'{a}s aun, el conjunto de
+	elementos de grupo es un monoide con el producto y la unidad de $B$. Y,
+	si $H$ es un \'{a}lgebra de Hopf, entonces todo elemento
+	$x\in\grouplike H$ posee inverso en $\grouplike H$. En primer lugar,
+	notemos que, por la Observaci\'{o}n~%
+	\ref{obs:antipoda:morfismodealgebrasopuestas}, la ant\'{\i}poda
+	$S$ cumple que
+	\begin{align*}
+		(S\tensor S)\circ\coproducto & \,=\,\coproducto^\opp\circ S
+			\,=\, \swap\circ\coproducto\circ S
+		\text{ .}
+	\end{align*}
+	%
+	Si, adem\'{a}s, $x\in\grouplike H$, entonces
+	\begin{align*}
+		\coproducto(S(x)) & \,=\,
+			\swap\circ (S\tensor S)\circ\coproducto(x) \,=\,
+			\swap (S(x)\tensor S(x))\,=\,S(x)\tensor S(x)
+		\text{ .}
+	\end{align*}
+	%
+	($\swap^2=\id$). Es decir, $S(x)$ es un elemento de grupo, tambi\'{e}n.
+	La condici\'{o}n de ser de grupo implica, adem\'{a}s, que
+	\begin{align*}
+		x\,S(x) & \,=\,\producto(x\tensor S(x))\,=\,
+			\producto\circ(\id\tensor S)\circ\coproducto(x)\,=\,
+			\counidad(x)\,1
+		\text{ .}
+	\end{align*}
+	%
+	An\'{a}logamente, $S(x)\,x=\counidad(x)\,1$. Pero la igualdad
+	\begin{align*}
+		x & \,=\,\producto\circ(\counidad\tensor\id)\circ\coproducto(x)
+			\,=\,\counidad(x)\,x
+	\end{align*}
+	%
+	implica que $\counidad(x)$ es idempotente. Bajo la hip\'{o}tesis de que
+	$k$ no posea idempotentes distintos de $0$ y $1$, se cumple que
+	$\counidad(x)=1$ para todo $x\in\grouplike H$ y $S(x)\in\grouplike H$
+	es un inverso.
+	% !`Las \'{a}lgebras de Hopf son, verdaderamente, objetos
+	% geom\'{e}tricos!
+	% $\grouplike{k[G]}=G$.
+\end{obsElementosDeGrupo}
+
+\subsection{El grupo $\Homalg\big(H,A\big)$}\label{subsec:hopf:elgrupo}
+
+\begin{teoGrupoDeMorfismos}\label{thm:grupodemorfismos}
+	Sean $H$ un \'{a}lgebra de Hopf y $A$ un \'{a}lgebra conmutativa.
+	Entonces el conjunto $\Homalg\big(H,A\big)$ es un grupo con la
+	convoluci\'{o}n heredada de $\Hom[k]\big(H,A\big)$. El inverso de
+	$f:\,H\rightarrow A$ est\'{a} dado por $f\circ S$.
+\end{teoGrupoDeMorfismos}
+
+\begin{teoGrupoDeMorfismos}\label{thm:grupodecomorfismos}
+	Sean $H$ un \'{a}lgebra de Hopf y $C$ una co\'{a}lgebra coconmutativa.
+	Entonces el conjunto $\Homcoalg\big(C,H\big)$ es un grupo con la
+	convoluci\'{o}n heredada de $\Hom[k]\big(C,H\big)$. El inverso de
+	$g:\,C\rightarrow H$ est\'{a} dado por $S\circ g$.
+\end{teoGrupoDeMorfismos}
+
+\begin{proof}[Demostraci\'{o}n de \ref{thm:grupodemorfismos}]
+	Sean $\psi,\phi\in\Homalg[k]\big(H,A\big)$. La convoluci\'{o}n
+	$\psi\convol\phi$ es morfismo de \'{a}lgebras, si cumple que
+	\begin{align*}
+		(\psi\convol\phi)\circ\producto[H] & \,=\,
+			\producto[A]\circ(\psi\convol\phi\tensor
+				\psi\convol\phi)
+		\text{ .}
+	\end{align*}
+	%
+	Como $H$ es bi\'{a}lgebra, $\coproducto[H]:\,H\rightarrow H\tensor H$
+	es morfismo de \'{a}lgebras. Entonces
+	\begin{align*}
+		(\psi\convol\phi)\,\producto[H] & \,\equiv\,
+			\producto[A]\,(\psi\tensor\phi)\,\coproducto[H]\,
+				\producto[H] \\
+		& \,=\, \producto[A]\,(\psi\tensor\phi)\,
+				(\producto[H]\tensor\producto[H])\,
+				(\id[H]\tensor\swap[H\tensor H]\tensor\id[H])\,
+				(\coproducto[H]\tensor\coproducto[H])
+		\text{ .}
+	\end{align*}
+	%
+	Como $\psi$ y $\phi$ son morfismos de \'{a}lgebras,
+	\begin{align*}
+		(\psi\tensor\phi)\,(\producto[H]\tensor\producto[H]) & \,=\,
+			(\producto[A]\,(\psi\tensor\psi))\tensor
+			(\producto[A]\,(\phi\tensor\phi)) \,=\,
+			(\producto[A]\tensor\producto[A])\,
+			((\psi\tensor\psi)\tensor(\phi\tensor\phi))
+		\text{ .}
+	\end{align*}
+	%
+	Entonces
+	\begin{align*}
+		(\psi\convol\phi)\,\producto[H] & \,=\,\producto[A]\,
+			(\producto[A]\tensor\producto[A])\,
+			(\psi\tensor\psi\tensor\phi\tensor\phi)\,
+			(\id[H]\tensor\swap[H\tensor H]\tensor\id[H])\,
+			(\coproducto[H]\tensor\coproducto[H]) \\
+		& \,=\,\producto[A]\,((\psi\convol\phi)\tensor
+			(\psi\convol\phi))
+		\text{ .}
+	\end{align*}
+	%
+	En cuanto a la unidad,
+	\begin{align*}
+		(\psi\convol\phi)\,\unidad[H] & \,=\,
+			\producto[A]\,(\psi\tensor\phi)\,
+			(\unidad[H]\tensor\unidad[H])\,\coproducto[k]
+		\,=\,\producto[A]\,(\unidad[A]\tensor\unidad[A])\,
+			\coproducto[k] \,=\,\unidad[A]
+		\text{ .}
+	\end{align*}
+	%
+	En definitiva, $\psi\convol\phi\in\Homalg[k]\big(H,A\big)$. Si
+	$c=\unidad[A]\,\counidad[H]$, entonces
+	$c:\,H\rightarrow k\rightarrow A$ es composici\'{o}n de morfismos de
+	\'{a}lgebras y, por lo tanto $c\in\Homalg[k]\big(H,A\big)$. La
+	Proposici\'{o}n~\ref{propo:productodeconvolucion} implica que
+	$c\convol\psi=\psi\convol c=\psi$ para todo morfismo de \'{a}lgebras
+	$\psi$. En particular, $(\Homalg[k]\big(H,A\big),\convol,c)$ es un
+	monoide. Aun no hemos usado que $A$ es conmutativa, ni que $H$ posee
+	ant\'{\i}poda.
+
+	Sea $S_H$ la ant\'{\i}poda en $H$. Entonces
+	\begin{align*}
+		\psi\convol (\psi\,S_H) & \,=\,\producto[A]\,
+			(\psi\tensor(\psi\,S_H))\,\coproducto[H] \,=\,
+			\producto[A]\,(\psi\tensor\psi)\,(\id[H]\tensor S_H)\,
+				\coproducto[H] \\
+		& \,=\,\psi\,\producto[H]\,(\id[H]\tensor S_H)\,\coproducto[H]
+			\,=\,\psi\,(\id[H]\convol S_H) \\
+		& \,=\,\psi\,(\unidad[H]\,\counidad[H]) \,=\,
+			\unidad[A]\,\counidad[H]\,=\,c
+		\text{ .}
+	\end{align*}
+	%
+	An\'{a}logamente, $(\psi\,S_H)\convol\psi=c$. Entonces, los morfismos
+	de \'{a}lgebras poseen un inverso en el \'{a}lgebra
+	$\Hom[k]\big(H,A\big)$ dado por precomponer con $S_H$. Para ver que
+	este inverso es un inverso en el monoide, usamos que $A$ es
+	conmutativa: como $S_H:\,H\rightarrow H^\opp$ es morfismo de
+	\'{a}lgebras, deducimos que
+	\begin{align*}
+		(\psi\,S_H)\,\producto[H] & \,=\,\psi\,
+			(\producto[H]\,\swap[H\tensor H])\,(S_H\tensor S_H)
+			\,=\,\producto[A]\,(\psi\tensor\psi)\,
+				\swap[H\tensor H]\,(S_H\tensor S_H) \\
+		& \,=\,(\producto[A]\,\swap[A\tensor A])\,
+			((\psi\,S_H)\tensor(\psi\,S_H))
+		\text{ .}
+	\end{align*}
+	%
+	Si $\producto[A]\,\swap[A\tensor A]=\producto[A]$, entonces $\psi\,S_H$
+	respeta productos. Esta condici\'{o}n quiere decir que $A$ es
+	conmutativa. En cuanto a la unidad,
+	\begin{align*}
+		(\psi\,S_H)\,\unidad[H] & \,=\,\psi\,\unidad[H]\,=\,\unidad[A]
+		\text{ .}
+	\end{align*}
+	%
+\end{proof}

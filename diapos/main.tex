@@ -1,0 +1,86 @@
+
+\documentclass{beamer}
+\mode<presentation>
+{
+  \usetheme{Singapore}
+
+  \setbeamercovered{transparent}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{nombres}
+\usepackage{abreviaciones}
+
+\title{\'{A}lgebras de Hopf y grupos afines}
+\subtitle{}
+\author{}
+\institute{
+	% Departamento de Matem\'{a}tica\\
+	% Facultad de Ciencias Exactas y Naturales\\
+	% Universidad de Buenos Aires
+}
+\date{}
+\subject{Talks}
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Contenidos}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+% \beamerdefaultoverlayspecification{<+->}
+
+\setbeamertemplate{itemize subitem}{$\circ$}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\resetcounteronoverlays{saveenumi}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Contenidos}
+  \tableofcontents
+  %% You might wish to add the option [pausesections]
+  % Empezamos recordando la definici\'{o}n de $k$-\'{a}lgebra y algunas construcciones,
+  % como el \'{a}lgebra libre, y vemos c\'{o}mo definir un grupo a partir del conjunto de
+  % morfismos de $k$-\'{a}lgebras en algunos casos particulares/.
+  %
+  % A continuaci\'{o}n introducimos las definiciones de co\'{a}lgebra y bi\'{a}lgebra y
+  % damos algunos ejemeplos.
+  %
+  % Seguimos, luego, con la noci\'{o}n de convoluci\'{o}n, ant\'{\i}poda y \'{a}lgebra de
+  % Hopf, terminando esta parte definiendo un grupo a partir de un \'{a}lgebra de Hopf y
+  % un \'{a}lgebra conmutativa.
+  %
+  % Por \'{u}ltimo, veremos c\'{o}mo estas estructuras describen una ley de grupo de
+  % manera universal, es decir, independientemente del \'{a}lgebra conmutativa. Esto
+  % permitir\'{a} asociarle a un \'{a}lgebra de Hopf (conmutativa) un esquma af\'{\i}n en
+  % grupos.
+  %
+\end{frame}
+
+\section{$k$-\'{a}lgebras}
+\input{./secciones/kalgebras.tex}
+
+\section{Co\'{a}lgebras y bi\'{a}lgebras}
+\input{./secciones/coalgebras.tex}
+
+\section{\'{A}lgebras de Hopf}
+\input{./secciones/hopf.tex}
+
+\section{Grupos afines}
+\input{./secciones/gruposafines.tex}
+
+\end{document}
